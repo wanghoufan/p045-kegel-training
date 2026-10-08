@@ -1,0 +1,38 @@
+{
+  "record_type": "RUNTIME_ATTEMPT_NOT_SUCCESSFUL_BROWSER_EVIDENCE",
+  "prototype_version": "PROTOTYPE-V4.0",
+  "created_at": "2026-10-08T01:10:08.248711+00:00",
+  "prototype_sha256": "be1ed465290b569852354c6e645fc58ff7b64e6336887dfd81ab6ff2b2ed314b",
+  "ux_contract_sha256": "47fb2f841459410eae0becf39173ce99494e6dafa12f8fb3022f413b1735a9fa",
+  "direction_set_sha256": "14ec0c87b6d03c5b647fc3bd127cc3f081ff0a7b85028c09e490d520a9ef9478",
+  "browser_executed": false,
+  "console_inspected": false,
+  "console_blocking_errors": null,
+  "page_errors": null,
+  "interactions_executed": [],
+  "states_observed": [],
+  "screenshots": [],
+  "result": "PENDING_RUNTIME_VALIDATION",
+  "attempts": [
+    {
+      "tool": "BrowserOS neo run",
+      "action": "列出浏览器页，开工预检",
+      "result": "TOOL_APPROVAL_DENIED",
+      "actual_output": "MCP tool call requires approval, but approval policy is never"
+    }
+  ],
+  "required_rerun": [
+    "真实浏览器无等级首页选择L1并开始；有等级今日一次开始。",
+    "验证开始同一点击即收紧、无准备/试听/耳机确认；无声音/播放失败字幕继续。",
+    "完整训练、暂停恢复、提前结束、焦点中断返回、安全停止与历史。",
+    "实际检查console与pageerror，拍可读截图绑定SCR/ST和图片hash。",
+    "全部68交互/58状态复核，不能用状态样例替代。"
+  ],
+  "user_reported_prior_runtime": {
+    "version": "V3",
+    "source": "用户本轮反馈已实点旧版",
+    "agent_execution": false,
+    "supports_v4_pass": false
+  },
+  "prior_evidence": "archive-v3及更早目录仅历史，不支持V4运行结论。"
+}

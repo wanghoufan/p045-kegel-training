@@ -1,0 +1,9 @@
+{
+  "mode": "FUNCTION_HARNESS_NOT_BROWSER_RUNTIME",
+  "status": "PASS",
+  "checks": 27,
+  "browser_executed": false,
+  "console_inspected": false,
+  "scope": "V4单项：同步首相位/首提示、无准备和试听、无setTimeout/语音回调等待、无声音或播放失败继续、六级时长/首周期去重/放松保持/手动继续",
+  "limitations": "Node模拟对象及语音回调，未执行真实浏览器DOM/声音/console或截图，不能支持runtime PASS。"
+}

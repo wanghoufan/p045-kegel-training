@@ -1,0 +1,8 @@
+{
+  "mode": "STATIC_NODE_RULE_CHECKS_NOT_BROWSER_RUNTIME",
+  "status": "PASS",
+  "checks": 86,
+  "browser_executed": false,
+  "console_inspected": false,
+  "limitations": "规则函数与内联脚本语法检查；没有实际页面点击、console检查或截图，不能支持Prototype PASS。"
+}

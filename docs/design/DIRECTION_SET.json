@@ -1,0 +1,376 @@
+{
+  "direction_version": "DIRSET-V1.0",
+  "task_id": "TASK-010",
+  "product_plan_version": "Product Plan V1.1（用户草稿）",
+  "product_plan_sha256": "931629211593832424ac5479f3f4d89c83395101ed8e024c81bbf22b4d708887",
+  "research_version": "R-V1.0",
+  "research_gate_required": "PASS",
+  "directions": {
+    "A": {
+      "concept": "随身语音教练",
+      "research_pattern_ids": [
+        "PAT-01",
+        "PAT-02",
+        "PAT-03",
+        "PAT-04",
+        "PAT-05",
+        "PAT-06"
+      ],
+      "strengths": [
+        "日常训练路径短",
+        "符合耳机离屏与低注意力场景",
+        "结果与今日方案衔接直接"
+      ],
+      "tradeoffs": [
+        "首屏难呈现所有历史明细",
+        "摸底需逐步推进，完整数值对照依赖次级页"
+      ],
+      "design_axes": {
+        "information_architecture": "今日任务优先，能力与记录为次级目的地",
+        "hierarchy": "一个主要动作；阶段信息大于统计",
+        "page_structure": "留白卡片与单步骤摸底；沉浸式播放器",
+        "navigation": "今日/能力/记录三个稳定底部入口；训练中收起导航",
+        "density": "低密度，概览后按需深入",
+        "interaction_model": "逐步摸底 → 确认建议 → 一键语音；训练以听为主",
+        "imagery": "克制的呼吸圆与自然绿色，无身体/疗效意象",
+        "data_expression": "分类摘要与轻量日历；不显示综合分数"
+      },
+      "source_pattern_ids": [
+        "PAT-01",
+        "PAT-02",
+        "PAT-03",
+        "PAT-04",
+        "PAT-05",
+        "PAT-06"
+      ],
+      "visual_evidence": {
+        "type": "HTML_PREVIEW",
+        "path": "directions/A/index.html",
+        "screens": [
+          {
+            "screen": "首次摸底",
+            "anchor": "#screen-1",
+            "product_plan_refs": [
+              "FR-001",
+              "AC-001～005"
+            ]
+          },
+          {
+            "screen": "等级结果",
+            "anchor": "#screen-2",
+            "product_plan_refs": [
+              "FR-002",
+              "AC-006～008"
+            ]
+          },
+          {
+            "screen": "今日训练",
+            "anchor": "#screen-3",
+            "product_plan_refs": [
+              "FR-005",
+              "AC-014～015"
+            ]
+          },
+          {
+            "screen": "训练中语音阶段",
+            "anchor": "#screen-4",
+            "product_plan_refs": [
+              "FR-003/004/006",
+              "AC-010～018"
+            ]
+          },
+          {
+            "screen": "历史统计",
+            "anchor": "#screen-5",
+            "product_plan_refs": [
+              "FR-007/008",
+              "AC-019～023"
+            ]
+          }
+        ],
+        "png_status": "NOT_GENERATED",
+        "limitations": "可离线打开的静态 HTML/CSS；不是计时/音频运行证据。未生成方向 PNG，不以参考产品截图冒充本方向截图。"
+      },
+      "technology_reuse": {
+        "REUSE": "原生 HTML/CSS；音频基础能力候选官方 Media3（全方向共用）",
+        "ADAPT": "基于官方媒体能力映射训练阶段，方向只影响呈现",
+        "REVIEW_FOR_REUSE": "自己的旧代码和技术样机须正式审查后再决定",
+        "BUILD": "未选择自建底层；业务页面后续按正式 Reuse Audit 判断，不提前开发"
+      },
+      "product_plan_coverage": [
+        "FR-001",
+        "FR-002",
+        "FR-003",
+        "FR-004",
+        "FR-005",
+        "FR-006",
+        "FR-007",
+        "FR-008",
+        "FR-009"
+      ]
+    },
+    "B": {
+      "concept": "能力工作台",
+      "research_pattern_ids": [
+        "PAT-01",
+        "PAT-02",
+        "PAT-03",
+        "PAT-04",
+        "PAT-05",
+        "PAT-06"
+      ],
+      "strengths": [
+        "等级解释可追溯",
+        "参数与统计容易比较",
+        "耐力/快速记录分离明确"
+      ],
+      "tradeoffs": [
+        "首次进入阅读负担较高",
+        "页面更容易诱发盯屏，需确保语音独立",
+        "须防止数据表达被误解为医学测量"
+      ],
+      "design_axes": {
+        "information_architecture": "能力档案为中心，训练处方和趋势作为并列模块",
+        "hierarchy": "五维输入及负荷理由优先；参数表可复核",
+        "page_structure": "工作表、矩阵、分类趋势；阶段时间线播放器",
+        "navigation": "能力/训练/趋势/设置四个稳定入口与模块分段",
+        "density": "中高密度，关键数值同屏比较",
+        "interaction_model": "质量检查与数值工作表 → 确认处方 → 执行阶段队列",
+        "imagery": "技术文档式网格、数据线与蓝色重点",
+        "data_expression": "分类表格与按日训练量小图；能力与练习量分区"
+      },
+      "source_pattern_ids": [
+        "PAT-01",
+        "PAT-02",
+        "PAT-03",
+        "PAT-04",
+        "PAT-05",
+        "PAT-06"
+      ],
+      "visual_evidence": {
+        "type": "HTML_PREVIEW",
+        "path": "directions/B/index.html",
+        "screens": [
+          {
+            "screen": "首次摸底",
+            "anchor": "#screen-1",
+            "product_plan_refs": [
+              "FR-001",
+              "AC-001～005"
+            ]
+          },
+          {
+            "screen": "等级结果",
+            "anchor": "#screen-2",
+            "product_plan_refs": [
+              "FR-002",
+              "AC-006～008"
+            ]
+          },
+          {
+            "screen": "今日训练",
+            "anchor": "#screen-3",
+            "product_plan_refs": [
+              "FR-005",
+              "AC-014～015"
+            ]
+          },
+          {
+            "screen": "训练中语音阶段",
+            "anchor": "#screen-4",
+            "product_plan_refs": [
+              "FR-003/004/006",
+              "AC-010～018"
+            ]
+          },
+          {
+            "screen": "历史统计",
+            "anchor": "#screen-5",
+            "product_plan_refs": [
+              "FR-007/008",
+              "AC-019～023"
+            ]
+          }
+        ],
+        "png_status": "NOT_GENERATED",
+        "limitations": "可离线打开的静态 HTML/CSS；不是计时/音频运行证据。未生成方向 PNG，不以参考产品截图冒充本方向截图。"
+      },
+      "technology_reuse": {
+        "REUSE": "原生 HTML/CSS；音频基础能力候选官方 Media3（全方向共用）",
+        "ADAPT": "基于官方媒体能力映射训练阶段，方向只影响呈现",
+        "REVIEW_FOR_REUSE": "自己的旧代码和技术样机须正式审查后再决定",
+        "BUILD": "未选择自建底层；业务页面后续按正式 Reuse Audit 判断，不提前开发"
+      },
+      "product_plan_coverage": [
+        "FR-001",
+        "FR-002",
+        "FR-003",
+        "FR-004",
+        "FR-005",
+        "FR-006",
+        "FR-007",
+        "FR-008",
+        "FR-009"
+      ]
+    },
+    "C": {
+      "concept": "节律训练手册",
+      "research_pattern_ids": [
+        "PAT-01",
+        "PAT-02",
+        "PAT-03",
+        "PAT-04",
+        "PAT-06"
+      ],
+      "strengths": [
+        "第一次更容易理解动作与放松",
+        "训练顺序可见且连贯",
+        "表达温和，减少等级竞赛感"
+      ],
+      "tradeoffs": [
+        "章节路径比 A 长",
+        "历史跨周比较效率不及 B",
+        "须避免教学每次重复、阶梯被误解为自动晋级"
+      ],
+      "design_axes": {
+        "information_architecture": "一次完整练习为主线；能力与历史按章节收纳",
+        "hierarchy": "动作理解与放松质量优先，数字跟随解释",
+        "page_structure": "连续章节、训练行程、横向节奏带与逐日日志",
+        "navigation": "无常驻底栏；手册目录、返回与日志互链",
+        "density": "渐进揭示，叙事中密度；单页只完成一个章节目标",
+        "interaction_model": "质量教学章节 → 五维摸底 → 采用起点 → 沿训练行程执行",
+        "imagery": "纸张、抽象地形与章节编号，避免升级竞赛意象",
+        "data_expression": "六阶负荷示意与逐日分类日志，周合计作收束"
+      },
+      "source_pattern_ids": [
+        "PAT-01",
+        "PAT-02",
+        "PAT-03",
+        "PAT-04",
+        "PAT-06"
+      ],
+      "visual_evidence": {
+        "type": "HTML_PREVIEW",
+        "path": "directions/C/index.html",
+        "screens": [
+          {
+            "screen": "首次摸底",
+            "anchor": "#screen-1",
+            "product_plan_refs": [
+              "FR-001",
+              "AC-001～005"
+            ]
+          },
+          {
+            "screen": "等级结果",
+            "anchor": "#screen-2",
+            "product_plan_refs": [
+              "FR-002",
+              "AC-006～008"
+            ]
+          },
+          {
+            "screen": "今日训练",
+            "anchor": "#screen-3",
+            "product_plan_refs": [
+              "FR-005",
+              "AC-014～015"
+            ]
+          },
+          {
+            "screen": "训练中语音阶段",
+            "anchor": "#screen-4",
+            "product_plan_refs": [
+              "FR-003/004/006",
+              "AC-010～018"
+            ]
+          },
+          {
+            "screen": "历史统计",
+            "anchor": "#screen-5",
+            "product_plan_refs": [
+              "FR-007/008",
+              "AC-019～023"
+            ]
+          }
+        ],
+        "png_status": "NOT_GENERATED",
+        "limitations": "可离线打开的静态 HTML/CSS；不是计时/音频运行证据。未生成方向 PNG，不以参考产品截图冒充本方向截图。"
+      },
+      "technology_reuse": {
+        "REUSE": "原生 HTML/CSS；音频基础能力候选官方 Media3（全方向共用）",
+        "ADAPT": "基于官方媒体能力映射训练阶段，方向只影响呈现",
+        "REVIEW_FOR_REUSE": "自己的旧代码和技术样机须正式审查后再决定",
+        "BUILD": "未选择自建底层；业务页面后续按正式 Reuse Audit 判断，不提前开发"
+      },
+      "product_plan_coverage": [
+        "FR-001",
+        "FR-002",
+        "FR-003",
+        "FR-004",
+        "FR-005",
+        "FR-006",
+        "FR-007",
+        "FR-008",
+        "FR-009"
+      ]
+    }
+  },
+  "pairwise_difference_axes": {
+    "A-B": [
+      "information_architecture",
+      "hierarchy",
+      "page_structure",
+      "navigation",
+      "density",
+      "interaction_model",
+      "data_expression"
+    ],
+    "A-C": [
+      "information_architecture",
+      "page_structure",
+      "navigation",
+      "interaction_model",
+      "imagery",
+      "data_expression"
+    ],
+    "B-C": [
+      "information_architecture",
+      "hierarchy",
+      "page_structure",
+      "navigation",
+      "density",
+      "interaction_model",
+      "imagery",
+      "data_expression"
+    ]
+  },
+  "pairwise_difference_explanations": {
+    "A-B": "A 今日任务+单步骤摸底+摘要；B 能力档案+工作表+参数矩阵与趋势。",
+    "A-C": "A 稳定三栏与沉浸圆形阶段；C 章节互链与训练行程、横向节奏带和日志。",
+    "B-C": "B 四栏数据工作台与处方队列；C 无常驻栏的章节叙事与逐日日志。"
+  },
+  "recommendation": {
+    "direction": "A",
+    "reason": "当前主任务是摸底后用耳机执行今日自动组合；A 日常入口短、语音阶段层级明确。推荐不等于已选择。"
+  },
+  "selected_direction": "A",
+  "selection_evidence": {
+    "selected_by": "user",
+    "evidence": "用户 2026-10-07 回复 `a`，选定「A｜随身语音教练」",
+    "date": "2026-10-07"
+  },
+  "status": "DIRECTION_SELECTED",
+  "approval_scope": "只选择整体产品/视觉方向；不批准分级阈值、频率、UX、Prototype 或正式开发。",
+  "not_frozen": [
+    "布局细节",
+    "组件样式",
+    "间距配色",
+    "具体 UI 文案",
+    "分级阈值",
+    "默认训练频率",
+    "重新摸底周期",
+    "训练中断细节",
+    "技术版本与库选择"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "mode": "CONTRACT_STRUCTURAL_VALIDATION_NOT_RUNTIME",
+  "ux_contract_sha256": "e00173de99c3ed2e3f5c323769276c2bcc5967e5b6a154855ec22af8b7f9a9ad",
+  "source_sha256": "931629211593832424ac5479f3f4d89c83395101ed8e024c81bbf22b4d708887",
+  "source_unchanged": true,
+  "fr_count": 14,
+  "ac_count": 26,
+  "flow_count": 14,
+  "screen_count": 17,
+  "interaction_count": 72,
+  "state_count": 62,
+  "requirement_chains": 3760,
+  "unknown_requirement_ids": [],
+  "controlled_semantic_changes": [
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R5"
+  ],
+  "human2_approved": false
+}

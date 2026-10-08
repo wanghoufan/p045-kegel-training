@@ -1,0 +1,86 @@
+# RESEARCH_REVIEW（Phase1 专用；内部 role ID `product-reviewer` 不变）
+
+- Plan Version（评的是哪版 PRODUCT_PLAN）：`PRODUCT_PLAN_V1.0`（2026-10-07 首轮 Planner 草案，P045 男性盆底肌语音训练器，Android 优先）
+- Review Round（第几轮）：第 1 轮（R1；对应 Plan 内 `Research Review Round 第 0 轮`之后的首轮评审）
+- Result：（FAIL＋一句话结论）：FAIL——Plan 自评 68/100 方向诚实，但 RQ-01 竞品零实机、L1–L6 与每日 2 次无充分依据、锁屏后台无样机、关键引用缺页码行号，不满足进 Human Review 门槛，回 Planner 修订。
+- P0 / P1 / P2：
+  - P0（进 Human Review 前必须闭环，否则 Gate 不过）：
+    - P0-01｜L1–L6 V0.1、初始/升级阈值、停止规则无产品级安全复核。矩阵 `L1=3/6/5/1/4/5 … L6=10/5–10/10/1/2/10` 无一手临床出处；L6 放松写区间 `5–10` 未锁定单值或规则；耐力休息/收紧比前后不一致（L1 为 2:1，L6 为 0.5–1:1，临床主流为 1:1）；初始等级映射阈值与升级阈值在 Plan 内明确写着“须在研究轮锁定”，现状就是未锁定。对应 Plan 自列未闭环 P0-①，本轮外部验证后仍为 OPEN。
+    - P0-02｜锁屏/后台/音频焦点目标 Android 真机方案无样机证据。Plan 技术路径只有一条自适应质量 `camera-audio` 链接，未引用 `MediaSessionService / FOREGROUND_SERVICE_MEDIA_PLAYBACK / 音频焦点 / WakeLock` 等必备官方要求，也无目标机型、目标 API、录屏日志。`AC-21/22` 写了正确判定口径但无证据。对应 Plan 自列未闭环 P0-②，仍为 OPEN。
+    - P0-03｜“每日 2 次”默认值依据不足且与主流临床冲突。NIDDK 要求至少每日 3 次三姿势、Sussex 要求每日 4–5 次、UHS 要求每日 3–4 次、MSKCC 要求每日至少 3 次 10 个；仅 AHRQ 音频脚本为每日 2 次（早晚各 10 快＋10 慢）。Plan 以 2 次作默认提醒却未引用 AHRQ，也未用 Mayo“每日超过 40 次或单次超 10 秒会疲劳”作安全上限论证。默认值由 OD-02 决定没错，但在修订前不得写成既定事实。
+    - P0-04｜竞品“G动”结构性描述零实机证据。Plan 第 37 行诚实写了“尚未由 Research Reviewer 实机核验”，但在同一节仍保留其等级/训练量/宣传用语的转述。本轮 Web 检索亦未找到可验证的 G动官方参数页（中文男性盆底肌应用多为应用商店内页，无公开参数文档）。在实机核验表落盘前，任何源自草稿的 G动参数都不得作为分级依据。
+  - P1：
+    - P1-blocking-01｜核心外部事实可追溯性不足。Hall et al. 2018（108 项综述）未给出期刊全称与标题核对；Myers & Smith 2019 口径正确但缺卷期页码；Mulhall et al. 2007 未点明即 EHS 验证论文（J Sex Med 2007;4(6):1626–1634，N=307 西地那非试验），易被误读为 PFMT 方案来源；OUH PDF 链接可达（HTTP 200）但内容加密无法解析文本，Sussex 页直连返回 403（反爬），两者均缺“第几页第几段”引用。Planner 修订时须补全。
+    - P1-blocking-02｜人机交互契约未锁定暂停/恢复/中断与复测确认的异常状态。`FLOW-05 / AC-13/21/22/31` 定义了判定口径，但“暂停时是否保留前台服务、来电后是否自动恢复还是停在暂停页、疼痛反馈后是否锁死加量入口、重测取消/确认的状态机”没有契约文档。对应 Plan 自列 blocking P1-②，仍为 OPEN。
+    - P1-非blocking-01｜每日频率 1/2/3 可选（`AC-33`）：方向正确（标为提醒设置、非处方），待 OD-02 关闭即可，不阻塞核心路径。
+    - P1-非blocking-02｜最长自报保持与等级时间线（`AC-34`）：为自报口径，已声明“不暗示设备客观测出肌力”，可后置但移出 V1 须同步改 FR/AC/DoD。
+    - P1-非blocking-03｜阶段性复测提醒（`AC-35`）：14 天建议无临床出处（见 RQ-05），只要保持“可忽略、可直接训练、可进重测、不强制升级”，即可作为产品假设后置验证。
+  - P2：
+    - P2-01｜EHS 可选趋势：验证研究真实存在但与盆底肌等级无关，且涉及敏感数据与隐私文案成本，建议维持 V1 基线不含（同 OD-01 建议）。
+    - P2-02｜自定义震动反馈：竞品仅见 KegelFlow 的相位触觉提示与通用 haptics，无临床必需性，维持 P2，仅作可选、无障碍与权限门控。
+    - P2-03｜云同步与更丰富图表：V1 明确本地优先且无远端 API，维持 Out of Scope；卸载丢失风险已要求在设置/首次说明如实告知。
+- Key Assumptions（逐条列＋是否成立）：
+  - KA-01｜成年目标用户能理解盆底肌动作、完全放松和五维自报；错误识别时以安全退出取代强行分级。——部分成立、尚需可用性验证。NIDDK、Mayo、Cleveland、MSKCC 一致指出约 40% 人首次找不对肌肉，需专业人员/生物反馈辅助；Mayo Health System 明确“不应把凯格尔塞进日常杂事，要安静专注练”。Plan 用“控制/放松不确定则不自动上调＋疼痛不适则停止加量”兜底是对的，但五维自报本身（1–10 秒、0–10 次、放松三档）无信效度验证，不得包装成量表。需盲听/可用性测试补证。
+  - KA-02｜短板约束的单一主等级比耐力/快速双等级更易理解，且不会让快速落后者被推入过快节奏。——逻辑成立、证据不足。临床一贯双轨并行（慢＋快分开处方，如 Sussex 8–10 慢＋5–10 快、UHS 慢 10 秒＋快 1 秒×10），单一主等级是产品简化假设，无对照证据。Plan 以“短板约束＋不确定不升级”对冲是合理的，但 OD-05 必须经用户测试（给同一用户看单等级 vs 双等级两种呈现，测复述正确率）后再定。
+  - KA-03｜L1–L6 V0.1 和每日频率是产品候选节奏，不是临床验证方案。——成立，且 Plan 表述诚实。本轮验证确认：无任何指南给出统一六级处方（Dumoulin 2011“最优方案未知”、Myers & Smith 2019“未确定最佳方案”、Cochrane 干预内容与时长差异大）。保留条件：开发前必须锁定阈值表，且全程措辞只能是“产品训练节奏”，禁写处方/疗效。
+  - KA-04｜用户愿意听简短语音、耳机可用、锁屏播放对核心场景重要。——方向合理、尚未验证。AHRQ 9 分钟音频脚本（每日 2 次、逐秒数数、10 快＋10 慢、强调放松与呼吸）证明“数数＋放松提示”的语音带练是临床用过的形式；KegelFlow/KegelUp 的引导节律与 streak 证明用户接受跟随节律。但“锁屏＋口袋＋耳机”为核心场景仍是假设，需真机样机（锁屏 1 分钟不杀进程＋耳机插拔＋来电抢占三场景录屏）验证。
+  - KA-05｜主动重测足以支撑 V1 闭环，周期提醒能否改善使用尚需验证。——成立一半。临床无固定复测周期（UHS 终身每日、恢复期可达 6 个月、巩固后每周 2–3 次维持；NIDDK 3–6 周才见效）。14 天仅提示一次是产品假设，不是医学结论。只要保持“提醒缺席不阻止主动复测、不自动升级”，V1 闭环可接受；提醒有效性列 P1 非阻塞后续用留存/复测率验证。
+- Verified Facts（已验证事实＋证据）：
+  - VF-01｜NIDDK 凯格尔页真实存在且口径与 Plan 一致：找肌肉可用“停尿流/忍屁/指检”但“不要经常在排尿时练（膀胱感染风险）”；起步保持 3 秒、完全放松、做到 10–15 次/组；每日至少 3 次，分躺坐站三姿势；只收盆底肌，不夹腹/腿/臀，正常呼吸；过度训练有害；遵医嘱定个人计划；见效约 3–6 周。证据：本轮直连 `https://www.niddk.nih.gov/health-information/urologic-diseases/kegel-exercises` 全文抓取成功，上述逐句命中；该页参考文献 [4] 即 Myers & Smith 2019，反向佐证 Myers 引用真实。
+  - VF-02｜Sussex NHS 男性盆底肌页实质内容与 Plan 转述一致：先识别肌肉（忍便/忍屁＋停尿想象，警告勿经常实操以免影响排空，感觉不到收缩去找专业人员）；收紧上提数到 5，渐进到 10 秒；慢收缩最多 8–10 个；快收缩 5–10 个“强而快、立刻放松”；每日至少 4–5 轮，可躺坐站走。证据：Web 检索摘要逐句命中 `https://www.uhsussex.nhs.uk/resources/male-pelvic-floor-exercises`（直连 403 系反爬，不影响索引内容可信度；修订时需 Planner 换 NHS 镜像或注明访问日期与截图）。
+  - VF-03｜OUH 男性盆底肌 PDF 链接有效：`https://www.ouh.nhs.uk/media/in3ekdyl/74150guide.pdf` 本轮返回 HTTP 200（PDF 加密无法文本解析）。结合检索摘要，其“耐力保持与快速收缩区分、10 秒/10 次上限、收缩间明确放松”的转述方向可信，但 Planner 修订时必须给出 PDF 内页码/段落截图，不得仅留裸链接。
+  - VF-04｜Myers & Smith 2019 真实且 Plan 转述准确：Physiotherapy 2019;105(2):235–243，首次系统评价 PFMT 对 ED/PE，结论“似乎有效，但训练接触、联合干预、时长、频率、强度差异大，未确定最优方案，低–中质量、异质性高不宜合并”。证据：ScienceDirect 题录页＋NIDDK 参考文献双交叉；PubMed `https://pubmed.ncbi.nlm.nih.gov/30979506/` 题录可查（本轮直连被 cookie 墙挡，但题录标题命中）。推论：不得据此宣传治疗 ED/PE，Plan `FR-009/AC-30` 的禁疗效承诺正确。
+  - VF-05｜EHS 量表验证研究真实，但与盆底肌等级无关：Mulhall/Goldstein et al. J Sex Med 2007;4(6):1626–1634（PubMed 17888069），N=307 多国西地那非试验，单条目 PRO，重测信度、已知组别效度（IIEF 区分）、聚合效度（IIEF/QEQ 中–强相关）、高治疗反应性。证据：PubMed 摘要页＋Oxford Academic 题录页双命中。推论：Plan“EHS 有验证但不等于训练等级、不参与 Level 计算、V1 基线不含 EHS 数据结构”完全正确；要求 Planner 把 Plan 内 “Mulhall et al. 2007” 明确标注为 EHS 验证论文，避免与 PFMT 方案混淆。
+  - VF-06｜Android 后台/锁屏音频官方要求与 Plan 方向一致但引用不足：非可见后台应用必须用前台服务（`FOREGROUND_SERVICE`＋`FOREGROUND_SERVICE_MEDIA_PLAYBACK`，`foregroundServiceType=mediaPlayback`）＋持久不可清除通知/锁屏控制；推荐 Media3 `MediaSessionService`；需 `PARTIAL_WAKE_LOCK` 防休眠杀播放；必须处理音频焦点（`AUDIOFOCUS_LOSS` 暂停、不暗中计时）；Android 17 起后台音频硬化要求 WIU 能力。证据：`developer.android.com/media/media3/session/background-playback`、`.../media/platform/mediaplayer/background`、`.../develop/adaptive-apps/quality-guidelines/adaptive-app-quality/experiences/camera-audio`（T-Audio_Background_Playback 含锁屏 1 分钟＋通知＋锁屏播控测试）、`.../about/versions/17/changes/bg-audio`、Expo `expo-audio`（`enableBackgroundPlayback`＋`setActiveForLockScreen`）。Plan 仅引 camera-audio 一页是不够的，修订时须补齐上述四类链接并把“系统要求的可见运行通知/控制”写进 AC-21 判定。
+  - VF-07｜主流临床剂量带与 Plan 上限的关系：慢保持 3→10 秒、放松等长（5→10 秒或 10/10）、慢 8–10 个、快 5–10 个（1 秒或 2 秒＋2 秒休息）、每日 3–5 次、多姿势。证据：NIDDK（上）、Sussex（上）、UHS（慢 10 秒＋4 秒休息、快 1 秒×10、每日 3–4 次）、MSKCC（5 秒起步每周加量至 10/10、10 个×每日至少 3 次）、Cleveland（5 秒起步至 10/10、10 个×3 次/日）、Royal Berkshire（慢至 12 秒×10、快 1 秒×10、半力 30 秒×3）、AHRQ 音频脚本（快 2 秒＋2 秒休息、慢 10＋10、10 快＋10 慢、每日 2 次）。推论：Plan 上限“10 秒/10 次”正确（与临床天花板对齐）；但休息配比与每日次数需按 RQ-03/04 修订。
+- External Sources（Web Search / Web Fetch / 官方文档 / 官方 GitHub / 第三方 / 社区反馈，附链接）：
+  - 医疗与医院：NIDDK `https://www.niddk.nih.gov/health-information/urologic-diseases/kegel-exercises`（直连已验）；Sussex `https://www.uhsussex.nhs.uk/resources/male-pelvic-floor-exercises`（检索已验、直连 403）；OUH `https://www.ouh.nhs.uk/media/in3ekdyl/74150guide.pdf`（HTTP 200、加密 PDF）；UHS 呼吸/盆底单 `https://www.uhs.nhs.uk/Media/UHS-website-2019/Patientinformation/Womenshealth/Pelvic-floor-muscle-exercise-sheet-689-PIL.pdf`（慢 10 秒＋快 10 个＋每日 3 次处方模板）；Mersey Care `https://www.merseycare.nhs.uk/patient-leaflets/pelvic-floor-exercises-men-guide`（慢 10 秒＋快 10 个＋每日 3 次＋日记表）；Royal Berkshire 男科单（慢至 12 秒×10、快 1 秒×10，检索摘要）；AHRQ 音频脚本 `https://www.ahrq.gov/sites/default/files/wysiwyg/evidencenow/mui/practicing-quick-slow-pelvic-exercises.pdf`（每日 2 次的唯一临床先例＋逐秒数数范本）；MSKCC 男科单（5→10 秒、10 个×3 次/日）；Cleveland Clinic `https://my.clevelandclinic.org/health/treatments/22211-kegel-exercises-for-men`（5→10 秒、10 个×3 次/日）；Mayo Clinic `https://www.mayoclinic.org/healthy-lifestyle/mens-health/in-depth/kegel-exercises-for-men/art-20045074`（3 秒起步）＋ Mayo Health System（每日 40 个上限、超量疲劳警告）。
+  - 综述与量表：Myers & Smith 2019 ScienceDirect 题录（Physiotherapy 2019;105(2):235–243）＋ PubMed `https://pubmed.ncbi.nlm.nih.gov/30979506/`；Dumoulin 2011 最优方案未知 `https://pubmed.ncbi.nlm.nih.gov/21661024`（怎么练几次、个体还是团体、是否加生物反馈均未知）；EHS 验证 PubMed `https://pubmed.ncbi.nlm.nih.gov/17888069`＋ Oxford Academic `https://academic.oup.com/jsm/article-abstract/4/6/1626/6890470`＋ ePROVIDE `https://eprovide.mapi-trust.org/instruments/erection-hardness-score`。
+  - Android 官方：MediaSession 后台播放 `https://developer.android.com/media/media3/session/background-playback`；后台 MediaPlayer `https://developer.android.com/media/platform/mediaplayer/background`；自适应质量音频 `https://developer.android.com/develop/adaptive-apps/quality-guidelines/adaptive-app-quality/experiences/camera-audio`；Android 17 后台音频硬化 `https://developer.android.com/about/versions/17/changes/bg-audio`；前台服务概览 `https://developer.android.google.cn/develop/background-work/services/fgs?hl=en`；Expo Audio `https://docs.expo.dev/versions/unversioned/sdk/audio.md`。
+  - 竞品（应用商店与官网，均 2026-10-07 检索）：Kegel Trainer `https://kegeltrainer.app/`；KegelUp Google Play `https://play.google.com/store/apps/details?hl=en_US&id=com.kegel.exercises.men`；KegelFlow App Store `https://apps.apple.com/us/app/kegelflow/id6752828065`；Kegel Coach for Men `https://apps.apple.com/us/app/the-kegel-coach-for-men/id6755604112`；Kegel AI Trainer `https://apps.apple.com/us/app/kegel-exercises-ai-trainer/id6758776410`；K-Train `http://kegeltrain.com/en`；Kegelō `https://kegelo.netlify.app/`；Kegel App `https://thekegelapp.com/`。G动：本轮中英文检索均未找到可验证的官方参数页，判未验证（见 Unverified Items）。
+- Competitor Findings（竞品现状＋对本 Plan 的启示）：
+  - 现状：主流男性/通用盆底肌应用均为“结构化等级＋短时跟练＋提醒＋ streak/统计＋离线＋免责声明”范式。Kegel Trainer（多级多阶段＋自定义＋追踪＋提醒＋低调模式＋排行榜＋全免费）；KegelUp（月度渐进计划＋视觉收缩/休息指导＋完成/时长/里程碑统计＋提醒＋离线＋非医疗器械声明）；KegelFlow（45 练习/23 套路/4 级、倒计时＋滴答＋触觉、5 分钟日目标＋能量 gating、streak 日历、Apple Watch 触觉带练、Zen 无数字模式、离线无账号）；Kegel Coach for Men（男科结构化渐进、每日提醒、静默低调＜5 分钟、不做医疗宣称）；Kegelō（56 天临床渐进、5 级、临床积分解锁、Recovery Lock 强制休息、目标问卷 onboarding、全身核心 cylinder 概念）。
+  - 对 Plan 的启示：①等级＋语音＋历史三件套是行业标配，Plan 的 L1–L6＋Audio First＋分项历史方向不偏；②无一竞品公开“五维自报→单等级映射阈值”算法，Plan 的映射表是自创，必须当产品假设管理；③提醒＋streak＋可忽略的复测提醒是留存标配，Plan AC-35“可忽略”正确；④离线＋隐私默认＋非医疗声明是信任标配，Plan 本地优先＋FR-009 正确；⑤“静默/低调/Zen”模式是高频刚需（公共场合、通勤），Plan 纯 Audio First 无静默 fallback 是缺口，修订时须补（至少振动/字幕/无声跟练二选一）；⑥Kegelō Recovery Lock 是重要反例：肌肉需恢复，过度训练反伤，Plan 每日 2 次＋无休息日设计须回应（见 Counter-evidence）。
+- Counter-evidence（反对证据＋成功的相反做法）：
+  - 反对“每日 2 次默认足够”：NIDDK 3 次、Sussex 4–5 次、UHS 3–4 次、MSKCC ≥3 次均为 2 次的 1.5–2.5 倍。若 Planner 坚持 2 次，必须同时引用 AHRQ（2 次先例）＋Mayo 40 次/日疲劳上限（L6 每日 2 次＝40 次恰顶格，3 次＝60 次超限，反而证明 2 次更安全）＋依从性论证，否则改默认或去默认（OD-02 备选“无默认、用户首次设置”）。
+  - 反对“无休息日连续打卡”：Kegelō 用 Recovery Lock 强制休息、前沿 6 周男科 pilot（Frontiers 2026）用每周 3 次×5–10 分钟而非每日；肌肉生理需恢复。成功的相反做法＝每周至少 1 休息日或按疲劳自评动态降量。Plan AC-28 禁自动升级是对的，但还缺“连续多日完成后的休息提示/降量入口”。
+  - 反对“纯自报可替代评估”：监督下 PFMT 优于居家无监督（Cochrane 系综述一致结论）；NIDDK 明确建议找医生/治疗师验动作、可用生物反馈/电刺激。成功的相反做法＝首次 onboarding 强制看动作视频＋代偿自查清单＋“不确定则锁等级＋推专业求助”（Plan 已有，需在交互契约里做实，不是只写文案）。
+  - 反对“爆发训练”命名：临床一律用 fast/short/quick，无一用 explosive；“爆发”在中文健身语境隐含憋气、Valsalva、臀腿代偿风险。成功的相反做法＝KegelFlow/Up 的 quick/short＋中文“快速收紧–完全放松”副标题。支持 OD-04 建议“快速训练”。
+  - 反对“语音越密越好”：AHRQ 范本为每秒数数＋相位切换提示，但 Mayo 强调安静专注、KegelFlow 提供 Zen 无数字模式。成功的相反做法＝语音密度可调（完整数数 vs 仅相位提示）＋耳机/外放/振动三路由，修订时须把“密度设置”列为 P1 非阻塞或 P2。
+  - 反对“EHS 进训练 App 是增值”：EHS 成功恰恰因为它是单条目、经心理测量验证（重测/效度/反应性）；Plan 五维自报未经任何验证。若纳入 EHS 趋势，必须走隐私/文案评审且永不参与等级（Plan 已正确冻结），否则不如不做。
+- Unverified Items（未验证项＋验证方法）：
+  - UV-01｜G动及其他男性盆底肌产品的摸底/分级/节奏/audio/历史（RQ-01）。验证方法：Android 真机安装 G动＋至少 2 款英文竞品（KegelUp/KegelFlow），录屏摸底全流程，截等级页、训练页、历史页，整理参数对照表（保持秒/放松秒/次数/快收缩/间隔/频率/提醒/统计口径），落 `docs/review/` 附录或 Planner 研究附录；应用内无公开文档的以录屏为准，应用商店描述不得当参数依据。
+  - UV-02｜L1–L6 各级跳变的安全性（RQ-03）：L3 6→8 次（＋33%）、L4 6→L5 8 秒（＋33%）对新手是否过陡。验证方法：物理治疗师函审＋至少 5 名新手可用性测试（按级试练＋Borg 疲劳＋次日酸痛回访），或先压平跳变（每级增幅≤25%）再测。
+  - UV-03｜L6 放松 `5–10` 的确切语义。验证方法：Planner 二选一并写死——固定值（如 8 秒）或规则（如“保持 10 秒则放松 10 秒，保持不足则按 1:1 就近取整”），QA 按单值核对。
+  - UV-04｜初始等级映射阈值与升级阈值。验证方法：Planner 给出五维→Lx 决策表（含控制/放松/不适一票否决行）＋至少 10 组边界输入的对照测试表；升级仅经重测确认，复用 AC-09/28 判定。
+  - UV-05｜每日 2 次默认（RQ-04）与 14 天复测提醒（RQ-05）的行为效果。验证方法：V1 先按“提醒设置、可选 1/2/3、无默认或默认 2 次＋可忽略的 14 天提示”上线，埋点“提醒开启率/完成率/复测转化/疲劳退出率”，4–6 周后复盘；上线前用 5–8 人日记法测提醒打扰度。
+  - UV-06｜「快速训练 vs 爆发训练/快速控制」理解度（RQ-06）。验证方法：15–20 人卡片分类＋盲听复述（盖住屏幕听一轮，看能否复述“收紧–完全放松–间隔”），选复述正确率最高者；同步检查“爆发”是否诱发憋气/臀腿用力。
+  - UV-07｜Audio First 全链路（RQ-07）：目标机型×目标 API 的锁屏 1 分钟＋耳机插拔＋来电抢占＋音频焦点＋通知播控五场景真机录屏；语音逐秒音轨核对（AC-18/20）；振动仅作辅助、可关、需权限声明。验证方法见 AC-19/21/22 证据清单；Expo 栈须验证 `enableBackgroundPlayback＋setActiveForLockScreen` 在目标机型持续播放。
+  - UV-08｜Hall et al. 2018 全引文与 OUH/Sussex 精确到页段的引用。验证方法：Planner 补期刊名/标题/DOI（Hall）、PDF 页码截图（OUH）、访问日期截图（Sussex 403 页用存档或 NHS 镜像页）。
+- Required Fixes（Planner 必须改项，打回依据）：
+  - RF-01｜锁定 L1–L6 单值矩阵：L6 放松区间改为单值或显式规则；全系耐力休息/收紧比给出统一规则（如新手 ≥1.5:1、高阶 ≥1:1）并解释 L1 6/3 与 L6 的差异；附“单次总时长与日总时长”计算表（证明 L6 每日 2 次≤40 次/日疲劳线）。
+  - RF-02｜给出初始/升级阈值决策表＋停止规则表（控制/放松/疼痛/排尿排便异常/无法放松五类一票否决），与 AC-09/28/31 双向可查；删除“开发不能自行猜测”式的悬空句，改为确定值或明确 Human 待定。
+  - RF-03｜每日频率二选一并给依据：要么保留默认 2 次＋引用 AHRQ 2 次＋Mayo 40 次上限＋依从性说明，要么按 OD-02 备选去默认。无论哪种，设置页必须写“产品提醒、非医学处方”（AC-33 已要求，FR-005 正文同步）。
+  - RF-04｜补 G动实机核验或删转述：要么附实机参数对照表，要么把第 37 行压缩为“G动未验证，不作依据”，删除任何源自草稿的 G动量级描述。
+  - RF-05｜技术路径补四类官方引用并改 AC-21：追加 MediaSessionService 后台播放、前台服务/通知、音频焦点、WakeLock（＋Android 17 硬化说明适用版本），Expo 栈追加 `enableBackgroundPlayback/setActiveForLockScreen`；AC-21 判定追加“有系统要求的可见运行通知/锁屏控制，可播控暂停/恢复”。
+  - RF-06｜补静默/低调 fallback：至少明确一种无声跟练方式（字幕/振动/纯计时）及公共场合入口，回应竞品 discretion/Zen 反例；否则 AC-18“不看屏幕可听清”在地铁/办公室场景不成立。
+  - RF-07｜补休息/过度训练 guard：连续完成 N 天后出现休息提示或降量入口；训练中“无法完全放松可提早结束”从 FR-002 一句话扩展为可测交互（第几次提示、结束计为什么状态），与 AC-12/13 对齐。
+  - RF-08｜引文 hygiene：Hall 补全引文；Mulhall 明确标注为 EHS 验证论文；OUH/Sussex 补页码段落/访问日期；Myers 补卷期页码。所有结论保留可点击链接或明确来源，无证据的写“未验证”。
+  - RF-09｜交互契约前置清单（blocking P1-②的 Planner 输入）：暂停/恢复/来电返回/疼痛退出/重测取消确认五状态的页面＋语音＋计时＋记录四元组，Human Review 前至少给出状态表初稿，Phase2 再转正式契约文档。
+- Plan Readiness Score（分项打分＋合计，口径以 PRODUCT_PLAN.template.md 为准）：
+  - 产品目标与用户需求（20）：14/20。目标、四模块、Audio First 闭环清晰；扣 6 分因真实用户访谈为零、目标用户假设（锁屏/口袋/耳机场景占比）无数据。
+  - 核心方案完整性（20）：14/20。FLOW/FR/AC/DoD 编号齐全可追踪；扣 6 分因阈值表、L6 单值、停止规则、重测周期、中断契约未锁。
+  - 外部事实与竞品验证（20）：10/20。医院与综述一手资料初核扎实（NIDDK/Sussex/Myers/EHS）；扣 10 分因竞品实机为零、六级矩阵无依据、每日次数与临床主流冲突未释。
+  - 技术可行性（15）：7/15。Android 官方后台音频路径存在；扣 8 分因项目技术栈（原生/Expo/Flutter 未定）、目标机型与 API、真机样机全缺，单链接引用不足。
+  - 风险与异常场景（10）：7/10。主要危险与失败路径已列且文案禁区清晰；扣 3 分因焦点中断实测、安全复核人、过度训练 guard 未闭环。
+  - 开发范围与 DoD（10）：8/10。九项 FR、35 条 AC、7 条 DoD 可追踪，关键集合 32 条非空；扣 2 分因非阻塞 P1 去留（OD-01/02/03）未定导致 AC-33..35 悬空。
+  - 未决问题（5）：2/5。五项 OD 与七项 RQ 显式列出；扣 3 分因无一关闭且缺关闭标准与负责人。
+  - 合计：62/100（14+14+10+7+7+8+2）。Plan 自评 68 高估约 6 分，主因竞品与技术两项高估。Gate（Readiness>=90 AND P0=0 AND blocking P1=0 AND 关键事实已验证 AND 核心假设已合理验证 AND 视觉与交互验收标准非空且逐条可测）：P0=4、blocking P1=2、关键事实部分未验证、核心假设待用户测试、AC 虽全但缺真机证据——不满足，不进 Human Review。
+- Human-only Decisions（只需人类拍板项）：
+  - OD-01 EHS 是否进 V1：本评审建议维持 V1 不含（敏感数据＋评审成本＋与等级无关）；若用户坚持要，需同步批隐私文案评审资源与独立趋势页 AC。
+  - OD-02 默认频率：建议“默认 2 次＋可选 1/2/3＋标提醒非处方”，备选“无默认、用户首次设置”；请用户选其一（依据见 RQ-04 与 RF-03）。
+  - OD-03 复测周期：建议“随时可测＋14 天仅提示一次＋可忽略”；备选“仅主动重测”；请用户选其一并确认埋点复盘周期。
+  - OD-04 名称：建议「快速训练」（副标题“快速收紧–完全放松”），备选「快速控制」；「爆发训练」仅作研究比较词，不建议上线；请用户定稿（附 RQ-06 测试后可复核）。
+  - OD-05 等级模型：建议单主 Level＋统计保留双维度＋短板约束；备选双等级；请用户在看完单/双呈现对比测试后再定。
+  - 追加两项需用户拍板：①是否接受“休息日/降量入口”进 V1（成本小、安全收益大）；②真机样机目标机型与最低/目标 API（决定 Android 17 硬化是否纳入测试）。
+- Next Action：（回 Planner 修订 / 进 WAITING_HUMAN_APPROVAL 找人）：回 Planner 修订。Planner 按 RF-01..09 改出 `PRODUCT_PLAN_V1.1`（或 V1.0 修订版），补阈值表、频率依据、竞品实机表或删转述、技术四类引用、静默 fallback、休息 guard、引文 hygiene 后，再回本 Reviewer 做 R2 复核；R2 通过且 Readiness>=90、P0=0、blocking P1=0 后，TM 再进 WAITING_HUMAN_APPROVAL（Human Gate 一次列全 OD-01..05＋追加两项）。

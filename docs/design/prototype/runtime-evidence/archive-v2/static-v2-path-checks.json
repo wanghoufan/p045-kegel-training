@@ -1,0 +1,15 @@
+{
+  "mode": "FUNCTION_HARNESS_NOT_BROWSER_RUNTIME",
+  "status": "PASS",
+  "checks": 47,
+  "browser_executed": false,
+  "console_inspected": false,
+  "paths": [
+    "无等级→首页选L1→开始",
+    "有等级→今日一次开始",
+    "暂停恢复/取消结束/自然完成/历史",
+    "可选五项摸底即时反馈/跳过",
+    "六级明确自选与安全锁"
+  ],
+  "limitations": "实际handler及内容生成器在Node模拟对象中执行，未在真实浏览器点击或观察DOM；不能作为runtime PASS。"
+}

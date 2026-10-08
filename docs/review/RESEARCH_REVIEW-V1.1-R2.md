@@ -1,0 +1,100 @@
+# RESEARCH_REVIEW（Phase1 专用；内部 role ID `product-reviewer` 不变）
+
+- Plan Version（评的是哪版 PRODUCT_PLAN）：`PRODUCT_PLAN_V1.1`（2026-10-07，P045 男性盆底肌语音训练器，Android 优先；按 `RESEARCH_REVIEW-V1.0-R1` 的 RF-01..09 修订）
+- Review Round（第几轮）：第 2 轮（R2；复核对象 V1.1，对照 R1 的 RF-01..09、P0-01..04、P1-blocking-01/02）
+- Result：（PASS / FAIL＋一句话结论）：FAIL——V1.1 把九项 RF 在“规则锁定与引文 hygiene”层面基本闭环、算术自洽且不再宣称医学疗效，但 P0-01（物理治疗师安全复核＋新手试练）与 P0-02（目标真机样机）零外部证据、两项 blocking P1（可复验存档、正式交互契约接受）未闭，Readiness 74/100 不满足 Human Review 门槛，回 Planner 修订。
+- P0 / P1 / P2：
+  - P0（进 Human Review 前必须闭环，否则 Gate 不过；以下为本轮 R2 判定）：
+    - P0-01｜数值锁定但安全有效性未经专家复核——未闭。`FR-002` 单值矩阵、初始/升级阈值、停止规则表在写法上已锁定（RF-01/02 的文本闭环见下），但 L3→L4/L4→L5 的 6→8 秒跳幅（+33%）、五维自报→等级映射仍无物理治疗师函审、无新手试练与疲劳回访（UV-02/04/05）。Plan 自列未闭环 P0-01，本轮维持 OPEN。
+    - P0-02｜目标机型/API 与后台音频真机样机证据仍缺——未闭。技术路径引文已补齐（见 VF），但 OD-07 未决策（目标机型、最低/target API 未指定），无锁屏≥1 分钟、耳机、来电/焦点抢占的真机录屏与日志。Plan 自列未闭环 P0-02，本轮维持 OPEN。机型未指定前不得报真机可行性通过（Plan 已正确声明）。
+    - P0-03｜“每日 2 次”默认值依据——已闭（计划文本层面）。V1.1 已引用 AHRQ 两次安排先例＋Mayo 40 次上限＋依从性假设，明确标注为产品假设、设置页固定“产品提醒、非医学处方”，保留 NIDDK/Sussex 高频反证并交 OD-02 拍板。满足 R1 RF-03 的二选一要求，降为 OD-02＋UV-05，不再占 P0。
+    - P0-04｜竞品 G动零实机转述——已闭。V1.1 竞品段已改为“未完成实机核验，不作任何参数或等级依据”，删除量级转述（RF-04 文本闭环）。残留的一句商店观察（低调/恢复提示）未带参数，不构成依据。
+  - P1：
+    - P1-blocking-01｜核心外部事实可复验存档仍缺——未闭。Hall/Myers/Mulhall 引文元数据已补全（见 VF-08），但 OUH PDF 精确页段截图、Sussex 可访问存档、AHRQ 原 PDF 可复验副本仍缺；且本轮发现 V1.1 中“AHRQ PDF 直连 404”表述已过时（本轮 WebFetch 取回 PDF 字节流，见 VF-09）。须 Reviewer 判定证据级别并补档。对应 Plan 自列 blocking P1-①，维持 OPEN。
+    - P1-blocking-02｜交互契约正式接受仍缺——未闭。V1.1 已给出六行四元组（暂停/恢复/来电/疼痛/重测取消/确认）＋放松与无声补充＋`AC-39` 逐列比对口径，作为 Human Review 前的产品输入是合格的；但仍需 Research Reviewer/UX 契约负责人在 Human Review 前明确接受为正式交互输入（Plan 自列 blocking P1-②语义），维持 OPEN。
+    - P1-非blocking-01｜每日频率 1/2/3 可选（`AC-33`）：方向正确，待 OD-02 关闭，不阻塞核心路径。
+    - P1-非blocking-02｜最长自报保持与等级时间线（`AC-34`，关键：否）：自报口径声明正确，可后置；移出 V1 须同步改 FR/AC/DoD。
+    - P1-非blocking-03｜阶段性复测提醒（`AC-35`，关键：否）：“随时可测＋14 天仅提示一次＋可忽略＋不强制升级”可作为产品假设后置验证（UV-05）。
+    - P1-非blocking-04｜语音密度自定义：V1.1 已正确列为 P1 非阻塞/P2，不阻塞无声入口（`AC-36` 独立可测）。
+  - P2：
+    - P2-01｜EHS 可选趋势：维持 V1 基线不含、不参与 Level、不进数据结构（同 OD-01 建议）；引文已正确标注为 EHS 验证论文（见 VF-08）。
+    - P2-02｜自定义震动反馈：维持 P2，仅可选、无障碍与权限门控。
+    - P2-03｜云同步与更丰富图表：维持 Out of Scope；卸载丢失风险已要求如实告知。
+- Key Assumptions（逐条列＋是否成立）：
+  - KA-01｜成年目标用户能理解动作、完全放松和五维自报；错误识别以安全退出取代强行分级——部分成立、尚需可用性验证。NIDDK 强调约 40% 人首次找不对肌肉、需专业人员/生物反馈辅助（本轮直连全文已复验，见 VF-01）；V1.1 用一票否决＋`training_enabled=false` 锁＋求助入口兜底正确，但五维自报无信效度验证，不得包装成量表。保留。
+  - KA-02｜短板约束单一主等级更易理解、不推入过快节奏——逻辑成立、证据不足。临床一贯双轨并行（慢＋快分开，如 Sussex 8–10 慢＋5–10 快）；单一主等级是产品简化假设。V1.1 以短板约束＋统计保留双维度对冲合理，仍需 OD-05 与用户测试（单 vs 双呈现复述正确率）验证。保留。
+  - KA-03｜L1–L6 单值矩阵、阈值、每日 2 次及 40 次上限是可测产品候选规则、非临床验证方案——成立。Hall 2018（108 项，方案高度异质，见 VF-08）、Myers 2019（未确定最优方案）确认无统一六级处方；V1.1 已关闭“数值悬空”写法、全程产品措辞，仍需 PT 审跳幅＋试练＋疲劳回访（UV-02/04/05）。保留。
+  - KA-04｜用户愿意听简短语音、耳机可用、锁屏播放重要；无声字幕为可选替代——方向合理、尚未验证。AHRQ 音频形式证明数数＋放松提示是临床用过的形式；Expo 官方文档确认后台＋锁屏控制路径存在（见 VF-06/07）。场景占比、锁屏持续能力、无声可用性仍需目标真机及用户测试（UV-07）。保留。
+  - KA-05｜主动重测足以支撑 V1 闭环——成立一半。临床无固定复测周期；V1.1 “随时可测＋14 天仅提示一次＋可忽略＋不自动升级”闭环可接受，提醒有效性列 P1 非阻塞后续用留存/复测率验证。保留。
+- Verified Facts（已验证事实＋证据）：
+  - VF-01｜NIDDK 凯格尔页口径与 Plan 一致：找肌肉可用停尿流/忍屁/指检但“不要经常在排尿时练（膀胱感染风险）”；起步 3 秒、完全放松、10–15 次/组；每日至少 3 次三姿势；只收盆底肌、正常呼吸；过度有害；3–6 周见效；参考文献 [4] 即 Myers & Smith 2019。证据：本轮直连 `https://www.niddk.nih.gov/health-information/urologic-diseases/kegel-exercises` 全文抓取成功逐句命中。推论：NIDDK 每日 3 次构成对“2 次最优”的反证，V1.1 保留该反证正确。
+  - VF-02｜Mayo 40 次/日与 10 秒上限出处成立：Mayo Clinic Health System 男性指导建议 4 组×10 次＝40 次/日，“超过 40 次/日或单次超过 10 秒肌肉会疲劳”。证据：本轮直连返回 403（反爬），但 WebSearch 同 URL 摘要逐句命中（2023-01-26/2023-03-14 双源一致，含 40 次与疲劳警告原文）；另有 Mayo Clinic 主站（每日至少 3 组）、Cleveland（5→10 秒、10 个×3 次/日）、MSKCC（5 秒起步每周加量至 10/10、10 个×每日至少 3 次）交叉印证上限语义。推论：V1.1 “40 次作为保守产品上限、非所有人安全保证”引用成立。
+  - VF-03｜AHRQ 音频脚本是“两次安排＋语音形式”的先例、非男性剂量证据：AHRQ EvidenceNOW MUI 患者资源页列出 9 分钟快慢练习音频脚本（检索缓存：早晚各一次、每次 10 快＋10 慢、逐秒语音）。证据：本轮 WebFetch 直连 PDF 取回 PDF 字节流（`%PDF-1.6` 头成功，非 404），故 V1.1 “PDF 直连本轮返回 404”表述已过时、须订正；原项目面向女性尿失禁、不能外推为成年男性最佳频率——V1.1 该限定正确，保留。
+  - VF-04｜Hall/Myers/Mulhall 引文 hygiene 已补全且准确：Hall et al. 2018 *Neurourology and Urodynamics* 37(7):2053–2087, doi:10.1002/nau.23593, PMID 29687914，纳入 108 项、方案与报告高度异质（本轮 Wiley 题录＋摘要复验）；Myers & Smith 2019 *Physiotherapy* 105(2):235–243（NIDDK 参考文献 [4] 反向佐证），结论未确定最优协议、不得承诺疗效；Mulhall et al. *J Sex Med* 2007;4(6):1626–1634（N=307 西地那非试验，单条目 PRO，重测信度/已知组别效度/聚合效度/高反应性），系 EHS 验证论文、非 PFMT 方案来源——V1.1 已正确标注且 EHS 不参与 Level。证据：Wiley/ScienceDirect/PubMed/ePROVIDE 题录页本轮检索命中。
+  - VF-05｜OUH PDF 链接有效但精确页段仍未验证：`https://www.ouh.nhs.uk/media/in3ekdyl/74150guide.pdf` R1 曾返回 HTTP 200（加密无法文本解析）；V1.1 所写“PDF 第 5 页 1–2 段”及新增的“OUH 男性单甚至采用 4 秒休息”均无本轮可复验截图，判未验证（UV-08）。Sussex 页（慢渐进至 10 秒、8–10 慢、5–10 快）直连 403 系反爬、检索索引可读，V1.1 以公开索引为准＋要求补存档的写法诚实，但仍缺可复验副本（UV-08）。
+  - VF-06｜Android 后台/锁屏音频官方要求与 V1.1 技术路径一致：`MediaSessionService`/`MediaLibraryService` 承载后台播放；manifest 需 `FOREGROUND_SERVICE`＋`FOREGROUND_SERVICE_MEDIA_PLAYBACK`、`foregroundServiceType=mediaPlayback`、媒体通知与锁屏播控；需处理音频焦点（`AUDIOFOCUS_LOSS` 暂停、不暗中计时，`CONTENT_TYPE_SPEECH` 场景暂停而非 duck）；API 31+ 强制焦点行为、API 26+ 用 `AudioFocusRequest`。证据：本轮 WebSearch 命中 `developer.android.com/media/media3/session/background-playback`（含 manifest 片段）、前台服务类型表、音频焦点指南及 API 参考。V1.1 技术路径引用成立。
+  - VF-07｜Expo Audio 后台路径与 V1.1 写法一致：config plugin `enableBackgroundPlayback` 自动配前台服务与锁屏控制；iOS 配 `audio` background mode；运行时需 `setAudioModeAsync({shouldPlayInBackground: true, interruptionMode: 'doNotMix'})`＋`setActiveForLockScreen(true, …)`，Android 无锁屏控制约 3 分钟会被系统停。证据：本轮直连 `https://docs.expo.dev/versions/latest/sdk/audio/` 全文命中（含配置、manifest 片段与上述 API）。V1.1 “真机核对生成的原生前台服务与通知，不能只凭 JS 配置宣称通过”正确。
+  - VF-08｜Android 17 后台音频硬化引用成立：Android 17 起后台音频交互须可见 Activity 或非 `SHORT_SERVICE` 前台服务；target API 37 还需 WIU 条件；违规时播放/音量静默失败、焦点返回 `AUDIOFOCUS_REQUEST_FAILED`。证据：本轮 WebSearch 命中 `developer.android.google.cn/about/versions/17/changes/bg-audio`。V1.1 按 target 36 建议＋API 37 模拟器验证备选的写法谨慎，待 OD-07 锁定后复核。
+  - VF-09｜V1.1 六级时长与配额算术全部自洽（本轮逐项复算）：L1 5×(3+6)+5×(1+4)+30=100 秒；L2 114；L3 142；L4 156；L5 220；L6 260；每日 2 次恰 20/24/32/36/40/40 次，L6 顶格 40；3 次提醒 `Q=floor(40/3)=13`，L6 例 耐力 min(10,6)=6、快速 min(10,7)=7，合计 39 次/日，每次 6×20+7×3+30=171 秒、三次 513 秒。阈值边界例（2/10/10→NO_LEVEL…10/10/10→L6）与“从 L6 向 L1 找首个满足行”“一次最多升一级”一致。结论：RF-01/02 的数值自洽性通过，不替代安全有效性证据。
+- External Sources（Web Search / Web Fetch / 官方文档 / 官方 GitHub / 第三方 / 社区反馈，附链接）：
+  - 医疗与医院：NIDDK `https://www.niddk.nih.gov/health-information/urologic-diseases/kegel-exercises`（本轮直连已验）；Mayo Health System `https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/kegels-are-for-men-too`（直连 403 系反爬，检索摘要已验＋镜像页 `https://sncs-prod-external.mayo.edu/hometown-health/speaking-of-health/kegels-are-for-men-too` 交叉）；Mayo 主站 `https://www.mayoclinic.org/healthy-lifestyle/mens-health/in-depth/kegel-exercises-for-men/art-20045074`；Cleveland `https://my.clevelandclinic.org/health/treatments/22211-kegel-exercises-for-men`；MSKCC 男科单 `https://www.mskcc.org/cancer-care/patient-education/pelvic-floor-muscle-kegel-exercises-males`；OUH `https://www.ouh.nhs.uk/media/in3ekdyl/74150guide.pdf`（R1 曾 HTTP 200，精确页段待补）；Sussex `https://www.uhsussex.nhs.uk/resources/male-pelvic-floor-exercises/`（检索已验、直连 403，需存档/镜像）；AHRQ 患者资源页 `https://www.ahrq.gov/evidencenow/projects/urinary/resources/patient-resources.html` 与音频脚本 `https://www.ahrq.gov/sites/default/files/wysiwyg/evidencenow/mui/practicing-quick-slow-pelvic-exercises.pdf`（本轮取回 PDF 字节，非 404）。
+  - 综述与量表：Hall Wiley `https://doi.org/10.1002/nau.23593`＋PMID `https://pubmed.ncbi.nlm.nih.gov/29687914/`；Myers PMID `https://pubmed.ncbi.nlm.nih.gov/30979506/`；Mulhall PMID `https://pubmed.ncbi.nlm.nih.gov/17888069`、Oxford Academic `https://academic.oup.com/jsm/article-abstract/4/6/1626/6890470`、ePROVIDE `https://eprovide.mapi-trust.org/instruments/erection-hardness-score`。
+  - Android 官方：MediaSession 后台播放 `https://developer.android.com/media/media3/session/background-playback`；音频焦点 `https://developer.android.com/media/optimize/audio-focus`；后台 MediaPlayer `https://developer.android.com/media/platform/mediaplayer/background`；自适应质量音频 `https://developer.android.com/docs/quality-guidelines/adaptive-app-quality/experiences/camera-audio`；Android 17 硬化 `https://developer.android.com/about/versions/17/changes/bg-audio`；前台服务类型 `https://developer.android.com/develop/background-work/services/fgs/service-types`；Expo Audio `https://docs.expo.dev/versions/latest/sdk/audio/`。
+  - 竞品：G动本轮仍无可验证官方参数页，判未验证（与 R1 一致）；V1.1 已不再以其为依据。
+- Competitor Findings（竞品现状＋对本 Plan 的启示）：
+  - 现状（沿用 R1 已验证结论，V1.1 未新增实机证据）：主流男性/通用盆底肌应用均为“结构化等级＋短时跟练＋提醒＋streak/统计＋离线＋免责声明”范式；无一竞品公开“五维自报→单等级映射阈值”算法；“静默/低调/Zen”模式是高频刚需；Kegelō Recovery Lock 证明肌肉需恢复。
+  - 对本 Plan 的启示：①V1.1 的 L1–L6＋Audio First＋分项历史方向不偏，但映射表仍是自创、须当产品假设管理；②V1.1 已补无声 fallback（`AC-36`）与休息出口（`AC-37`），回应了 R1 的两条反例，正确；③提醒＋streak＋可忽略复测（`AC-35`）符合留存标配；④本地优先＋`FR-009` 非医疗声明符合信任标配；⑤G动与目标用户场景仍未实测（UV-01），商店文案不得充当参数或需求证据——V1.1 已做到。
+- Counter-evidence（反对证据＋成功的相反做法）：
+  - 反对“每日 2 次默认足够”：NIDDK 3 次、Sussex 4–5 次、UHS 3–4 次、MSKCC ≥3 次、Cleveland 3 次/日均为 2 次的 1.5 倍以上。V1.1 以 AHRQ（2 次先例）＋Mayo（40 次上限，L6 每日 2 次恰顶格、3 次满量 60 次超限反证 2 次更安全）＋依从性假设回应，并交 OD-02 备选“首次由用户选 1/2/3”，处理正确；但“2 次最优”仍未被证明。
+  - 反对“无休息日连续打卡”：Kegelō Recovery Lock、前沿男科 pilot（每周 3 次而非每日）证明需恢复。V1.1 “连续 6 日后休息/半量＋随时降量”回应正确；但 6 日阈值是保守产品假设（OD-06），不得称医学标准——V1.1 已正确标注。
+  - 反对“纯自报可替代评估”：监督下 PFMT 优于无监督居家；NIDDK 建议找医生/治疗师验动作。V1.1 一票否决＋锁＋求助入口正确，但须在交互契约做实（P1-blocking-02）。
+  - 反对“爆发训练”命名：临床一律 fast/short/quick。V1.1 候选名“快速训练”＋OD-04 备选“快速控制”、“爆发”仅作研究比较词，正确。
+  - 反对“语音越密越好”：AHRQ 每秒数数 vs Mayo 安静专注 vs Zen 无数字模式。V1.1 语音密度自定义列 P1 非阻塞、耳机/无声双路由，正确。
+  - 反对“EHS 进训练 App 是增值”：EHS 成功恰因单条目经心理测量验证；五维自报未经验证。V1.1 基线不含 EHS、不参与 Level，正确冻结。
+- Unverified Items（未验证项＋验证方法）：
+  - UV-01｜G动及其他产品实机（RQ-01）——仍未验证。方法同 R1：Android 真机安装 G动＋至少 2 款英文竞品，录屏摸底全流程，截等级/训练/历史页，整理参数对照表落 `docs/review/` 附录；商店描述不得当参数依据。
+  - UV-02｜L1–L6 跳变安全性（RQ-03）——仍未验证。方法：物理治疗师函审＋至少 5 名新手按级试练＋Borg 疲劳＋次日回访；或先压平跳变（每级增幅≤25%）再测。6→8 秒（+33%）为重点审查行。
+  - UV-03｜L6 放松区间语义——已闭。V1.1 已锁定 L6 10/10 单值，无区间值（`AC-08/10` 可核）。
+  - UV-04｜初始/升级阈值决策表——规则已写、验证未做。方法：至少 10 组边界输入对照测试表（V1.1 已列 9 组可直接用）＋控制/放松/症状否决例＋L3 重测 `8/10/10` 最多 L4 例，升级仅经重测确认（`AC-09/28`）。
+  - UV-05｜每日 2 次默认与 14 天提醒行为效果（RQ-04/05）——仍未验证。方法：按“可选 1/2/3＋可忽略 14 天提示”上线，埋点提醒开启率/完成率/复测转化/疲劳退出率，4–6 周复盘；上线前 5–8 人日记法测打扰度。
+  - UV-06｜名称理解度（RQ-06）——仍未验证。方法：15–20 人卡片分类＋盲听复述，选正确率最高者；同步检查“爆发”是否诱发憋气/代偿。
+  - UV-07｜Audio First 全链路（RQ-07）——仍未验证。方法：目标机型×目标 API 锁屏 1 分钟＋耳机插拔＋来电抢占＋焦点＋通知播控五场景真机录屏；音轨逐秒核对（`AC-18/20`）；Expo 栈验 `enableBackgroundPlayback＋setActiveForLockScreen` 持续播放。
+  - UV-08｜医院原页可复验副本——仍未验证。方法：OUH PDF 页码截图（V1.1 所称第 5 页 1–2 段＋“4 秒休息”出处须逐页举证）、Sussex 访问日期截图或 NHS 镜像页、AHRQ 原 PDF 可复验副本（注意 V1.1 “404”表述已过时，修订时以本轮成功取回为准）。
+- Required Fixes（Planner 必须改项，打回依据）：
+  - R2-RF-01｜订正 AHRQ 404 表述：V1.1 两处“PDF 直连本轮返回 404”与本轮实测（取回 `%PDF-1.6` 字节）矛盾，改为“本轮可达；原项目面向女性尿失禁，仅作语音形式与两次安排先例，不作男性剂量证据”，并附可复验副本或访问日期。
+  - R2-RF-02｜举证或删除“OUH 4 秒休息”：V1.1 `FR-002` 新增的“OUH 男性单甚至采用 4 秒休息”是无页段截图的新断言，要么补 PDF 逐页截图（含单证编号/日期），要么删除该半句（不影响“保守假设＋需复核”结论）。
+  - R2-RF-03｜澄清 L2 比率措辞：`FR-002` “L2 1.5:1”改为“放松:保持＝6:4（1.5:1），初学者窗口更长”，与 L1 2:1、L3–L6 1:1 同口径表述，避免方向歧义；QA 按矩阵单值核对，不受影响。
+  - R2-RF-04｜补档 blocking P1-01：OUH 页段截图、Sussex 可访问存档/镜像访问记录、AHRQ 原 PDF 复验副本三者至少给出明确证据级别判定＋落盘位置；给不出即在 Plan 内写明“以检索索引为准、证据级别降级”，由 Reviewer 在 R3 判定是否接受降级。
+  - R2-RF-05｜推进 blocking P1-02：Planner 给出四元组状态表初稿的接受记录（Reviewer/UX 负责人签字位＋日期），或明确写入“Human Review 前由指定负责人接受为正式交互输入”；`AC-39` 逐列比对口径不变。
+  - R2-RF-06｜推进 P0-01/P0-02 的 Human 前置输入：物理治疗师函审请求（含跳幅表＋阈值表＋停止表附件清单）与目标真机样机清单（OD-07 机型＋最低/target API＋五场景录屏清单）至少以“待办＋负责人＋截止”形式写入 Plan，不得只写“需复核”而无抓手；函审回执与样机录屏本身是 Human Gate 后/Phase2 前置证据，不要求本轮伪造。
+- Plan Readiness Score（分项打分＋合计，口径以 PRODUCT_PLAN.template.md 为准；独立复打，非沿用自评）：
+  - 产品目标与用户需求（20）：15/20。目标、四模块、公共场合与恢复场景完整；扣 5 分因真实用户访谈与名称理解测试为零（UV-06）。
+  - 核心方案完整性（20）：17/20。六级单值、初始/升级/停止、每日额度与四元组均有确定值且算术自洽（VF-09）；扣 3 分因安全有效性待审（P0-01）。
+  - 外部事实与竞品验证（20）：13/20。一手资料与完整引文大增、反证保留诚实；扣 7 分因 G动实机为零、OUH/Sussex 原页可复验副本与 AHRQ 副本管理仍缺（含 R2-RF-01/02/04）。
+  - 技术可行性（15）：9/15。Media3/Expo/焦点/WakeLock/Android 17 路径均指向官方文档且与本轮复验一致；扣 6 分因目标栈/机型/API 未定、无真机样机（P0-02）。
+  - 风险与异常场景（10）：8/10。一票否决、无声 fallback、恢复提示、四元组已写；扣 2 分因安全复核及焦点实测未完成。
+  - 开发范围与 DoD（10）：9/10。九项 FR、39 条 AC、八条 DoD 可追踪，关键集合 37 条非空；扣 1 分因非阻塞增强去留待 Gate 确认。
+  - 未决问题（5）：3/5。七项 OD（OD-01..07）与七项 RQ 明列且给备选；扣 2 分因无一关闭（属 Human Gate 职责，Planner 已做到可决策状态）。
+  - 合计：74/100（15+17+13+9+8+9+3）。与 Plan 自评 74 一致，系独立复打收敛，非沿用。
+  - Gate（进 Human Review 条件）：`Readiness >= 90 AND P0 = 0 AND blocking P1 = 0 AND 关键事实已验证 AND 核心假设已合理验证 AND 视觉与交互验收标准非空且逐条可测`。当前 74、未闭环 P0=2（P0-01/02）、blocking P1=2；关键事实部分未验证（UV-08）、核心假设待用户测试（KA-01/02/04）；39 条 AC 非空且逐条可测不替代实机和安全证据——不满足，不进 Human Review。
+- Human-only Decisions（只需人类拍板项；V1.1 OD-01..07 汇总，R2 无新增拍板项）：
+  - OD-01 EHS 是否进 V1：建议 V1 不纳入（敏感数据＋评审成本＋与等级无关）；备选可选独立趋势记录，不参与 Level，须加隐私及文案验收。
+  - OD-02 默认每日频率：建议维持每日 2 次提醒、可选 1/2/3、3 次自动降量且每日不超 40 次；AHRQ 仅语音先例、Mayo 仅上限参考，不证明男性最佳频率。备选首次由用户选 1/2/3 且仍受 40 次上限约束；选备选须同步改 `FR-005/AC-33`。
+  - OD-03 重新摸底周期：建议随时主动重测、完成 14 天后仅提示一次；备选仅主动重测。
+  - OD-04 界面训练名称：建议「快速训练」（副标题“快速收紧–完全放松”）；备选「快速控制」；「爆发训练」仅研究比较词，不建议上线。
+  - OD-05 等级模型：建议单主 Level＋统计保留双维度＋短板约束；备选耐力/快速双等级（解释与编排复杂度提高）。
+  - OD-06 休息日/降量入口是否纳入 V1：建议按“连续完成 6 日后提示休息或半量”，不称医学标准；备选每次训练结束问疲劳＋随时降量（需额外交互验收；选备选须改 `FR-005/AC-37`）。
+  - OD-07 目标机型与目标 API：建议 Human 指定一台实际持有 Android 真机为主目标（型号/系统/API/耳机类型），构建最低 API 建议 31、target 建议 36，另以 Android 17/API 37 模拟器验证硬化；备选 target 37＋Android 17 真机必测（验证成本更高）。机型未指定前不得报真机可行性通过。
+- Next Action：（回 Planner 修订 / 进 WAITING_HUMAN_APPROVAL 找人）：回 Planner 修订。按 R2-RF-01..06 改出 `PRODUCT_PLAN_V1.2`（AHRQ 表述订正、OUH 4 秒举证或删除、L2 措辞澄清、blocking P1 补档/接受记录、P0 前置输入待办化），再回本 Reviewer 做 R3 复核；R3 通过且 Readiness>=90、P0=0、blocking P1=0 后，TM 再进 WAITING_HUMAN_APPROVAL（Human Gate 一次列全 OD-01..07）。
+
+- 附：RF-01..09 逐条闭环判定（R2）：
+  - RF-01（锁定单值矩阵＋时长表）：规则已闭／证据未闭。单值矩阵、比率说明、单次/每日时长表、四量配额公式及 L6 示例算术全对（VF-09）；“较长休息是保守假设”定性正确；但新增“OUH 4 秒休息”无出处（R2-RF-02），6→8 跳幅安全复核缺（P0-01）。
+  - RF-02（阈值＋停止表）：规则已闭／验证未做。初始/升级/停止三表、12 组边界例、一次最多升一级、`training_enabled` 锁齐全；验证归 UV-04＋P0-01。
+  - RF-03（频率依据）：已闭。AHRQ＋Mayo＋假设三件套齐、`AC-33` 非处方措辞同步、反证保留、交 OD-02；仅 AHRQ 404 表述需订正（R2-RF-01，不推翻闭环）。
+  - RF-04（G动）：已闭。压缩为未验证声明、无参数转述。
+  - RF-05（技术四类引用＋AC-21）：引用已闭／样机未闭。四类官方引用与 Expo 配置均与本轮复验一致；样机归 P0-02。
+  - RF-06（静默 fallback）：已闭。`FR-006/AC-36` 无声字幕＋相位倒计时＋锁屏暂停＋不承诺盲练；可用性归 UV-07。
+  - RF-07（休息 guard＋放松可测交互）：已闭。`REST_DAY`/半量取整规则、首次延长 10 秒/第二次结束、`AC-12/13/37` 对齐；6 日阈值假设交 OD-06。
+  - RF-08（引文 hygiene）：部分闭。Hall/Myers/Mulhall 全引文＋EHS 标注已闭；OUH 页段/Sussex 存档/AHRQ 副本仍缺（P1-blocking-01），且 AHRQ 404 表述过时。
+  - RF-09（交互契约前置清单）：初稿已闭／正式接受未闭。六行四元组＋补充＋`AC-39` 齐全；接受记录归 P1-blocking-02。
+- 附：上一轮 P0/P1 逐项判定：P0-01 未闭；P0-02 未闭；P0-03 已闭（转 OD-02＋UV-05）；P0-04 已闭；P1-blocking-01 未闭；P1-blocking-02 未闭（初稿已收到，仅缺接受）。

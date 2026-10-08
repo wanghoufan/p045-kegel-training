@@ -43,3 +43,14 @@ secrets.*
 # 系统文件
 .DS_Store
 Thumbs.db
+
+# ORCA 治理：temp 工作区不入仓（全局规则：temp 及其内容不得上传）
+/temp/
+
+# Decision Sidecar 依赖目录禁入仓（lock 文件入仓）
+scripts/decision/node_modules/
+
+# QA 通道：独立浏览器 Profile / 认证状态 / 产物，禁入仓
+*.qa-profile/
+qa-auth/
+.maestro/
