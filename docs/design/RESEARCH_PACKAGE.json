@@ -1,0 +1,719 @@
+{
+  "research_version": "R-V1.0",
+  "task_id": "TASK-010",
+  "product_plan_version": "Product Plan V1.1（用户草稿）",
+  "product_plan_path": "../../temp/用户草稿-Product Plan V1.1.md",
+  "product_plan_sha256": "931629211593832424ac5479f3f4d89c83395101ed8e024c81bbf22b4d708887",
+  "category": "男性盆底肌语音训练器；Android 优先；无硬件自报训练辅助",
+  "profile": {
+    "audience": "希望了解当前控制能力并按适合负荷训练的男性",
+    "primary_job": "摸底后无需手调参数，以耳机完成今日耐力与快速训练",
+    "use_context": "私密、低注意力占用、可离屏训练",
+    "scope_source": "Product Plan FR-001～009、FR-AUDIO-01～05",
+    "excluded": "诊断、疗效承诺、社交排行榜、硬件测量、泛健身"
+  },
+  "sources": [
+    {
+      "source_id": "SRC-01",
+      "product": "G动",
+      "URL": "https://apps.apple.com/cn/app/g%E5%8A%A8-%E5%87%AF%E6%A0%BC%E5%B0%94%E8%BF%90%E5%8A%A8%E9%94%BB%E7%82%BC%E8%BD%AF%E4%BB%B6/id1096015822",
+      "reference": "https://apps.apple.com/cn/app/g%E5%8A%A8-%E5%87%AF%E6%A0%BC%E5%B0%94%E8%BF%90%E5%8A%A8%E9%94%BB%E7%82%BC%E8%BD%AF%E4%BB%B6/id1096015822",
+      "status": "VERIFIED",
+      "access_status": "ACCESSIBLE",
+      "accessed_at": "2026-10-07",
+      "category": "男性/女性盆底训练商业产品",
+      "evidence_method": "商店页面、开发者描述与宣传截图；桌面 Chrome 实际查看",
+      "assets": [
+        "research/assets/SRC-01-G动-AppStore.png"
+      ],
+      "limitations": "仅公开材料；未验证安装后的完整流程、私有算法或音频行为。"
+    },
+    {
+      "source_id": "SRC-02",
+      "product": "Squeezy Men",
+      "URL": "https://play.google.com/store/apps/details?id=com.propagator.squeezyformen",
+      "reference": "https://play.google.com/store/apps/details?id=com.propagator.squeezyformen",
+      "status": "VERIFIED",
+      "access_status": "ACCESSIBLE",
+      "accessed_at": "2026-10-07",
+      "category": "男性盆底训练产品",
+      "evidence_method": "商店页面、开发者描述与宣传截图；桌面 Chrome 实际查看",
+      "assets": [
+        "research/assets/SRC-02-Squeezy-Men-GooglePlay.png"
+      ],
+      "limitations": "仅公开材料；未验证安装后的完整流程、私有算法或音频行为。"
+    },
+    {
+      "source_id": "SRC-03",
+      "product": "Squeezy",
+      "URL": "https://squeezyapp.com/how-it-works/",
+      "reference": "https://squeezyapp.com/how-it-works/",
+      "status": "VERIFIED",
+      "access_status": "ACCESSIBLE",
+      "accessed_at": "2026-10-07",
+      "category": "同产品补充来源，不计独立产品",
+      "evidence_method": "官方网站说明；桌面 Chrome 实际查看",
+      "assets": [],
+      "limitations": "说明文本按来源语境使用，不提升为本产品已批准规则。"
+    },
+    {
+      "source_id": "SRC-04",
+      "product": "Kegel – Trainer for Men",
+      "URL": "https://apps.apple.com/ca/app/kegel-trainer-for-men/id6737899983",
+      "reference": "https://apps.apple.com/ca/app/kegel-trainer-for-men/id6737899983",
+      "status": "VERIFIED",
+      "access_status": "ACCESSIBLE",
+      "accessed_at": "2026-10-07",
+      "category": "男性 Kegel 商业产品",
+      "evidence_method": "官方商店描述、版本历史；未安装运行",
+      "assets": [],
+      "limitations": "仅公开材料；未验证安装后的完整流程、私有算法或音频行为。"
+    },
+    {
+      "source_id": "SRC-05",
+      "product": "Elvie Trainer",
+      "URL": "https://support.elvie.com/en-gb/app-support/elvie-trainer-app-support",
+      "reference": "https://support.elvie.com/en-gb/app-support/elvie-trainer-app-support",
+      "status": "VERIFIED",
+      "access_status": "ACCESSIBLE",
+      "accessed_at": "2026-10-07",
+      "category": "邻近参照：女性、硬件感测产品",
+      "evidence_method": "官方应用支持文档；未安装运行",
+      "assets": [],
+      "limitations": "仅公开材料；未验证安装后的完整流程、私有算法或音频行为。"
+    },
+    {
+      "source_id": "SRC-06",
+      "product": "Oxford University Hospitals NHS",
+      "URL": "https://www.ouh.nhs.uk/media/in3ekdyl/74150guide.pdf",
+      "reference": "https://www.ouh.nhs.uk/media/in3ekdyl/74150guide.pdf",
+      "status": "VERIFIED",
+      "access_status": "ACCESSIBLE",
+      "accessed_at": "2026-10-07",
+      "category": "男性盆底训练指导，非 UI 产品",
+      "evidence_method": "官方 PDF：A Guide to the Pelvic Floor Muscles for Men",
+      "assets": [],
+      "limitations": "说明文本按来源语境使用，不提升为本产品已批准规则。"
+    },
+    {
+      "source_id": "SRC-07",
+      "product": "University Hospitals Sussex NHS",
+      "URL": "https://www.uhsussex.nhs.uk/resources/male-pelvic-floor-exercises/",
+      "reference": "https://www.uhsussex.nhs.uk/resources/male-pelvic-floor-exercises/",
+      "status": "VERIFIED",
+      "access_status": "ACCESSIBLE",
+      "accessed_at": "2026-10-07",
+      "category": "男性盆底训练指导，非 UI 产品",
+      "evidence_method": "官方患者指导网页",
+      "assets": [],
+      "limitations": "说明文本按来源语境使用，不提升为本产品已批准规则。"
+    },
+    {
+      "source_id": "SRC-08",
+      "product": "NIDDK",
+      "URL": "https://www.niddk.nih.gov/health-information/urologic-diseases/kegel-exercises",
+      "reference": "https://www.niddk.nih.gov/health-information/urologic-diseases/kegel-exercises",
+      "status": "VERIFIED",
+      "access_status": "ACCESSIBLE",
+      "accessed_at": "2026-10-07",
+      "category": "盆底训练与质量边界，非 UI 产品",
+      "evidence_method": "官方健康指导网页",
+      "assets": [],
+      "limitations": "说明文本按来源语境使用，不提升为本产品已批准规则。"
+    },
+    {
+      "source_id": "SRC-09",
+      "product": "Android Developers / Media3",
+      "URL": "https://developer.android.com/media/media3/session/background-playback",
+      "reference": "https://developer.android.com/media/media3/session/background-playback",
+      "status": "VERIFIED",
+      "access_status": "ACCESSIBLE",
+      "accessed_at": "2026-10-07",
+      "category": "技术候选官方文档，非竞品",
+      "evidence_method": "官方后台音频文档",
+      "assets": [],
+      "limitations": "说明文本按来源语境使用，不提升为本产品已批准规则。"
+    },
+    {
+      "source_id": "SRC-10",
+      "product": "Android Developers / MediaSession",
+      "URL": "https://developer.android.com/media/media3/session/control-playback",
+      "reference": "https://developer.android.com/media/media3/session/control-playback",
+      "status": "VERIFIED",
+      "access_status": "ACCESSIBLE",
+      "accessed_at": "2026-10-07",
+      "category": "技术候选官方文档，非竞品",
+      "evidence_method": "官方系统/耳机控制文档",
+      "assets": [],
+      "limitations": "说明文本按来源语境使用，不提升为本产品已批准规则。"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "OBS-01",
+      "source_id": "SRC-01",
+      "kind": "OBSERVED",
+      "finding": "商店截图呈现个性化方案匹配、综合评分与方案推荐；这证明宣传界面的结果呈现，不证明分级算法。",
+      "locator": "宣传截图：个性化方案匹配；本地 SRC-01 图下部"
+    },
+    {
+      "observation_id": "OBS-02",
+      "source_id": "SRC-01",
+      "kind": "OBSERVED",
+      "finding": "开发者描述列出盆底课程、训练记录、声音设置和内容/社区入口。",
+      "locator": "App Store 描述的产品特色"
+    },
+    {
+      "observation_id": "OBS-03",
+      "source_id": "SRC-02",
+      "kind": "OBSERVED",
+      "finding": "商店训练截图有 Slow / Quick / Finish 阶段、环形重复进度以及声音和暂停入口；进度截图把 slow 与 quick 计数分列。",
+      "locator": "Google Play 截图条：训练、今日进度；本地 SRC-02 图下部"
+    },
+    {
+      "observation_id": "OBS-04",
+      "source_id": "SRC-02",
+      "kind": "OBSERVED",
+      "finding": "开发者明确列出视觉和音频提示、可定制计划、历史图表与完成后备注。",
+      "locator": "About this app / Features"
+    },
+    {
+      "observation_id": "OBS-05",
+      "source_id": "SRC-03",
+      "kind": "OBSERVED",
+      "finding": "官方网站描述预设计划、视觉引导、物理治疗师协助调整以及症状记录。",
+      "locator": "How it works 正文"
+    },
+    {
+      "observation_id": "OBS-06",
+      "source_id": "SRC-04",
+      "kind": "OBSERVED",
+      "finding": "版本历史明确提及新增盆底肌测试、训练振动提示和详细统计；公开描述同时扩展至呼吸和瑜伽。",
+      "locator": "Version History：2025-02-14 与详细统计更新；描述"
+    },
+    {
+      "observation_id": "OBS-07",
+      "source_id": "SRC-05",
+      "kind": "OBSERVED",
+      "finding": "官方支持文档说明分级训练、历史及按动作类型拆分结果；其反馈建立在连接 Elvie 硬件的前提上。",
+      "locator": "Using the Elvie Trainer App；How to view your results and workout history"
+    },
+    {
+      "observation_id": "OBS-08",
+      "source_id": "SRC-06",
+      "kind": "OBSERVED",
+      "finding": "男性指导让用户从能有效保持的时长和重复数起步，分别练习慢收缩与快收缩，并强调两次间放松。",
+      "locator": "PDF：How do I do pelvic floor exercises / slow and fast contractions"
+    },
+    {
+      "observation_id": "OBS-09",
+      "source_id": "SRC-07",
+      "kind": "OBSERVED",
+      "finding": "男性指导区分耐力保持与快速收缩，强调完全放松及正确定位肌肉；无法定位时建议专业帮助。",
+      "locator": "Slow contractions / Fast contractions / 正确动作指导"
+    },
+    {
+      "observation_id": "OBS-10",
+      "source_id": "SRC-08",
+      "kind": "OBSERVED",
+      "finding": "指导要求只用目标肌群、收紧后放松，并可由专业人员提供适合个人的训练计划。",
+      "locator": "How do I do Kegel exercises / How often should I do Kegel exercises"
+    },
+    {
+      "observation_id": "OBS-11",
+      "source_id": "SRC-09",
+      "kind": "OBSERVED",
+      "finding": "官方提供 MediaSessionService 支持后台播放；这是框架能力文档，不是本产品后台实测。",
+      "locator": "Background playback with a MediaSessionService"
+    },
+    {
+      "observation_id": "OBS-12",
+      "source_id": "SRC-10",
+      "kind": "OBSERVED",
+      "finding": "官方描述 MediaSession 将播放控制接入系统及耳机等外部控制端。",
+      "locator": "Control and advertise playback using a MediaSession"
+    },
+    {
+      "observation_id": "OBS-13",
+      "source_id": "SRC-02",
+      "kind": "INFERRED",
+      "finding": "语音主导产品可把环形进度降为视觉辅助手段，阶段语义由音频完整传达。",
+      "locator": "由 OBS-03/04 与 FR-006 推导；不是竞品锁屏验证"
+    },
+    {
+      "observation_id": "OBS-14",
+      "source_id": "SRC-01",
+      "kind": "INFERRED",
+      "finding": "结果之后直接给出今日方案，比要求用户先选择多个课程更适合本项目的日常单任务。",
+      "locator": "由 OBS-01/02 与 FR-005 推导；尚未进行可用性测试"
+    },
+    {
+      "observation_id": "OBS-15",
+      "source_id": "SRC-05",
+      "kind": "INFERRED",
+      "finding": "无硬件产品应保留自报维度与训练记录，并避免把练习量包装为实时肌力。",
+      "locator": "由 OBS-07 与 AC-005/024 推导"
+    }
+  ],
+  "patterns": [
+    {
+      "pattern_id": "PAT-01",
+      "source_ids": [
+        "SRC-01",
+        "SRC-04",
+        "SRC-06"
+      ],
+      "observation_ids": [
+        "OBS-01",
+        "OBS-06",
+        "OBS-08"
+      ],
+      "kind": "INFERRED",
+      "finding": "先解释和摸底，再给负荷建议；本项目采用五维自报与短板限制，不能照抄竞品分数。",
+      "product_plan_refs": [
+        "FR-001",
+        "FR-002",
+        "AC-001",
+        "AC-004",
+        "AC-007"
+      ]
+    },
+    {
+      "pattern_id": "PAT-02",
+      "source_ids": [
+        "SRC-02",
+        "SRC-06",
+        "SRC-07"
+      ],
+      "observation_ids": [
+        "OBS-03",
+        "OBS-08",
+        "OBS-09"
+      ],
+      "kind": "INFERRED",
+      "finding": "耐力、快速与完全放松应有独立语义，自动串联时仍能辨认当前类型。",
+      "product_plan_refs": [
+        "FR-003",
+        "FR-004",
+        "FR-005",
+        "AC-010",
+        "AC-012",
+        "AC-015"
+      ]
+    },
+    {
+      "pattern_id": "PAT-03",
+      "source_ids": [
+        "SRC-01",
+        "SRC-02",
+        "SRC-04"
+      ],
+      "observation_ids": [
+        "OBS-02",
+        "OBS-04",
+        "OBS-06",
+        "OBS-13"
+      ],
+      "kind": "INFERRED",
+      "finding": "阶段提示需超越屏幕计时；本项目以耳机语音为主，视觉只辅助复核。",
+      "product_plan_refs": [
+        "FR-006",
+        "FR-AUDIO-01",
+        "FR-AUDIO-02",
+        "FR-AUDIO-03",
+        "FR-AUDIO-04",
+        "FR-AUDIO-05",
+        "AC-016",
+        "AC-017",
+        "AC-018"
+      ]
+    },
+    {
+      "pattern_id": "PAT-04",
+      "source_ids": [
+        "SRC-02",
+        "SRC-04",
+        "SRC-05"
+      ],
+      "observation_ids": [
+        "OBS-03",
+        "OBS-06",
+        "OBS-07"
+      ],
+      "kind": "INFERRED",
+      "finding": "历史同时表达训练频率与分类训练量；不以总分代替耐力/快速明细。",
+      "product_plan_refs": [
+        "FR-007",
+        "AC-019",
+        "AC-020",
+        "AC-021"
+      ]
+    },
+    {
+      "pattern_id": "PAT-05",
+      "source_ids": [
+        "SRC-01",
+        "SRC-02"
+      ],
+      "observation_ids": [
+        "OBS-01",
+        "OBS-05",
+        "OBS-14"
+      ],
+      "kind": "INFERRED",
+      "finding": "等级建议连接可直接执行的今日方案；调整参数收纳到次级流程。",
+      "product_plan_refs": [
+        "FR-002",
+        "FR-005",
+        "AC-006",
+        "AC-014"
+      ]
+    },
+    {
+      "pattern_id": "PAT-06",
+      "source_ids": [
+        "SRC-05",
+        "SRC-06",
+        "SRC-08"
+      ],
+      "observation_ids": [
+        "OBS-07",
+        "OBS-08",
+        "OBS-10",
+        "OBS-15"
+      ],
+      "kind": "INFERRED",
+      "finding": "把动作质量与放松质量置于升级叙事之前，区分自报能力、练习记录与医学测量。",
+      "product_plan_refs": [
+        "FR-001",
+        "FR-008",
+        "FR-009",
+        "AC-004",
+        "AC-005",
+        "AC-022",
+        "AC-023",
+        "AC-024",
+        "AC-025",
+        "AC-026"
+      ]
+    }
+  ],
+  "learn": [
+    {
+      "source_id": "SRC-01",
+      "finding": "学习方案推荐与训练记录衔接；采用今日任务而非内容首页。",
+      "pattern_ids": [
+        "PAT-01",
+        "PAT-05"
+      ]
+    },
+    {
+      "source_id": "SRC-02",
+      "finding": "学习两类计数、明确阶段及音频辅助；将语音提升为主通道。",
+      "pattern_ids": [
+        "PAT-02",
+        "PAT-03",
+        "PAT-04"
+      ]
+    },
+    {
+      "source_id": "SRC-04",
+      "finding": "学习测试与历史统计构成持续训练闭环，不引入扩展健身课程。",
+      "pattern_ids": [
+        "PAT-01",
+        "PAT-04"
+      ]
+    },
+    {
+      "source_id": "SRC-05",
+      "finding": "学习结果按动作类型拆分，以及能力与训练频率分开表达。",
+      "pattern_ids": [
+        "PAT-04",
+        "PAT-06"
+      ]
+    }
+  ],
+  "avoid": [
+    {
+      "source_id": "SRC-01",
+      "finding": "不复制其综合评分、课程商城或社区；得分不是本项目等级算法。",
+      "reason": "Plan FR-002、§§21–23"
+    },
+    {
+      "source_id": "SRC-02",
+      "finding": "不把专业模式调参作为日常前置；不移植医疗器械身份或疗效表述。",
+      "reason": "AC-014、AC-024、AC-025"
+    },
+    {
+      "source_id": "SRC-04",
+      "finding": "不引入瑜伽、泛健身、徽章促升级及疗效营销。",
+      "reason": "Plan 范围及 AC-008/025"
+    },
+    {
+      "source_id": "SRC-05",
+      "finding": "不复制硬件实时反馈、肌力分数或按完成次数自动升级。",
+      "reason": "无硬件测量；FR-008 短板重新摸底"
+    }
+  ],
+  "design_principles": [
+    {
+      "principle_id": "DP-01",
+      "statement": "训练行动优先，当前负荷自动生成；日常入口不要求用户设置六项参数。",
+      "pattern_ids": [
+        "PAT-05"
+      ],
+      "source_ids": [
+        "SRC-01",
+        "SRC-02"
+      ],
+      "product_plan_refs": [
+        "AC-006",
+        "AC-014"
+      ]
+    },
+    {
+      "principle_id": "DP-02",
+      "statement": "音频必须完整表达准备、类型、收紧、保持、完全放松、计数与完成。",
+      "pattern_ids": [
+        "PAT-02",
+        "PAT-03"
+      ],
+      "source_ids": [
+        "SRC-02",
+        "SRC-06",
+        "SRC-07"
+      ],
+      "product_plan_refs": [
+        "AC-010",
+        "AC-012",
+        "AC-016",
+        "AC-017",
+        "AC-018"
+      ]
+    },
+    {
+      "principle_id": "DP-03",
+      "statement": "建议等级依据多维自报；能力建议、训练量和医学诊断不能混为一项。",
+      "pattern_ids": [
+        "PAT-01",
+        "PAT-06"
+      ],
+      "source_ids": [
+        "SRC-04",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "product_plan_refs": [
+        "AC-004",
+        "AC-005",
+        "AC-007",
+        "AC-023",
+        "AC-024"
+      ]
+    },
+    {
+      "principle_id": "DP-04",
+      "statement": "历史按耐力与快速拆分，同时保留等级变化与测试记录。",
+      "pattern_ids": [
+        "PAT-04",
+        "PAT-06"
+      ],
+      "source_ids": [
+        "SRC-02",
+        "SRC-04",
+        "SRC-05"
+      ],
+      "product_plan_refs": [
+        "AC-019",
+        "AC-020",
+        "AC-021",
+        "AC-022"
+      ]
+    }
+  ],
+  "anti_patterns": [
+    {
+      "anti_pattern_id": "AP-01",
+      "finding": "仅凭最大保持秒数或总分决定等级",
+      "pattern_ids": [
+        "PAT-01",
+        "PAT-06"
+      ]
+    },
+    {
+      "anti_pattern_id": "AP-02",
+      "finding": "只有收紧倒计时，没有完全放松提示",
+      "pattern_ids": [
+        "PAT-02",
+        "PAT-03"
+      ]
+    },
+    {
+      "anti_pattern_id": "AP-03",
+      "finding": "每日入口先调参数或逛课程",
+      "pattern_ids": [
+        "PAT-05"
+      ]
+    },
+    {
+      "anti_pattern_id": "AP-04",
+      "finding": "训练天数等同于肌力改善，连续打卡自动升级",
+      "pattern_ids": [
+        "PAT-04",
+        "PAT-06"
+      ]
+    }
+  ],
+  "design_opportunities": [
+    {
+      "opportunity_id": "OP-01",
+      "finding": "将语音阶段作为今日训练的核心对象，视觉减少依赖",
+      "pattern_ids": [
+        "PAT-02",
+        "PAT-03",
+        "PAT-05"
+      ]
+    },
+    {
+      "opportunity_id": "OP-02",
+      "finding": "以能力维度和处方解释服务重视数据的用户",
+      "pattern_ids": [
+        "PAT-01",
+        "PAT-04",
+        "PAT-06"
+      ]
+    },
+    {
+      "opportunity_id": "OP-03",
+      "finding": "以线性训练手册解释质量与放松，降低首次理解负担",
+      "pattern_ids": [
+        "PAT-01",
+        "PAT-02",
+        "PAT-06"
+      ]
+    }
+  ],
+  "selected_references": [
+    "SRC-01",
+    "SRC-02",
+    "SRC-04",
+    "SRC-05"
+  ],
+  "coverage": {
+    "male_products": [
+      "SRC-01",
+      "SRC-02",
+      "SRC-04"
+    ],
+    "assessment": [
+      "SRC-01",
+      "SRC-04",
+      "SRC-06"
+    ],
+    "levels": [
+      "SRC-01",
+      "SRC-05"
+    ],
+    "endurance_and_fast": [
+      "SRC-02",
+      "SRC-06",
+      "SRC-07"
+    ],
+    "audio_first_headphones": [
+      "SRC-02",
+      "SRC-09",
+      "SRC-10"
+    ],
+    "history": [
+      "SRC-02",
+      "SRC-04",
+      "SRC-05"
+    ],
+    "shipped_UI": [
+      "SRC-01",
+      "SRC-02"
+    ],
+    "learn_avoid": [
+      "SRC-01",
+      "SRC-02",
+      "SRC-04",
+      "SRC-05"
+    ]
+  },
+  "evidence_limits": [
+    {
+      "topic": "完整首次测试交互、分级阈值",
+      "status": "NOT_OBSERVED",
+      "impact": "不妨碍方向选择；不从宣传截图补造算法；后续需 Plan 决策与 UX Contract。"
+    },
+    {
+      "topic": "耳机/锁屏/来电/音频焦点实际运行",
+      "status": "NOT_TESTED",
+      "impact": "竞品声明仅支持研究模式；本产品离屏要求来自 FR-006，后续必须实际验证。"
+    },
+    {
+      "topic": "参考图",
+      "status": "PARTIAL_STORE_CAPTURE",
+      "impact": "本地两图为商店页截图裁切，部分手机内容未完整展示；原始商店可回访。无付费应用安装实测。"
+    },
+    {
+      "topic": "跨指南的频率与间隔差异",
+      "status": "OPEN_PRODUCT_PARAMETER",
+      "impact": "不借指南冻结默认频率、休息时长和分级阈值；遵循 Plan 开放项。"
+    }
+  ],
+  "technology_reuse": [
+    {
+      "capability": "方向预览",
+      "decision": "REUSE",
+      "candidate": "浏览器原生 HTML/CSS 与语义链接",
+      "reason": "静态展示无需框架安装或运行服务。"
+    },
+    {
+      "capability": "Android 后台音频/耳机控制",
+      "decision": "REUSE",
+      "candidate": "官方 AndroidX Media3 / MediaSessionService",
+      "source_ids": [
+        "SRC-09",
+        "SRC-10"
+      ],
+      "status": "CANDIDATE_ONLY",
+      "reason": "先采用官方成熟能力；本轮未冻结库版本或技术实现。"
+    },
+    {
+      "capability": "训练阶段与音频映射",
+      "decision": "ADAPT",
+      "candidate": "在官方播放/会话能力之上配置训练语义",
+      "status": "CANDIDATE_ONLY",
+      "reason": "收紧/放松与训练记录为本项目业务，候选框架只提供媒体基础能力。"
+    },
+    {
+      "capability": "旧代码/技术样机",
+      "decision": "REVIEW_FOR_REUSE",
+      "candidate": "用户旧项目与 TEMP_FEASIBILITY_EVIDENCE",
+      "status": "NOT_AUDITED",
+      "reason": "不得直接搬用；正式 Reuse Audit 在 Prototype Approval 后、SDD 前。"
+    },
+    {
+      "capability": "自建音频引擎或绘图库",
+      "decision": "BUILD",
+      "status": "NOT_SELECTED",
+      "reason": "现有官方能力优先；没有证据证明必须自建，不新增技术实现。"
+    }
+  ],
+  "gate": "PASS",
+  "gate_status": {
+    "DESIGN_RESEARCH": "PASS",
+    "scope": "Human 1 方向选择所需公开产品与模式证据",
+    "blocking_source_evidence_gaps": [],
+    "checks": {
+      "traceable_external_sources": true,
+      "multiple_independent_products": true,
+      "observed_inferred_separated": true,
+      "selected_references_have_learn_and_avoid": true,
+      "patterns_have_source_traceability": true,
+      "direction_material_evidence_complete": true
+    },
+    "rationale": "3 个真实盆底训练产品、1 个明确标明人群/硬件差异的邻近产品，辅以独立官方训练指导；两个产品的商店 UI 可看。公开 UI/描述足以支持三方向的 IA、密度、导航与数据表达比较；未声称阈值、疗效或运行行为已验证。"
+  }
+}

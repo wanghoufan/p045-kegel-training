@@ -1,0 +1,40 @@
+{
+  "record_type": "RUNTIME_ATTEMPT_NOT_SUCCESSFUL_BROWSER_EVIDENCE",
+  "prototype_version": "PROTOTYPE-V2.0",
+  "created_at": "2026-10-07T23:45:05.010499+00:00",
+  "prototype_sha256": "9a9a2792d66ed1cde46467cafa963ea56d5672775d5f565d8f8b142cfa12d2ad",
+  "ux_contract_sha256": "2b75f79ff2f2a7c030a03a1ba35e627651eafdbc66f674631c69c69e340b3034",
+  "direction_set_sha256": "14ec0c87b6d03c5b647fc3bd127cc3f081ff0a7b85028c09e490d520a9ef9478",
+  "browser_executed": false,
+  "console_inspected": false,
+  "console_blocking_errors": null,
+  "page_errors": null,
+  "interactions_executed": [],
+  "states_observed": [],
+  "screenshots": [],
+  "result": "PENDING_RUNTIME_VALIDATION",
+  "attempts": [
+    {
+      "tool": "BrowserOS neo run",
+      "action": "列出浏览器页，开工预检",
+      "result": "TOOL_APPROVAL_DENIED",
+      "actual_output": "MCP tool call requires approval, but approval policy is never"
+    },
+    {
+      "tool": "cua_repl",
+      "action": "await cua.getState()",
+      "result": "TIMEOUT",
+      "actual_output": "js execution timed out; kernel reset, rerun your request",
+      "attempt_count": 1,
+      "timeout_ms": 30000
+    }
+  ],
+  "required_rerun": [
+    "真实浏览器无等级首页选择L1并开始；有等级今日一次开始。",
+    "执行可选五项摸底、即时计数/10次边界、各项SKIP。",
+    "完整训练、暂停恢复、提前结束、焦点中断返回、安全停止与历史。",
+    "实际检查console与pageerror，拍可读截图绑定SCR/ST和图片hash。",
+    "全部65交互/61状态复核，不能用状态样例替代。"
+  ],
+  "prior_evidence": "archive-v1/为旧hash/样例截图，只作历史，不支持V2运行结论。"
+}

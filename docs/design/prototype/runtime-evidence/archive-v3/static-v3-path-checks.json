@@ -1,0 +1,18 @@
+{
+  "mode": "FUNCTION_AND_FAKE_SPEECH_TIMING_NOT_BROWSER_RUNTIME",
+  "status": "PASS",
+  "checks": 47,
+  "browser_executed": false,
+  "console_inspected": false,
+  "paths": [
+    "无级→L1→开始",
+    "有级一键开始",
+    "今日/能力各级标准",
+    "自由跨级/活动快照独立",
+    "最新摸底与选择持久化/默认建议",
+    "真实配置损坏手动恢复",
+    "紧松与完整动作窗口",
+    "真实异常中止/日40边界"
+  ],
+  "limitations": "Node模拟DOM对象、存储及语音回调校核；不是实际浏览器点击、真实声音或截图证据。"
+}

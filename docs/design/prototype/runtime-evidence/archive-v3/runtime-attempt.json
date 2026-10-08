@@ -1,0 +1,40 @@
+{
+  "record_type": "RUNTIME_ATTEMPT_NOT_SUCCESSFUL_BROWSER_EVIDENCE",
+  "prototype_version": "PROTOTYPE-V3.0",
+  "created_at": "2026-10-08T00:15:55.630945+00:00",
+  "prototype_sha256": "0c30394e725b5a97153bba2e4cf2ac5d378a29abf8587c4675937c77aa04c11d",
+  "ux_contract_sha256": "e00173de99c3ed2e3f5c323769276c2bcc5967e5b6a154855ec22af8b7f9a9ad",
+  "direction_set_sha256": "14ec0c87b6d03c5b647fc3bd127cc3f081ff0a7b85028c09e490d520a9ef9478",
+  "browser_executed": false,
+  "console_inspected": false,
+  "console_blocking_errors": null,
+  "page_errors": null,
+  "interactions_executed": [],
+  "states_observed": [],
+  "screenshots": [],
+  "result": "PENDING_RUNTIME_VALIDATION",
+  "attempts": [
+    {
+      "tool": "BrowserOS neo run",
+      "action": "列出浏览器页，开工预检",
+      "result": "TOOL_APPROVAL_DENIED",
+      "actual_output": "MCP tool call requires approval, but approval policy is never"
+    }
+  ],
+  "required_rerun": [
+    "真实浏览器无等级首页选择L1并开始；有等级今日一次开始。",
+    "打开各级标准；自由选级/两条结果/重开持久化；R1说明与次数；系统语音紧/松和完整动作窗口。",
+    "完整训练、暂停恢复、提前结束、焦点中断返回、安全停止与历史。",
+    "实际检查console与pageerror，拍可读截图绑定SCR/ST和图片hash。",
+    "全部72交互/62状态复核，不能用状态样例替代。"
+  ],
+  "user_reported_prior_runtime": {
+    "version": "V2",
+    "source": "用户本轮反馈",
+    "browser": "桌面Chrome",
+    "audio": "用户报告声音正常",
+    "agent_execution": false,
+    "supports_v3_pass": false
+  },
+  "prior_evidence": "archive-v1/archive-v2为旧hash或样例，只作历史，不支持V3运行结论。"
+}

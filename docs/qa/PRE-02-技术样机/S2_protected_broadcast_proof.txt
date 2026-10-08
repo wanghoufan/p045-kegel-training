@@ -1,0 +1,39 @@
+$ adb shell am broadcast -a android.media.AUDIO_BECOMING_NOISY
+Broadcasting: Intent { act=android.media.AUDIO_BECOMING_NOISY flg=0x400000 pkg=com.orca.audiopoc }
+
+Exception occurred while executing 'broadcast':
+java.lang.SecurityException: Permission Denial: not allowed to send broadcast android.media.AUDIO_BECOMING_NOISY from pid=6320, uid=2000
+	at com.android.server.am.ActivityManagerService.broadcastIntentLockedTraced(ActivityManagerService.java:15466)
+	at com.android.server.am.ActivityManagerService.broadcastIntentLocked(ActivityManagerService.java:15259)
+	at com.android.server.am.ActivityManagerService.broadcastIntentWithFeature(ActivityManagerService.java:16249)
+	at com.android.server.am.ActivityManagerShellCommand.runSendBroadcast(ActivityManagerShellCommand.java:1021)
+	at com.android.server.am.ActivityManagerShellCommand.onCommand(ActivityManagerShellCommand.java:270)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:38)
+	at com.android.server.am.ActivityManagerService.onShellCommand(ActivityManagerService.java:10372)
+	at android.os.Binder.shellCommand(Binder.java:1075)
+	at android.os.Binder.onTransact(Binder.java:895)
+	at android.app.IActivityManager$Stub.onTransact(IActivityManager.java:5816)
+	at com.android.server.am.ActivityManagerService.onTransact(ActivityManagerService.java:2911)
+	at android.os.Binder.execTransactInternal(Binder.java:1351)
+	at android.os.Binder.execTransact(Binder.java:1282)
+
+$ adb shell am broadcast -a android.intent.action.HEADSET_PLUG --ei state 0 --ei microphone 1 --es name test
+Broadcasting: Intent { act=android.intent.action.HEADSET_PLUG flg=0x400000 (has extras) }
+
+Exception occurred while executing 'broadcast':
+java.lang.SecurityException: Permission Denial: not allowed to send broadcast android.intent.action.HEADSET_PLUG from pid=6326, uid=2000
+	at com.android.server.am.ActivityManagerService.broadcastIntentLockedTraced(ActivityManagerService.java:15466)
+	at com.android.server.am.ActivityManagerService.broadcastIntentLocked(ActivityManagerService.java:15259)
+	at com.android.server.am.ActivityManagerService.broadcastIntentWithFeature(ActivityManagerService.java:16249)
+	at com.android.server.am.ActivityManagerShellCommand.runSendBroadcast(ActivityManagerShellCommand.java:1021)
+	at com.android.server.am.ActivityManagerShellCommand.onCommand(ActivityManagerShellCommand.java:270)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:38)
+	at com.android.server.am.ActivityManagerService.onShellCommand(ActivityManagerService.java:10372)
+	at android.os.Binder.shellCommand(Binder.java:1075)
+	at android.os.Binder.onTransact(Binder.java:895)
+	at android.app.IActivityManager$Stub.onTransact(IActivityManager.java:5816)
+	at com.android.server.am.ActivityManagerService.onTransact(ActivityManagerService.java:2911)
+	at android.os.Binder.execTransactInternal(Binder.java:1351)
+	at android.os.Binder.execTransact(Binder.java:1282)

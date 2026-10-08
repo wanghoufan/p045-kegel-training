@@ -1,0 +1,1384 @@
+{
+  "prototype_version": "PROTOTYPE-V4.0",
+  "selected_direction": "A",
+  "status": "PENDING_RUNTIME_VALIDATION",
+  "formal_input_status": "VALID",
+  "static_integrity": "READY",
+  "ux_contract": {
+    "path": "../UX_CONTRACT.json",
+    "snapshot_path": "UX_CONTRACT.json",
+    "sha256": "47fb2f841459410eae0becf39173ce99494e6dafa12f8fb3022f413b1735a9fa",
+    "version": "UX-V1.4"
+  },
+  "direction_set": {
+    "path": "../DIRECTION_SET.json",
+    "snapshot_path": "DIRECTION_SET.json",
+    "sha256": "14ec0c87b6d03c5b647fc3bd127cc3f081ff0a7b85028c09e490d520a9ef9478",
+    "version": "DIRSET-V1.0",
+    "selected_direction": "A",
+    "approval_ref": "DIRECTION_SET.json#/selection_evidence",
+    "approval_evidence": {
+      "selected_by": "user",
+      "evidence": "用户 2026-10-07 回复 `a`，选定「A｜随身语音教练」",
+      "date": "2026-10-07"
+    }
+  },
+  "prototype": {
+    "path": "prototype.html",
+    "sha256": "be1ed465290b569852354c6e645fc58ff7b64e6336887dfd81ab6ff2b2ed314b",
+    "self_contained": true
+  },
+  "asset_delivery": {
+    "status": "EMPTY_EXPLICIT",
+    "reason": "HTML/CSS/JS与状态/控制模板全部内联；无远程字体、图片、脚本或音频资产。系统语音使用浏览器能力。"
+  },
+  "screens": [
+    "SCR-01",
+    "SCR-02",
+    "SCR-03",
+    "SCR-04",
+    "SCR-05",
+    "SCR-07",
+    "SCR-08",
+    "SCR-09",
+    "SCR-10",
+    "SCR-11",
+    "SCR-12",
+    "SCR-13",
+    "SCR-14",
+    "SCR-15",
+    "SCR-16",
+    "SCR-17"
+  ],
+  "interactions": [
+    "INT-01",
+    "INT-02",
+    "INT-03",
+    "INT-04",
+    "INT-05",
+    "INT-06",
+    "INT-07",
+    "INT-08",
+    "INT-09",
+    "INT-10",
+    "INT-11",
+    "INT-12",
+    "INT-13",
+    "INT-16",
+    "INT-17",
+    "INT-18",
+    "INT-19",
+    "INT-20",
+    "INT-21",
+    "INT-22",
+    "INT-23",
+    "INT-24",
+    "INT-25",
+    "INT-26",
+    "INT-27",
+    "INT-28",
+    "INT-29",
+    "INT-30",
+    "INT-31",
+    "INT-32",
+    "INT-33",
+    "INT-34",
+    "INT-35",
+    "INT-36",
+    "INT-37",
+    "INT-38",
+    "INT-39",
+    "INT-40",
+    "INT-41",
+    "INT-42",
+    "INT-44",
+    "INT-45",
+    "INT-46",
+    "INT-47",
+    "INT-48",
+    "INT-49",
+    "INT-50",
+    "INT-51",
+    "INT-52",
+    "INT-53",
+    "INT-54",
+    "INT-55",
+    "INT-56",
+    "INT-57",
+    "INT-58",
+    "INT-60",
+    "INT-61",
+    "INT-62",
+    "INT-63",
+    "INT-64",
+    "INT-65",
+    "INT-66",
+    "INT-67",
+    "INT-68",
+    "INT-69",
+    "INT-70",
+    "INT-71",
+    "INT-72"
+  ],
+  "states": [
+    "ST-01",
+    "ST-02",
+    "ST-03",
+    "ST-04",
+    "ST-05",
+    "ST-06",
+    "ST-07",
+    "ST-08",
+    "ST-11",
+    "ST-12",
+    "ST-13",
+    "ST-14",
+    "ST-15",
+    "ST-16",
+    "ST-17",
+    "ST-18",
+    "ST-19",
+    "ST-20",
+    "ST-21",
+    "ST-22",
+    "ST-23",
+    "ST-24",
+    "ST-25",
+    "ST-26",
+    "ST-27",
+    "ST-28",
+    "ST-29",
+    "ST-30",
+    "ST-31",
+    "ST-32",
+    "ST-33",
+    "ST-34",
+    "ST-35",
+    "ST-36",
+    "ST-37",
+    "ST-38",
+    "ST-39",
+    "ST-40",
+    "ST-41",
+    "ST-42",
+    "ST-43",
+    "ST-44",
+    "ST-45",
+    "ST-46",
+    "ST-47",
+    "ST-48",
+    "ST-49",
+    "ST-50",
+    "ST-51",
+    "ST-52",
+    "ST-53",
+    "ST-54",
+    "ST-55",
+    "ST-57",
+    "ST-58",
+    "ST-59",
+    "ST-60",
+    "ST-62"
+  ],
+  "interaction_bindings": [
+    {
+      "interaction_id": "INT-01",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-01",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-02",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-02",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-03",
+      "screen_id": "SCR-02",
+      "control_template": "control-INT-03",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-04",
+      "screen_id": "SCR-03",
+      "control_template": "control-INT-04",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-05",
+      "screen_id": "SCR-03",
+      "control_template": "control-INT-05",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-06",
+      "screen_id": "SCR-03",
+      "control_template": "control-INT-06",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-07",
+      "screen_id": "SCR-03",
+      "control_template": "control-INT-07",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-08",
+      "screen_id": "SCR-03",
+      "control_template": "control-INT-08",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-09",
+      "screen_id": "SCR-04",
+      "control_template": "control-INT-09",
+      "handler": "act",
+      "automatic": true
+    },
+    {
+      "interaction_id": "INT-10",
+      "screen_id": "SCR-04",
+      "control_template": "control-INT-10",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-11",
+      "screen_id": "SCR-04",
+      "control_template": "control-INT-11",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-12",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-12",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-13",
+      "screen_id": "SCR-05",
+      "control_template": "control-INT-13",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-16",
+      "screen_id": "SCR-07",
+      "control_template": "control-INT-16",
+      "handler": "act",
+      "automatic": true
+    },
+    {
+      "interaction_id": "INT-17",
+      "screen_id": "SCR-07",
+      "control_template": "control-INT-17",
+      "handler": "act",
+      "automatic": true
+    },
+    {
+      "interaction_id": "INT-18",
+      "screen_id": "SCR-07",
+      "control_template": "control-INT-18",
+      "handler": "act",
+      "automatic": true
+    },
+    {
+      "interaction_id": "INT-19",
+      "screen_id": "SCR-07",
+      "control_template": "control-INT-19",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-20",
+      "screen_id": "SCR-07",
+      "control_template": "control-INT-20",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-21",
+      "screen_id": "SCR-08",
+      "control_template": "control-INT-21",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-22",
+      "screen_id": "SCR-07",
+      "control_template": "control-INT-22",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-23",
+      "screen_id": "SCR-09",
+      "control_template": "control-INT-23",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-24",
+      "screen_id": "SCR-09",
+      "control_template": "control-INT-24",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-25",
+      "screen_id": "SCR-10",
+      "control_template": "control-INT-25",
+      "handler": "act",
+      "automatic": true
+    },
+    {
+      "interaction_id": "INT-26",
+      "screen_id": "SCR-10",
+      "control_template": "control-INT-26",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-27",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-27",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-28",
+      "screen_id": "SCR-11",
+      "control_template": "control-INT-28",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-29",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-29",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-30",
+      "screen_id": "SCR-05",
+      "control_template": "control-INT-30",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-31",
+      "screen_id": "SCR-05",
+      "control_template": "control-INT-31",
+      "handler": "act",
+      "automatic": true
+    },
+    {
+      "interaction_id": "INT-32",
+      "screen_id": "SCR-07",
+      "control_template": "control-INT-32",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-33",
+      "screen_id": "SCR-12",
+      "control_template": "control-INT-33",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-34",
+      "screen_id": "SCR-07",
+      "control_template": "control-INT-34",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-35",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-35",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-36",
+      "screen_id": "SCR-13",
+      "control_template": "control-INT-36",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-37",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-37",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-38",
+      "screen_id": "SCR-13",
+      "control_template": "control-INT-38",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-39",
+      "screen_id": "SCR-07",
+      "control_template": "control-INT-39",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-40",
+      "screen_id": "SCR-14",
+      "control_template": "control-INT-40",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-41",
+      "screen_id": "SCR-02",
+      "control_template": "control-INT-41",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-42",
+      "screen_id": "SCR-03",
+      "control_template": "control-INT-42",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-44",
+      "screen_id": "SCR-08",
+      "control_template": "control-INT-44",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-45",
+      "screen_id": "SCR-10",
+      "control_template": "control-INT-45",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-46",
+      "screen_id": "SCR-05",
+      "control_template": "control-INT-46",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-47",
+      "screen_id": "SCR-15",
+      "control_template": "control-INT-47",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-48",
+      "screen_id": "SCR-15",
+      "control_template": "control-INT-48",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-49",
+      "screen_id": "SCR-15",
+      "control_template": "control-INT-49",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-50",
+      "screen_id": "SCR-15",
+      "control_template": "control-INT-50",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-51",
+      "screen_id": "SCR-15",
+      "control_template": "control-INT-51",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-52",
+      "screen_id": "SCR-16",
+      "control_template": "control-INT-52",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-53",
+      "screen_id": "SCR-16",
+      "control_template": "control-INT-53",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-54",
+      "screen_id": "SCR-16",
+      "control_template": "control-INT-54",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-55",
+      "screen_id": "SCR-08",
+      "control_template": "control-INT-55",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-56",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-56",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-57",
+      "screen_id": "SCR-16",
+      "control_template": "control-INT-57",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-58",
+      "screen_id": "SCR-13",
+      "control_template": "control-INT-58",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-60",
+      "screen_id": "SCR-07",
+      "control_template": "control-INT-60",
+      "handler": "act",
+      "automatic": true
+    },
+    {
+      "interaction_id": "INT-61",
+      "screen_id": "SCR-08",
+      "control_template": "control-INT-61",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-62",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-62",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-63",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-63",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-64",
+      "screen_id": "SCR-02",
+      "control_template": "control-INT-64",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-65",
+      "screen_id": "SCR-03",
+      "control_template": "control-INT-65",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-66",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-66",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-67",
+      "screen_id": "SCR-05",
+      "control_template": "control-INT-67",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-68",
+      "screen_id": "SCR-17",
+      "control_template": "control-INT-68",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-69",
+      "screen_id": "SCR-01",
+      "control_template": "control-INT-69",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-70",
+      "screen_id": "SCR-14",
+      "control_template": "control-INT-70",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-71",
+      "screen_id": "SCR-07",
+      "control_template": "control-INT-71",
+      "handler": "act",
+      "automatic": false
+    },
+    {
+      "interaction_id": "INT-72",
+      "screen_id": "SCR-08",
+      "control_template": "control-INT-72",
+      "handler": "act",
+      "automatic": false
+    }
+  ],
+  "state_bindings": [
+    {
+      "state_id": "ST-01",
+      "screen_id": "SCR-01",
+      "kind": "normal",
+      "template": "state-ST-01",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-02",
+      "screen_id": "SCR-01",
+      "kind": "empty",
+      "template": "state-ST-02",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-03",
+      "screen_id": "SCR-01",
+      "kind": "loading",
+      "template": "state-ST-03",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-04",
+      "screen_id": "SCR-02",
+      "kind": "normal",
+      "template": "state-ST-04",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-05",
+      "screen_id": "SCR-03",
+      "kind": "normal",
+      "template": "state-ST-05",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-06",
+      "screen_id": "SCR-03",
+      "kind": "error",
+      "template": "state-ST-06",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-07",
+      "screen_id": "SCR-04",
+      "kind": "success",
+      "template": "state-ST-07",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-08",
+      "screen_id": "SCR-05",
+      "kind": "normal",
+      "template": "state-ST-08",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-11",
+      "screen_id": "SCR-07",
+      "kind": "normal",
+      "template": "state-ST-11",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-12",
+      "screen_id": "SCR-07",
+      "kind": "normal",
+      "template": "state-ST-12",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-13",
+      "screen_id": "SCR-07",
+      "kind": "normal",
+      "template": "state-ST-13",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-14",
+      "screen_id": "SCR-08",
+      "kind": "normal",
+      "template": "state-ST-14",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-15",
+      "screen_id": "SCR-08",
+      "kind": "interrupted",
+      "template": "state-ST-15",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-16",
+      "screen_id": "SCR-08",
+      "kind": "recovering",
+      "template": "state-ST-16",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-17",
+      "screen_id": "SCR-09",
+      "kind": "destructive",
+      "template": "state-ST-17",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-18",
+      "screen_id": "SCR-10",
+      "kind": "loading",
+      "template": "state-ST-18",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-19",
+      "screen_id": "SCR-10",
+      "kind": "success",
+      "template": "state-ST-19",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-20",
+      "screen_id": "SCR-11",
+      "kind": "normal",
+      "template": "state-ST-20",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-21",
+      "screen_id": "SCR-07",
+      "kind": "normal",
+      "template": "state-ST-21",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-22",
+      "screen_id": "SCR-01",
+      "kind": "error",
+      "template": "state-ST-22",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-23",
+      "screen_id": "SCR-10",
+      "kind": "error",
+      "template": "state-ST-23",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-24",
+      "screen_id": "SCR-11",
+      "kind": "empty",
+      "template": "state-ST-24",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-25",
+      "screen_id": "SCR-12",
+      "kind": "interrupted",
+      "template": "state-ST-25",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-26",
+      "screen_id": "SCR-13",
+      "kind": "permission",
+      "template": "state-ST-26",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-27",
+      "screen_id": "SCR-07",
+      "kind": "offline",
+      "template": "state-ST-27",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-28",
+      "screen_id": "SCR-14",
+      "kind": "error",
+      "template": "state-ST-28",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-29",
+      "screen_id": "SCR-05",
+      "kind": "empty",
+      "template": "state-ST-29",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-30",
+      "screen_id": "SCR-13",
+      "kind": "normal",
+      "template": "state-ST-30",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-31",
+      "screen_id": "SCR-11",
+      "kind": "error",
+      "template": "state-ST-31",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-32",
+      "screen_id": "SCR-04",
+      "kind": "loading",
+      "template": "state-ST-32",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-33",
+      "screen_id": "SCR-02",
+      "kind": "error",
+      "template": "state-ST-33",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-34",
+      "screen_id": "SCR-04",
+      "kind": "error",
+      "template": "state-ST-34",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-35",
+      "screen_id": "SCR-05",
+      "kind": "loading",
+      "template": "state-ST-35",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-36",
+      "screen_id": "SCR-05",
+      "kind": "error",
+      "template": "state-ST-36",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-37",
+      "screen_id": "SCR-07",
+      "kind": "error",
+      "template": "state-ST-37",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-38",
+      "screen_id": "SCR-08",
+      "kind": "error",
+      "template": "state-ST-38",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-39",
+      "screen_id": "SCR-09",
+      "kind": "error",
+      "template": "state-ST-39",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-40",
+      "screen_id": "SCR-11",
+      "kind": "loading",
+      "template": "state-ST-40",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-41",
+      "screen_id": "SCR-12",
+      "kind": "error",
+      "template": "state-ST-41",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-42",
+      "screen_id": "SCR-13",
+      "kind": "loading",
+      "template": "state-ST-42",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-43",
+      "screen_id": "SCR-13",
+      "kind": "error",
+      "template": "state-ST-43",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-44",
+      "screen_id": "SCR-08",
+      "kind": "interrupted",
+      "template": "state-ST-44",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-45",
+      "screen_id": "SCR-08",
+      "kind": "error",
+      "template": "state-ST-45",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-46",
+      "screen_id": "SCR-04",
+      "kind": "empty",
+      "template": "state-ST-46",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-47",
+      "screen_id": "SCR-01",
+      "kind": "normal",
+      "template": "state-ST-47",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-48",
+      "screen_id": "SCR-01",
+      "kind": "normal",
+      "template": "state-ST-48",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-49",
+      "screen_id": "SCR-15",
+      "kind": "normal",
+      "template": "state-ST-49",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-50",
+      "screen_id": "SCR-16",
+      "kind": "normal",
+      "template": "state-ST-50",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-51",
+      "screen_id": "SCR-15",
+      "kind": "success",
+      "template": "state-ST-51",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-52",
+      "screen_id": "SCR-15",
+      "kind": "error",
+      "template": "state-ST-52",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-53",
+      "screen_id": "SCR-16",
+      "kind": "empty",
+      "template": "state-ST-53",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-54",
+      "screen_id": "SCR-16",
+      "kind": "error",
+      "template": "state-ST-54",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-55",
+      "screen_id": "SCR-16",
+      "kind": "destructive",
+      "template": "state-ST-55",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-57",
+      "screen_id": "SCR-07",
+      "kind": "normal",
+      "template": "state-ST-57",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-58",
+      "screen_id": "SCR-15",
+      "kind": "loading",
+      "template": "state-ST-58",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-59",
+      "screen_id": "SCR-16",
+      "kind": "loading",
+      "template": "state-ST-59",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-60",
+      "screen_id": "SCR-01",
+      "kind": "normal",
+      "template": "state-ST-60",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    },
+    {
+      "state_id": "ST-62",
+      "screen_id": "SCR-17",
+      "kind": "normal",
+      "template": "state-ST-62",
+      "switch_handler": "go",
+      "screenshot_status": "NOT_CAPTURED"
+    }
+  ],
+  "five_slots": {
+    "prototype_html": "prototype.html",
+    "assets": "EMPTY_EXPLICIT",
+    "manifest": "PROTOTYPE_MANIFEST.json",
+    "screenshot_index": "PROTOTYPE_SCREENSHOT_INDEX.md",
+    "qa": "PROTOTYPE_QA.md"
+  },
+  "runtime_validation": {
+    "status": "PENDING",
+    "browser_executed": false,
+    "console_inspected": false,
+    "console_blocking_errors": null,
+    "page_errors": null,
+    "evidence_refs": [
+      "runtime-evidence/runtime-attempt.json"
+    ],
+    "required_interactions": [
+      "INT-01",
+      "INT-02",
+      "INT-03",
+      "INT-04",
+      "INT-05",
+      "INT-06",
+      "INT-07",
+      "INT-08",
+      "INT-09",
+      "INT-10",
+      "INT-11",
+      "INT-12",
+      "INT-13",
+      "INT-16",
+      "INT-17",
+      "INT-18",
+      "INT-19",
+      "INT-20",
+      "INT-21",
+      "INT-22",
+      "INT-23",
+      "INT-24",
+      "INT-25",
+      "INT-26",
+      "INT-27",
+      "INT-28",
+      "INT-29",
+      "INT-30",
+      "INT-31",
+      "INT-32",
+      "INT-33",
+      "INT-34",
+      "INT-35",
+      "INT-36",
+      "INT-37",
+      "INT-38",
+      "INT-39",
+      "INT-40",
+      "INT-41",
+      "INT-42",
+      "INT-44",
+      "INT-45",
+      "INT-46",
+      "INT-47",
+      "INT-48",
+      "INT-49",
+      "INT-50",
+      "INT-51",
+      "INT-52",
+      "INT-53",
+      "INT-54",
+      "INT-55",
+      "INT-56",
+      "INT-57",
+      "INT-58",
+      "INT-60",
+      "INT-61",
+      "INT-62",
+      "INT-63",
+      "INT-64",
+      "INT-65",
+      "INT-66",
+      "INT-67",
+      "INT-68",
+      "INT-69",
+      "INT-70",
+      "INT-71",
+      "INT-72"
+    ],
+    "required_states": [
+      "ST-01",
+      "ST-02",
+      "ST-03",
+      "ST-04",
+      "ST-05",
+      "ST-06",
+      "ST-07",
+      "ST-08",
+      "ST-11",
+      "ST-12",
+      "ST-13",
+      "ST-14",
+      "ST-15",
+      "ST-16",
+      "ST-17",
+      "ST-18",
+      "ST-19",
+      "ST-20",
+      "ST-21",
+      "ST-22",
+      "ST-23",
+      "ST-24",
+      "ST-25",
+      "ST-26",
+      "ST-27",
+      "ST-28",
+      "ST-29",
+      "ST-30",
+      "ST-31",
+      "ST-32",
+      "ST-33",
+      "ST-34",
+      "ST-35",
+      "ST-36",
+      "ST-37",
+      "ST-38",
+      "ST-39",
+      "ST-40",
+      "ST-41",
+      "ST-42",
+      "ST-43",
+      "ST-44",
+      "ST-45",
+      "ST-46",
+      "ST-47",
+      "ST-48",
+      "ST-49",
+      "ST-50",
+      "ST-51",
+      "ST-52",
+      "ST-53",
+      "ST-54",
+      "ST-55",
+      "ST-57",
+      "ST-58",
+      "ST-59",
+      "ST-60",
+      "ST-62"
+    ],
+    "required_screenshot_states": [
+      "ST-01",
+      "ST-02",
+      "ST-03",
+      "ST-04",
+      "ST-05",
+      "ST-06",
+      "ST-07",
+      "ST-08",
+      "ST-11",
+      "ST-12",
+      "ST-13",
+      "ST-14",
+      "ST-15",
+      "ST-16",
+      "ST-17",
+      "ST-18",
+      "ST-19",
+      "ST-20",
+      "ST-21",
+      "ST-22",
+      "ST-23",
+      "ST-24",
+      "ST-25",
+      "ST-26",
+      "ST-27",
+      "ST-28",
+      "ST-29",
+      "ST-30",
+      "ST-31",
+      "ST-32",
+      "ST-33",
+      "ST-34",
+      "ST-35",
+      "ST-36",
+      "ST-37",
+      "ST-38",
+      "ST-39",
+      "ST-40",
+      "ST-41",
+      "ST-42",
+      "ST-43",
+      "ST-44",
+      "ST-45",
+      "ST-46",
+      "ST-47",
+      "ST-48",
+      "ST-49",
+      "ST-50",
+      "ST-51",
+      "ST-52",
+      "ST-53",
+      "ST-54",
+      "ST-55",
+      "ST-57",
+      "ST-58",
+      "ST-59",
+      "ST-60",
+      "ST-62"
+    ]
+  },
+  "changes": {
+    "version": "V4",
+    "feedback_ref": "PROTOTYPE_V4-变更说明.md",
+    "applied": [
+      "V4_ZERO_PRECONDITION_START"
+    ],
+    "prior_human2_approval": false
+  },
+  "human_approval": {
+    "status": "NEEDS_REVISION_REVIEW",
+    "approved": false,
+    "evidence": null
+  },
+  "technology_reuse": [
+    {
+      "decision": "REUSE",
+      "capability": "可点击移动界面与本地模拟记录",
+      "candidate": "原生HTML/CSS、DOM、Web Storage",
+      "reason": "本次按用户指定做自包含HTML模拟器，无需依赖、框架或旧项目代码。"
+    },
+    {
+      "decision": "REUSE",
+      "capability": "演示语音",
+      "candidate": "浏览器系统SpeechSynthesis",
+      "reason": "复用平台语音能力；不冒充Android原生音频证明。"
+    },
+    {
+      "decision": "ADAPT",
+      "capability": "契约规则、阶段推进、模拟场景",
+      "candidate": "原生事件/计时的受控业务映射",
+      "reason": "绑定已批准规则与同一阶段状态，单主Level/日额度/原相位恢复。"
+    },
+    {
+      "decision": "REVIEW_FOR_REUSE",
+      "capability": "旧项目/技术样机",
+      "status": "NOT_REUSED",
+      "reason": "未审查，不读取或搬用技术样机。正式Reuse Audit仍在用户Prototype Approval后、SDD前。"
+    },
+    {
+      "decision": "BUILD",
+      "capability": "底层播放/界面框架",
+      "status": "NOT_SELECTED",
+      "reason": "原生能力足够，不自建引擎或引入未审组件。"
+    }
+  ],
+  "limitations": [
+    "HTML不验证Android耳机/媒体焦点/通知/锁屏后台服务；对应操作为明确可点击模拟。",
+    "20倍快进只看流程，不是训练节奏；状态样例不算运行执行证据。",
+    "本页导出的是自报操作日志，须真实浏览器console/截图复核后才能形成QA PASS。"
+  ]
+}

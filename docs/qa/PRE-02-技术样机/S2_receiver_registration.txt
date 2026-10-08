@@ -1,0 +1,5 @@
+    Filter #0: BroadcastFilter{d042029}
+      Action: "android.media.AUDIO_BECOMING_NOISY"
+  * ReceiverList{6ca061d 1692 system/1000/u0 local:ebdaef4}
+--
+  * ReceiverList{c74f9f8 4119 com.orca.audiopoc/10233/u0 remote:c4ced5b}

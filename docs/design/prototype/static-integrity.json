@@ -1,0 +1,28 @@
+{
+  "mode": "STATIC_INTEGRITY_NOT_BROWSER_RUNTIME",
+  "result": "READY",
+  "formal_inputs_valid": true,
+  "metadata_matches_formal_sets": true,
+  "executable_interaction_handlers_complete": true,
+  "screen_ids": 16,
+  "interaction_ids": 68,
+  "state_ids": 58,
+  "protected_inputs_unchanged": true,
+  "prototype_sha256": "be1ed465290b569852354c6e645fc58ff7b64e6336887dfd81ab6ff2b2ed314b",
+  "ux_contract_sha256": "47fb2f841459410eae0becf39173ce99494e6dafa12f8fb3022f413b1735a9fa",
+  "direction_set_sha256": "14ec0c87b6d03c5b647fc3bd127cc3f081ff0a7b85028c09e490d520a9ef9478",
+  "rule_checks_ref": "static-rule-checks.json",
+  "limitations": "语法/规则/元数据检查不能证明HTML实际渲染、按钮被浏览器点击、console无错误或截图可读。",
+  "deployed_artifact_validator": {
+    "validator": "interactive-product-prototype/validate_contract.py::artifact_errors",
+    "raw_validator_state": "BLOCKED",
+    "raw_validator_errors": [
+      "UX_DIRECTION_APPROVAL_MISMATCH"
+    ],
+    "compatibility_adapter": "仅内存解析UX approval_ref JSON指针到Direction selection_evidence，检查独立approval_evidence一致；原文件/hash保持。",
+    "artifact_state": "PENDING",
+    "errors": [],
+    "skill_benchmark_or_self_test_rerun": false,
+    "runtime_pass_claimed": false
+  }
+}

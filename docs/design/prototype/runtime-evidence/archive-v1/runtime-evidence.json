@@ -1,0 +1,98 @@
+{
+  "runtime_evidence_version": "RE-V1.0",
+  "browser": "BrowserOS(Chrome) + headless Chrome CDP",
+  "browser_executed": true,
+  "console_inspected": true,
+  "blocking_console_errors": 0,
+  "evidence_mode": "PARTIAL_AUDIO_LIMITED",
+  "bindings": {
+    "prototype_sha256": "5020cabafaaf6e20a8c878bc34a26483060d2e62723474c1e5c79c55ba042343",
+    "ux_contract_sha256": "b4f09448a34278b35f20b56e8cf4cecc18b707942567ce5ddcb7135d21e5be97",
+    "direction_sha256": "14ec0c87b6d03c5b647fc3bd127cc3f081ff0a7b85028c09e490d520a9ef9478"
+  },
+  "interactions_executed_runtime": [
+    "INT-01(读本地)",
+    "INT-02(开始摸底)",
+    "INT-03(动作确认)",
+    "INT-05(有效保持6s计时/确认)",
+    "INT-06(耐力重复×5)",
+    "INT-07(快速收缩×4)",
+    "INT-09(放松质量→建议)",
+    "INT-12(载入L3示例)",
+    "INT-13(耳机准备校验)",
+    "INT-14(试听语音→ST-10)",
+    "INT-15(确认开始训练→ST-21 AUDIO_UNAVAILABLE)",
+    "重试/recovery 路径多次出现(重试本屏上次操作)"
+  ],
+  "states_observed_runtime": [
+    "ST-01",
+    "ST-02",
+    "ST-03",
+    "ST-04",
+    "ST-05",
+    "ST-06",
+    "ST-09",
+    "ST-10",
+    "ST-21",
+    "ST-32",
+    "ST-46"
+  ],
+  "audio_limitation": "验证用浏览器无可持续系统语音/音频渲染；INT-15 启动训练按契约落到 ST-21 AUDIO_UNAVAILABLE 并给重试恢复，训练执行态 ST-11/12/13/14/15/16/17/18/19 无法在无音频环境经真实点击到达。",
+  "screenshots": [
+    {
+      "file": "shot-ST-01.png",
+      "state": "ST-01",
+      "kind": "state_sample_preview"
+    },
+    {
+      "file": "shot-ST-04.png",
+      "state": "ST-04",
+      "kind": "state_sample_preview"
+    },
+    {
+      "file": "shot-ST-08.png",
+      "state": "ST-08",
+      "kind": "state_sample_preview"
+    },
+    {
+      "file": "shot-ST-11.png",
+      "state": "ST-11",
+      "kind": "state_sample_preview"
+    },
+    {
+      "file": "shot-ST-13.png",
+      "state": "ST-13",
+      "kind": "state_sample_preview"
+    },
+    {
+      "file": "shot-ST-14.png",
+      "state": "ST-14",
+      "kind": "state_sample_preview"
+    },
+    {
+      "file": "shot-ST-15.png",
+      "state": "ST-15",
+      "kind": "state_sample_preview"
+    },
+    {
+      "file": "shot-ST-19.png",
+      "state": "ST-19",
+      "kind": "state_sample_preview"
+    },
+    {
+      "file": "shot-ST-20.png",
+      "state": "ST-20",
+      "kind": "state_sample_preview"
+    },
+    {
+      "file": "shot-ST-25.png",
+      "state": "ST-25",
+      "kind": "state_sample_preview"
+    }
+  ],
+  "screenshot_kind_note": "state_sample_preview = 原型内建「查看该状态样例」输出（原型自身标注：样例预览≠runtime 证据）；assessment 主流程为真实点击验证。",
+  "required_rerun": "在带系统音频的桌面 Chrome/真机打开 prototype.html，真实走通训练执行（耐力→快速→暂停/恢复→完成）并复核；Human 2 用户实点为最终验收证据。",
+  "prototype_result": "PARTIAL_PENDING_AUDIO",
+  "prototype_gate": "PENDING",
+  "datetime": "2026-10-08T00:55:32+08:00"
+}
