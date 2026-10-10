@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 使用 AppCompat DayNight 主题以支持应用内语言切换（AppCompatDelegate.setApplicationLocales）；
+         Compose 的 Material3 配色不依赖 XML 主题，此处仅提供窗口背景 -->
+    <style name="Theme.Kegel" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+</resources>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pelvic Trainer</string>
+    <string name="session_title">Guided pelvic floor training</string>
+
+    <!-- Navigation -->
+    <string name="nav_today">Today</string>
+    <string name="nav_assess">Check-in</string>
+    <string name="nav_ability">Progress</string>
+    <string name="nav_settings">Settings</string>
+    <string name="back">Back</string>
+
+    <!-- Home -->
+    <string name="home_title">Today\'s training</string>
+    <string name="home_last_assessment">Last check-in</string>
+    <string name="home_current_level">Current level</string>
+    <string name="home_level_unknown">Not assessed</string>
+    <string name="home_plan_endurance">Endurance: hold %1$d s × %2$d reps</string>
+    <string name="home_plan_fast">Quick: %1$d reps</string>
+    <string name="home_start">Start today\'s training</string>
+    <string name="home_today_done">Done today: %1$d / %2$d</string>
+    <string name="home_quota_left">Remaining today: %1$d contractions</string>
+    <string name="home_quota_blocked">You are near today\'s limit (fewer than 2 contractions left). Please train again tomorrow.</string>
+    <string name="home_rest_day_hint">You trained %1$d days in a row. Today, rest or use a half dose.</string>
+    <string name="home_half_dose">Half dose today</string>
+    <string name="home_half_dose_on">Half dose today: on</string>
+    <string name="home_retest_hint">%1$d completed days since your last check-in. You can re-assess (optional).</string>
+    <string name="home_retest_action">Re-assess now</string>
+    <string name="home_standard">Level standards</string>
+    <string name="home_change_level">Choose level</string>
+    <string name="home_skip_hint">The check-in is optional: you can also pick a level and start training right away.</string>
+    <string name="dismiss">Got it</string>
+    <string name="dur_min_sec">%1$d min %2$d s</string>
+    <string name="dur_sec">%1$d s</string>
+    <string name="common_confirm">OK</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_level">L%1$d</string>
+
+    <!-- Training -->
+    <string name="training_endurance">Endurance training</string>
+    <string name="training_fast">Quick contraction training</string>
+    <string name="training_ready">Get ready</string>
+    <string name="training_tighten">Tighten</string>
+    <string name="training_hold">Hold</string>
+    <string name="training_relax">Relax</string>
+    <string name="training_rest">Rest</string>
+    <string name="training_next">Next</string>
+    <string name="training_quick_tighten">Quick tighten</string>
+    <string name="training_quick_relax">Quick relax</string>
+    <string name="training_done">Complete</string>
+    <string name="training_rep_progress">Rep %1$d / %2$d</string>
+    <string name="training_pause">Pause</string>
+    <string name="training_resume">Resume</string>
+    <string name="training_stop">End early</string>
+    <string name="training_safety_exit">Safety exit</string>
+    <string name="training_silent_on">Discreet mode: silent, subtitles and countdown only</string>
+    <string name="training_silent_off">Voice mode</string>
+    <string name="training_fast_intro">Next: quick squeezes</string>
+    <string name="training_quality_hint">Breathe normally, don\'t hold your breath, don\'t clench your buttocks or thighs</string>
+
+    <!-- Pause -->
+    <string name="pause_title">Paused</string>
+    <string name="pause_reason_focus">Audio was taken by another app, so training paused automatically.</string>
+    <string name="pause_reason_noisy">Headphones were disconnected, so training paused automatically.</string>
+    <string name="pause_reason_manual">You paused the training.</string>
+    <string name="pause_reason_screen">The screen was locked in discreet mode, so training paused automatically.</string>
+    <string name="pause_need_resume">Tap Resume to continue. Playback never restarts on its own.</string>
+
+    <!-- Safety exit -->
+    <string name="safety_title">Safety exit</string>
+    <string name="safety_question">What are you feeling right now?</string>
+    <string name="safety_pain">Pain</string>
+    <string name="safety_urinary">Difficulty urinating or passing stool</string>
+    <string name="safety_relax_fail">Cannot relax</string>
+    <string name="safety_confirm">Stop this session</string>
+    <string name="safety_note">Training levels are a product pace, not a medical muscle-strength diagnosis. If discomfort continues, please consult a doctor or a pelvic floor physiotherapy professional.</string>
+    <string name="safety_stopped">This session has been stopped and cannot be resumed. Please rest, and seek professional advice if needed.</string>
+
+    <!-- Finish -->
+    <string name="finish_title">Session finished</string>
+    <string name="finish_completed">Completed</string>
+    <string name="finish_aborted">Ended early</string>
+    <string name="finish_endurance_reps">Endurance: %1$d reps</string>
+    <string name="finish_endurance_hold">Effective hold: %1$d s</string>
+    <string name="finish_fast_reps">Quick: %1$d reps</string>
+    <string name="finish_duration">Duration %1$s</string>
+    <string name="finish_saved">Saved automatically</string>
+    <string name="finish_back_home">Back to home</string>
+
+    <!-- Assessment -->
+    <string name="assess_title">Training ability check-in</string>
+    <string name="assess_intro">The check-in is optional. It helps you see which level fits you now. The result is only a suggestion and never locks your level.</string>
+    <string name="assess_step_of">Step %1$d of 5</string>
+    <string name="assess_control_title">1/5 Muscle control</string>
+    <string name="assess_control_body">Find the muscles you would use to hold back gas or stop urine flow. Tighten inward and upward. Breathe normally; don\'t clench your buttocks or thighs, and don\'t hold your breath.</string>
+    <string name="assess_control_q">How does it feel?</string>
+    <string name="assess_control_clear">I can find them clearly</string>
+    <string name="assess_control_unsure">Not sure</string>
+    <string name="assess_control_compensating">I clearly rely on other muscles</string>
+    <string name="assess_seconds_title">2/5 Endurance hold seconds</string>
+    <string name="assess_seconds_body">Tap Start timer and hold while following the seconds, up to 10 s. When the contraction clearly fades or you can\'t hold, tap Stop and the seconds you actually held are recorded.</string>
+    <string name="assess_reps_title">3/5 Endurance reps</string>
+    <string name="assess_reps_body">Each rep: tap Start this rep, then tighten and hold for the seconds you just measured following the countdown. After it ends you rest, and the rest is counted down too — when it ends the next rep starts automatically, no tap needed. Up to 10 reps.</string>
+    <string name="assess_fast_title">4/5 Quick reps</string>
+    <string name="assess_fast_body">Quick tighten, then relax fully right away. Pick how many you did in one go — no need to tap once per rep.</string>
+    <string name="assess_hold_start">Start timer</string>
+    <string name="assess_hold_stop">Can\'t hold, stop</string>
+    <string name="assess_hold_retry">Measure again</string>
+    <string name="assess_hold_running">Tighten and hold, follow the seconds…</string>
+    <string name="assess_hold_recorded">Recorded: held %1$d s</string>
+    <string name="assess_reps_start">Start this rep (hold %1$d s)</string>
+    <string name="assess_reps_holding">Tighten and hold</string>
+    <string name="assess_reps_rest">Fully relax, rest</string>
+    <string name="assess_reps_done">%1$d reps recorded</string>
+    <string name="assess_reps_limit">Reached the 10-rep limit</string>
+    <string name="assess_fast_pick">Drag to pick how many you did</string>
+    <string name="assess_sec">%1$d s</string>
+    <string name="assess_relax_title">5/5 Relaxation quality</string>
+    <string name="assess_relax_q">How does relaxing feel after training?</string>
+    <string name="assess_relax_good">I can fully relax</string>
+    <string name="assess_relax_uncertain">Not really sure</string>
+    <string name="assess_relax_poor">It gets harder to relax</string>
+    <string name="assess_counter">%1$d / %2$d</string>
+    <string name="assess_reps_rest_hint">Next rep starts automatically when rest ends</string>
+    <string name="assess_reps_more_rest">Rest 5 s more</string>
+    <string name="assess_reps_auto_hint">Each rep: tighten and hold %1$d s; after a 5 s rest the next rep starts automatically. If you can\'t continue, tap End this item.</string>
+    <string name="assess_end_item">End this item</string>
+    <string name="assess_next">Next</string>
+    <string name="assess_prev">Back</string>
+    <string name="assess_skip">Skip check-in</string>
+    <string name="assess_result_title">Training level suggestion</string>
+    <string name="assess_result_body">Based on this check-in, start training at %1$s. This is a training level, not a medical muscle-strength diagnosis.</string>
+    <string name="assess_result_veto">Muscle control or relaxation quality did not pass, so no level is suggested this time. Please practise correct technique first and consult a professional if needed.</string>
+    <string name="assess_accept">Use suggestion</string>
+    <string name="assess_keep">Keep current level</string>
+    <string name="assess_saved">Check-in result saved</string>
+
+    <!-- Ability -->
+    <string name="ability_title">Progress</string>
+    <string name="ability_current_level">Current level</string>
+    <string name="ability_endurance">Endurance</string>
+    <string name="ability_fast">Quick control</string>
+    <string name="ability_endurance_hold_total">Total effective hold %1$s</string>
+    <string name="ability_endurance_reps_total">Endurance contractions %1$d</string>
+    <string name="ability_longest_hold">Longest effective hold %1$d s</string>
+    <string name="ability_fast_total">Quick contractions %1$d</string>
+    <string name="ability_sessions">%1$d sessions completed</string>
+    <string name="ability_days">Trained %1$d days</string>
+    <string name="ability_level_history">Level history</string>
+    <string name="ability_retest">Re-assess</string>
+    <string name="ability_recent">Recent sessions</string>
+    <string name="history_empty">No sessions yet</string>
+    <string name="history_item">%1$s · %2$s · endurance %3$d / quick %4$d</string>
+    <string name="history_completed">completed</string>
+    <string name="history_aborted">ended early</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_light">Light</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_theme_system">Follow system</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_lang_system">Follow system</string>
+    <string name="settings_lang_zh">简体中文</string>
+    <string name="settings_lang_en">English</string>
+    <string name="settings_frequency">Daily reminders</string>
+    <string name="settings_frequency_times">%1$d time(s)</string>
+    <string name="settings_frequency_note">A product reminder, not a medical prescription. Choosing 3 times reduces the per-session dose automatically, and total daily contractions stay within 40.</string>
+    <string name="settings_silent">Discreet mode</string>
+    <string name="settings_silent_desc">When on: subtitles and countdown only, so nothing plays out loud in public.</string>
+    <string name="settings_ehs">Optional EHS self-rating</string>
+    <string name="settings_ehs_desc">Separate from training level. Stored locally only, never used for level calculation.</string>
+    <string name="settings_ehs_record">Record today\'s rating</string>
+    <string name="settings_ehs_clear">Clear all EHS records</string>
+    <string name="settings_ehs_history">History: %1$s</string>
+    <string name="settings_ehs_none">None</string>
+    <string name="settings_about">About</string>
+    <string name="settings_about_body">This app is a training aid and self-tracking tool. It does not diagnose, and it does not promise treatment results. Training levels are a product pace, not a medical muscle-strength grade.</string>
+    <string name="settings_offline">All data stays on this device. No network, no upload.</string>
+
+    <!-- Level standards -->
+    <string name="standards_title">Level standards</string>
+    <string name="standards_note">A training level is a product pace, not medical muscle strength. Values for each level are shown below.</string>
+    <string name="standards_level">Level</string>
+    <string name="standards_hold">Hold (s)</string>
+    <string name="standards_rest">Relax (s)</string>
+    <string name="standards_reps">Endurance reps</string>
+    <string name="standards_fast">Quick tighten (s)</string>
+    <string name="standards_fast_rest">Quick gap (s)</string>
+    <string name="standards_fast_reps">Quick reps</string>
+    <string name="standards_estimate">About %1$s per session</string>
+
+    <!-- EHS -->
+    <string name="ehs_title">Optional EHS self-rating</string>
+    <string name="ehs_intro">The Erection Hardness Score (EHS) is backed by validation studies and can be kept as an optional trend, completely separate from your training level.</string>
+    <string name="ehs_level_1">Level 1: larger but not hard</string>
+    <string name="ehs_level_2">Level 2: hard but not hard enough for penetration</string>
+    <string name="ehs_level_3">Level 3: hard enough for penetration but not fully hard</string>
+    <string name="ehs_level_4">Level 4: completely hard and fully rigid</string>
+    <string name="ehs_save">Save rating</string>
+    <string name="ehs_saved">Saved</string>
+    <string name="ehs_cleared">Cleared</string>
+    <string name="ehs_disabled">EHS self-rating is currently off. You can enable it in Settings.</string>
+
+    <!-- Notification -->
+    <string name="notif_channel_name">Training in progress</string>
+    <string name="notif_title">Guided pelvic floor training in progress</string>
+</resources>

@@ -54,3 +54,7 @@ scripts/decision/node_modules/
 *.qa-profile/
 qa-auth/
 .maestro/
+
+# 本地 IDE/工具目录与机器本地配置（永不入库）
+.arts/
+local.properties

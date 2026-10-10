@@ -1,104 +1,63 @@
-# ORCA 治理模板分发版｜导航（先读我）
+# 盆底肌训练（Pelvic Trainer）
 
 [English](./README.en.md)
 
-> 模板名冻结，版本真相以本仓库 Git 提交历史为准（版本标记文件仅为指针）。
+一款专注男性盆底肌的**语音训练 App**：戴上耳机跟着语音做「收紧—保持—放松」，不用盯屏幕、不用自己数数；从 1–6 级逐级进阶，训练自动记录。
 
-开工读盘顺序（全体系唯一）：`AGENTS.md` → `docs/roles/`（本次角色卡）→ 根 `USER_MODEL_OVERRIDE.md`（模型表，有就用它）→ `docs/handoff/`（交接现状）→ 根 `经验一句话.md` → 任务目标放最后。
-
-## 一图看懂（体系全景）
-
-**两阶段治理总流程**（口令推进 · Human Gate 不可自动跨越 · Change C 闭环）：
-
-![ORCA 两阶段治理总流程](./docs/assets/orca-two-phase-flow.png)
-
-**角色阵容与 Phase 2 派工主链**（9+1+1 · 自动探测派工口 · 账本与同步三件套）：
-
-![ORCA 角色阵容与派工主链](./docs/assets/orca-roles-dispatch-chain.png)
-
-## 怎么用：你的操作只有两件事（新建文件夹 ＋ 说一句话）
-
-体系不绑定 Orca，也不绑定任何客户端：**Orca／Trae／Qoder／Codex／CodeArts Agent／opencode／Claude Code** 随便切，编排者每轮开工跑 `scripts/detect-client.sh` 自动认当前客户端并选派工口（有原生子代理就在该客户端窗口内直派；没有就走通道 CLI），**不需要你填任何配置、不需要你指派角色**。
-
-| 场景 | 你要做的 | 说哪一句 |
+| 今日首页 | 能力记录 | 设置 |
 |---|---|---|
-| **新项目·大项目**（多阶段要等你点头／要产品验收留痕／跨周或会交接／要发布上线留回执／多角色并行，命中任一） | ①新建一个空文件夹 ②在里面打开任一客户端 | 见下方【新项目大项目·一句话】（它会自己铺包、建账本、认客户端、派活） |
-| **新项目·小项目**（单文件小修／单日单任务／一次性脚本／查资料） | 新建文件夹 ＋ 打开客户端 | `直接干活，别铺包。项目是 XXX，要做 XXX。` |
-| **老项目**（本机 `1.Active/` 里已铺好的） | 打开该项目 ＋ 打开客户端 | 直接说事即可：`XXX 项目，第一阶段，计划`（规则、脚本、账本都已就位，**不要重铺包**） |
-| **单客户端环境**（只有 shell、没有子代理） | 同上 | 完全一样；探测返回 `channel_cli`，角色走 `opencode run`／`codebuddy -y -p`／`codex exec` 直调，规矩不减，只是少了并行与真 resume |
+| ![今日页：一键开始今日训练](./docs/screenshots/home-zh-light.png) | ![能力页：耐力与快速控制统计](./docs/screenshots/ability-zh-light.png) | ![设置页：主题与语言](./docs/screenshots/settings-zh-light.png) |
 
-### 新项目大项目·一句话（复制即可）
+## 它解决什么问题
 
-```text
-按 /Users/zzymima0000/Developer/coding/4.Templates（PC）/2026-09-09 丨 MAC 丨 ORCA V2.1 治理模板 丨 分发版-2026-09-11/新项目模板包/README.md 和它的归位表，把 ORCA 治理模板铺进这个项目根目录（USER_MODEL_OVERRIDE.md 建软链指母版，别拷实文件），铺完你就是本项目编排者。项目是 XXX，第一阶段，计划。
+凯格尔（盆底肌）训练最难的不是动作，而是**坚持**：传统 App 要你盯着屏幕看倒计时、心里默数次数，练起来既麻烦也容易分心。这款 App 把整个训练交给语音——耳机里报「收紧」「保持 3、2、1」「放松」，你只管跟着做；坐着站着都行，通勤、办公间隙都能练。
+
+## 谁适合用
+
+- 想开始或已经在做凯格尔训练、但不想被屏幕绑住的男性用户
+- 希望有明确等级和目标节奏（而不是自己瞎定秒数次数）的训练者
+- 在意数据隐私、希望记录只留在自己手机上的用户
+
+## 核心功能
+
+- **一键开始今日训练**：按当前等级自动生成「耐力 + 快速」两段训练脚本，全程语音引导（中文 / English 双语语音）
+- **可选的能力摸底**：5 个摸底项（动作控制、耐力保持、耐力次数、快速次数、放松质量）全部内置计时/倒计时＋语音提示，不需要手动计数；测完给出 L1–L6 **训练等级建议**
+- **六级递进标准**：每一级的保持秒数、休息、次数都有明确单值标准，可在「各级标准」页随时查看；升级由多个维度共同达标决定，不看屏幕也知道进度
+- **训练可控**：暂停、恢复、提前结束、安全出口（疼痛等情况下立即停止）；低调模式全程无声、仅字幕与倒计时
+- **额度与频率**：每日提醒 1/2/3 次可选，选 3 次自动降量；每日总收缩封顶 40 次，支持「今日半量」
+- **能力页**：耐力 / 快速分开统计，训练天数、次数、等级变化历史一目了然
+- **主题三态 + 中英双语**：浅色 / 深色 / 跟随系统；简体中文 / English，其他系统语言自动回退中文；切换不丢训练状态
+
+## 快速开始（从源码构建）
+
+环境：JDK 17、Android SDK（compileSdk 36 / minSdk 31）、随仓 Gradle Wrapper。
+
+```bash
+export JAVA_HOME=$HOME/android-toolchain/jdk-17.0.20.1+1/Contents/Home
+export ANDROID_HOME=$HOME/android-toolchain/sdk
+./gradlew assembleDebug          # 产出 app/build/outputs/apk/debug/app-debug.apk
+./gradlew testDebugUnitTest      # 领域逻辑单元测试（21 个）
+adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
-之后每一单你只说**业务目标 ＋ 口令**（下面三个口令），铺包/派工/落账/验收全由编排者自己走完。
+语音提示资产可离线重新生成（macOS，无需联网）：`bash tools/make_cues.sh`。
 
-**别做的事**：不要把 `新项目模板包/` 整个文件夹丢进项目根（会多一层目录、路径全错）；不要拷母版 Git 历史或别的项目的 HANDOFF；老项目不要重铺（规则升级由母版 `scripts/sync-old-projects.sh` 自动铺开）。
+## 健康边界
 
-## 用户只需记住三个口令
+- 这是**训练辅助与自我记录工具**：不做医疗诊断，不承诺治疗效果（包括 ED/PE），App 内摸底不等于临床肌力评估。
+- 出现疼痛、持续异常紧张或明显排尿排便问题时，请使用「安全出口」停止训练并咨询医生或盆底物理治疗专业人员。
+- 所有数据只保存在本机应用私有目录，无联网、无账号。
 
-- `第一阶段，计划`：进 Phase1（PLAN），Planner＋Research Reviewer 出 PRODUCT_PLAN，≥90 且模板 Gate 全条件满足（P0=0＋blocking P1=0＋事实/假设验证）才找你。
-- `第二阶段，开发`：Human Gate 批准后进 Phase2（DEVELOP，锁定 DEV_BASELINE），默认主链开发（模型以override表为准）。
-- `变更请求：……`：开发中反馈统一入口，TM 按 A（小改留 DEVELOP）/ B（局部功能改留 DEVELOP 不召 Sol）/ C（产品架构变 Controlled Reopen）分类。
+## 项目结构
 
-## 模型口径（一句话）
+| 目录 | 内容 |
+|---|---|
+| `app/` | Android 应用（Kotlin 2.1.20 + Jetpack Compose + Media3；包名 `com.orca.kegel`） |
+| `docs/pm/` | 产品计划书与需求真源（Product Plan V1.1） |
+| `docs/design/` | 设计契约：交互规范、冻结说明与可点击原型（`docs/design/prototype/`） |
+| `docs/qa/` | 产品验收追踪矩阵（34 条 AC）与逐条证据截图（`docs/qa/evidence-P045/`） |
+| `docs/roles/`、`docs/handoff/` | 开发流程治理文档（ORCA 角色卡与交接记录） |
 
-模型／通道／调用方式**一律以根 `USER_MODEL_OVERRIDE.md` 表为准**（唯一口径，改表必真调，精确 ID 照抄执行）；本 README 不复述模型 ID，避免与表漂移。换人用户直接改母版真源表；表内无备用列。分工表软链制：各项目根表均为软链指母版真源，改母版即全项目同步（禁拷实文件；跨机器断链时拷实文件并记 HANDOFF）。
+## 当前版本
 
-## 根目录
-
-**入口与规则**
-- `AGENTS.md`：全员规则（一页，全体系唯一真源之一）
-- `README.md`：本导航（先读我）；`README.en.md`：英文导航
-- `ORCA治理体系说明.md`：**对外概览**（体系更新三件套第 2 步必须同步它）
-- `USER_MODEL_OVERRIDE.md`：模型表（角色/模型/执行通道/调用方式，**唯一口径**，改表即生效，精确ID照抄执行）
-- `GOVERNANCE_VERSION`：版本指针文件（内容：以Git历史为准）
-- `经验一句话.md`：收工一句经验（只追加）
-- `agent.md`：接续开工提示词快照（**临时材料，随交接更新，不受 check-sync 门禁**）
-
-**脚本（`scripts/`）**
-- `detect-client.sh`：自动认当前客户端并选派工口（`window_subagent`／`channel_cli`）；每轮开工先跑它
-- `check-channel-preflight.sh`：分工表在用模型 ↔ 通道目录对账，须 `CHANNEL-OK` 才可派工
-- `weekly-channel-check.sh` ＋ `_inject-agents-block.py`、`sync-old-projects.sh`、`migration-status.sh`、`_sync-packages.py`（母版→两包同步唯一入口，**禁手写 sed 复制**）
-- `model/check-ledger.mjs`：两本账本校验（老项目迁移登记检查用它，须 `LEDGER-OK`）
-- `decision/orca-decide.mjs`：决策侧车；`orchestration/`：L3 watchdog（仅外部/终端编排时部署）
-- `check-sync.sh`：母版↔两包一致性门禁（归一化裸名后逐字节比对），须 `SYNC-OK`
-
-**包**
-- `新项目模板包/`（新项目初始化）、`老项目迁移模板包/`（老项目迁移，入口【迁移整理】提示词）。两包内容由 `scripts/_sync-packages.py` 从母版生成，**不要手改包内文件**。
-
-## docs/ 地图
-
-- `roles/`：11张角色卡（只看本次派的角色）
-- `prompts/`：编排者/外部开发者/迁移整理三份提示词（迁移整理含自举取包＋冲突处理，可当老项目唯一入口）＋《Orca 通用编排者持续推进协议》（防停摆三层监督收编版；其动态角色论与十卡制冲突，不采用）＋《Orca 编排治理监督者提示词》（总监督wake-only收编版，平时只喊编排者）
-- `history/`：重塑说明、更新说明、ORCA 模型与双阶段治理整改方案（历史，看现行先看根）
-- `templates/`：归位表模板
-- `pm/` `qa/` `review/`：计划/测试/评审落盘（各照 template）
-- `handoff/`：交接（含模板）；`model/`：模型账本（TASK 首个真实任务前、DISPATCH 首个真实派工前删示例行）＋ TM 资格测试（`TASK-MANAGER-QUALIFICATION.md` 规范/报告、`TASK-MANAGER-QUALIFICATION-EVENTS.jsonl` 事件，评分 `scripts/model/tm-qualification.mjs`）
-- `sop/`：基础设施规范（docker.md、supabase.md、sqlite.md、android.md、android-machine-profile.md、webqa.md、decision-router.md，去版本号引用），新项目自建
-- `scripts/decision/`：Decision Sidecar orca-decide（用法见其 README 与 docs/sop/decision-router.md）
-
-## 已删除（用户令，结论均已落实）
-
-- 历史治理审查报告6份（09-09→09-11）：P1/P2结论已全部修完验过，删前状态见 git 历史；现行结论以包内文件为准
-- `docs/model/模型分工工作量排名-2026-09-13-参考.md`（2026-09-15 删，快照过期，见 git 历史）
-- 根散文件已归位：三提示词→`prompts/`、两说明→`history/`、归位表→`templates/`
-
-## 改名对照（去版本号一次改名，老链接按此找新位置）
-
-- `docs/history/2.0-重塑说明.md` → `docs/history/重塑说明.md`
-- `docs/history/2.1-更新说明.md` → `docs/history/更新说明.md`
-- `docs/history/ORCA-V2.1-治理审查报告-*` → `docs/history/ORCA-治理审查报告-*`（实物已删，见 git 历史）
-- `docs/history/*ORCA V2.1模型与双阶段治理-整改方案 丨 V1.0.md` → `docs/history/*ORCA模型与双阶段治理-整改方案.md`
-- `docs/prompts/*持续推进协议 丨 V1.1.md` → `Orca 通用编排者持续推进协议.md`
-- `docs/sop/*交接上下文 丨 V1.0.md` → 去掉末尾 ` 丨 V1.0`（该文件已删，见 git 历史）
-- 口令 `【迁移整理｜2.1】` → `【迁移整理】`
-- 口令 `【编排者｜2.1开工】` → `【编排者｜开工】`
-- 口令 `【外部施工｜2.1】` → `【外部施工】`
-
-## 可直接使用的模板包
-
-- `新项目模板包/`：新项目初始化所需的完整文件包。
-- `老项目迁移模板包/`：老项目迁移所需的完整文件包；入口是 `【迁移整理】` 提示词（含自举取包：它每次都自己去本机治理仓库取包，无需你手动拷贝，也不会因项目已有治理文件而跳过）。
+`v1.0`（versionCode 1）· Android 12 及以上 · 简体中文 / English。
