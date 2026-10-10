@@ -14,10 +14,10 @@
 - **未完成的收尾**：无——①用户已实听并复核听感类 AC-052/016/017；②**首次发布用户签收已到（2026-10-10 口令「签收」）**，整链 `chain_status` 已转 `ACCEPTED`，回执见 `docs/qa/产品验收追踪矩阵.md`「首次发布签收回执」。
 
 ### 二、下一步任务（2026-10-10 签收后更新）
-1. ~~实听复核 AC-052/016/017＋首次发布签收~~：**已完成**——用户实听后口令「签收」，整链 `chain_status=ACCEPTED`（回执落 `docs/qa/产品验收追踪矩阵.md`），DEV-V1 可报完工。
-2. 收尾（待用户口令）：commit 归档本轮全部改动（未获指令前不做）；收尾链 neat-freak＋experience-recorder 各派一次。
+1. ~~实听复核 AC-052/016/017＋首次发布签收~~：**已完成**（用户口令「签收」→整链 `ACCEPTED`）。
+2. ~~收尾：commit＋展示层同步~~：**已完成（TASK-019，2026-10-10 用户令三步）**——①jcp 小清理；②双语 README 重写＋About 三格＋push（`9743c05`＋`.project.yaml` 除名提交）；③**仓库已转公开**、**Release v1.0 已发布并挂 APK**（`pelvic-trainer-v1.0-debug.apk`，debug 签名已在 Release 注明，SHA-256 `0afda3e8…`）、GitHub 主页第 29 行已加、个人网站新增 `kegel-trainer` 条目＋16:9 封面（站点测试 14/14 绿、Pages 部署 success、线上绕缓存复验封面 sha256 与本地一致）。
 3. （用户持令待办）治理修复任务《P045 worktree 错位修复＋铺包防呆》——**须用户明确 A2–A5 指令才动（红线）**，不执行。
-4. 若用户提出新反馈：按 **Change Request** 分类——A/B 留 `DEVELOP` 不召 Planner；C（产品/架构变更）才走受控重开（`PLAN_REOPEN_REQUIRED` ＋ Human Approval ＋ 新 Plan 版本 ＋ 新基线）。
+4. 若用户提出新反馈：按 **Change Request** 分类——A/B 留 `DEVELOP`；C 才走受控重开。
 
 ### 三、注意事项与规矩
 - **权限边界**：不改业务代码除非用户明确授权；**不 push、不擅自 commit**（无明确指令一律不做，也不上报）。
