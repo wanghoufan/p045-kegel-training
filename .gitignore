@@ -58,3 +58,6 @@ qa-auth/
 # 本地 IDE/工具目录与机器本地配置（永不入库）
 .arts/
 local.properties
+
+# 项目机器身份（含本机路径，不入公开仓）
+.project.yaml
