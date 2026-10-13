@@ -32,6 +32,8 @@ object TrainingState {
     val section: MutableStateFlow<Section> = MutableStateFlow(Section.ENDURANCE)
     val repIndex = MutableStateFlow<Int?>(null)
     val repTotal = MutableStateFlow<Int?>(null)
+    val groupIndex = MutableStateFlow<Int?>(null)
+    val groupTotal = MutableStateFlow<Int?>(null)
     val remainingMs = MutableStateFlow(0L)
     val stepDurationMs = MutableStateFlow(0L)
     val stepIndex = MutableStateFlow(0)
@@ -49,6 +51,8 @@ object TrainingState {
         section.value = Section.ENDURANCE
         repIndex.value = null
         repTotal.value = null
+        groupIndex.value = null
+        groupTotal.value = null
         remainingMs.value = 0
         stepDurationMs.value = 0
         stepIndex.value = 0
@@ -66,6 +70,9 @@ sealed interface TrainingCommand {
     data object Stop : TrainingCommand
     data class SafetyExit(val reason: SafetyReason) : TrainingCommand
     data class SetSilent(val silent: Boolean) : TrainingCommand
+
+    /** 组间休息延长（毫秒增量） */
+    data class ExtendRest(val extraMs: Long) : TrainingCommand
 }
 
 /** 进程内命令总线（UI → 前台服务） */

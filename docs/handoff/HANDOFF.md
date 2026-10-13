@@ -82,3 +82,28 @@
 
 1. AGENTS；2. 角色卡；3. 根 `USER_MODEL_OVERRIDE.md`；4. 本 HANDOFF；5. 根 `经验一句话.md`；6. 任务目标放最后。
 冲突才扩大读。
+
+- 2026-10-13｜Change C：剂量与进阶体系受控重开；PROJECT_PHASE=PLAN_REOPEN_REQUIRED；planner已交 docs/pm/PRODUCT_PLAN_V2.0.md 与 DOSE-EVIDENCE-V2.0.md（82/100、P0=1、blocking P1=1，待独立研究/专业复核后 Human Approval，PLAN_GATE=IN_PROGRESS）；DEV_BASELINE 冻结待重签，旧 DEV-V1 ACCEPTED 不变，禁据此开240高量或开发发布。
+- 【Change C 重开｜2026-10-13 用户令】用户实测判定「L6 每日 40 次太少、新手都能达到」，令 planner 按研究最高标准重设计剂量与进阶体系。流程：planner（codex/gpt-6.1-sol）产出 `docs/pm/PRODUCT_PLAN_V2.0.md`＋`docs/pm/DOSE-EVIDENCE-V2.0.md`（证据 17 源；六级日量 30/45/60/90/120/240，L6 为耐力120＋快速120 合计、满量 6 会话；自评 82/100）；product-reviewer（codebuddy/glm-5.3-flash）串行独立复核 `docs/review/RESEARCH_REVIEW-V2.0-R1.md`＝`ACCEPTED_WITH_CONDITIONS`、建议 82/100。
+- 【用户修正令 B2（覆盖 V2.0 的量权限条款）】用户明确：取消「>45/日需专业书面审查」「>120 及 L6 需个体专业指导」「新用户 C≤45」「阶段日额/许可上限冻结」「分期解锁」等一切外部许可门槛；选 L6 当日即可按 240 满量执行，不做爬坡。保留：单次保持 ≤10 秒、同类组 ≤10 次、单会话 ≤40 次、日额 ≤240、组间 30 秒完全放松、疲劳/疼痛即停与半量降级、合规话术、中英双语与主题三态。
+- 【新 DEV_BASELINE】`PRODUCT_PLAN_V2.0 + 用户修正令 B2`（2026-10-13 用户令，取代 `PRODUCT_PLAN_V1.1 + PRODUCT_RULES_APPROVED`）。`PROJECT_PHASE=DEVELOP`（Change C 受控重开完成、用户放行开发）。当前 Task：TASK-020（builder 派工中，codebuddy/deepseek-v4.1-flash，prompt 落 `temp/dispatch-builder-dose-v2.md`，日志 `temp/builder-dose.log`）；后续：code-reviewer → qa → supervisor 复检；真机目标 Note 11T Pro（已固定）。旧 40 上限不追溯改写历史记录。
+- TASK-020（builder，DEV-V2 剂量体系实现）**已交付待复核**（2026-10-13）：按 `PRODUCT_PLAN_V2.0 + 修正令 B2` 落地新六级矩阵（L1–L6 日量 30/45/60/90/120/240，H 含收紧起始、每 10 次拆组、组间/跨类 30 秒可延长不可缩短、单会话 ≤40/日 ≤240）＋确定性额度换算（`B=min(D,240)`、`E_B/F_B`、半量按类折半、按时段分配、启动前按双维实际已用取小、中止不返还）＋会话次数 1/2/3/4/6 与提醒 1/2/3 分开。改动面：`domain/Levels.kt`、`domain/Plan.kt`、`domain/History.kt`、`data/AppRepository.kt`、`ui/AppViewModel.kt`、`ui/KegelApp.kt`、`ui/TrainingScreens.kt`、`audio/TrainingService.kt`、`audio/TrainingState.kt`、`res/values*/strings.xml`、`test/.../DomainTest.kt`。验证：`./gradlew assembleDebug testDebugUnitTest` **BUILD SUCCESSFUL**（36 单测全绿，`tests=36 failures=0 errors=0`）。AC-54..61 及重写 AC 已在本矩阵建行、状态 `OPEN`（真机/UI/听感待 qa）。未 commit/push。
+- TASK-020 返工（builder，2026-10-13）：修 `docs/review/CODE_REVIEW-V2.0-DEV2.md` 三条 P1＋可行 P2——P1-1 摸底实际开始的收缩计入当日额度（`AssessmentScreen`＋`AppViewModel.addAssessmentUsage`＋`AppState.usedE`；快速滑块自报不扣；余量不足提示次日）；P1-2 会期间隔 ≥2 小时（`SessionSpacing`＋`PlanResult.IntervalBlocked`＋首页可见说明/延后出口）；P1-3 疲劳即停（`SafetyReason.FATIGUE`＋双语＋安全出口项）与疲劳后次日整日半量（`pendingHalfDate`）；P2 跨午夜按发生日扣额（`SessionRecord.startedByDay`）、删死代码 `startLevelPreview`、`doseVersion` 旧=1/V2=2 可追溯。改动面追加 `ui/AssessmentScreen.kt`。验证：`./gradlew assembleDebug testDebugUnitTest` **BUILD SUCCESSFUL**（43 单测全绿，`tests=43 failures=0 errors=0`，新增 7 例独立硬编码断言）。待 code-reviewer 复检 → qa 真机。未 commit/push。
+
+- 2026-10-13｜planner 参数勘误：已交 `docs/pm/PRODUCT_PLAN_V2.1.md`（待批准，批准后取代V2.0剂量分配；V2.0其余条款仍有效，B2取消量权限门槛继续有效）；耐力回V1.4每次5/6/8/8/10/10、快速日10/20/30/50/80/120、快速组20/日硬限240、单会话合计≤40；L6 N6每次10+20、4:56/日29:36，非13–15/60–90分钟；证据总量口径已勘误，60种规划自查通过；不改业务/治理表、DEV_BASELINE或PROJECT_PHASE，不commit/push。
+
+- 2026-10-13｜【V2.2 剂量矩阵生效｜TASK-022】用户直接批准「三张表」口径并**跳过 planner**（V2.0/V2.1 剂量分配作废；B2 取消量权限门槛继续有效）。**新口径**：先定每场次数，日量＝每场次数×会话数（整除、每场全天一致，无 17/17/16 余数分摊）。每场＝**1 个耐力组（≤10）+ 1 个快速回合（≤20）**。
+  - 耐力：场数 3/3/4/4/5/6、每场 5/6/7/8/9/10、日总 **15/18/28/32/45/60**。
+  - 快速：回合数 3/3/4/4/5/6、每回合 5/8/10/12/16/20、日总 **15/24/40/48/80/120**。
+  - 每日合计：**30/42/68/80/125/180**；单次时长 106/120/136/168/228/296 秒；日上限 240 仅保护。
+  - 改动面：`domain/Levels.kt`（V2.2 矩阵＋`endurancePerSession/fastPerSession`＋`FAST_GROUP_MAX=20`＋`sessionOptions` 加 5）、`domain/Plan.kt`（快速按 20 拆回合、`Quota.daily` 改为每场×N）、`ui/KegelApp.kt`（各级标准页重做为三张表）、`res/values*/strings.xml`（中英新表头/说明）、`test/.../DomainTest.kt`（断言更新＋新增整除/一致性用例）。
+  - 验证：`./gradlew assembleDebug testDebugUnitTest` **BUILD SUCCESSFUL**，单测 **45 全绿**（tests=45 failures=0）；真机 `IN9LZTAYV4UGU4JF`（Redmi Note 11T Pro）`install -r` → **Success**，各级标准页三张表逐行核对与批准表一致（证据 `docs/qa/evidence-P045/50-52-v2.2-*.png`）。**未 commit/push**。
+  - 待办（治理）：V2.2 的 code-reviewer/qa/supervisor 正式链**未单独派**（用户直接令、本窗口「唯一实现者直做」，记 `executed_by=task-manager`，`chain_status=OPEN`）；如需正式复核可补派。
+
+- 2026-10-13｜【TASK-023｜用户两令：删 2 小时间隔闸 ＋ 新增「历史」tab】
+  - ①**删除首页 2 小时会话间隔安全闸**（用户令 A1）：`PlanResult.IntervalBlocked`、`SessionSpacing`、`AppRepository.canStartNextSession/nextSessionAllowedAtMs/lastSessionEndMs`、首页 `IntervalBlocked` 分支、文案 `home_interval_blocked/wait`、对应测试全清。**首页永远显示「开始今日训练」**，恢复用户早前「开始始终可点、安全锁只处理真实异常」规则。
+  - ②**新增底部「历史」tab**（今日/能力/历史/设置 四页）：`HistoryInsights`（`summary` 总计、`daily` 近 N 天按日聚合，纯函数可单测）＋ `HistoryScreen`：总计卡（总训练次数/训练天数/总时长/总次数/耐力总/快速总/累计保持）＋ 两张柱状图（每日训练时长、每日总次数，近 7 天）＋ 近 14 天每日明细表；中英文案齐备；无新增第三方依赖（图表用 Compose 布局自绘）。
+  - 验证：`assembleDebug testDebugUnitTest` **BUILD SUCCESSFUL**，单测 **44 全绿**（移除 2 间隔用例、新增 1 历史聚合用例）；真机 `IN9LZTAYV4UGU4JF` `install -r` → **Success**，首页无拦截、历史页统计与图表逐项核对通过（证据 `docs/qa/evidence-P045/53-55-v2.2-*.png`）。**未 commit/push**。
+  - 待办（治理）：同 TASK-022，正式 code-reviewer/qa 链未单独派（`executed_by=task-manager`，`chain_status=OPEN`）。
+  - 2026-10-13 补（用户验收反馈）：①「每日明细」改为两段式行（左日期 ←→ 右「场/时长 m:ss/次数」），去等宽字体、时长改 `9:23` 紧凑格式，解决列挤在一起；②底部 4 个 tab 改用 Material 图标（今日=Home、能力=Star、历史=DateRange、设置=Settings，material-icons-core 随 material3 自带，无新依赖）。44 单测绿，真机 install -r Success 并核对（证据 `56/57-v2.2-*.png`）。
+  - 2026-10-13 再补（用户验收反馈二轮）：①**首页移除「今日已用 / 今日剩余」两行**（用户令：练一遍即达标，不要额度显示）；②**能力页移除「最近训练」列表**（与历史页重复，保留等级变化）；③「每日明细」改为真正的**四列（日期｜场次｜时长｜次数）等宽居中**，列间清晰不再挤。44 单测绿，真机 install -r Success 并逐项核对（证据 `58-60-v2.2-*.png`）。

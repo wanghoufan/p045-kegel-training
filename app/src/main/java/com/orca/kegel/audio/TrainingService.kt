@@ -24,6 +24,7 @@ import com.orca.kegel.KegelApplication
 import com.orca.kegel.MainActivity
 import com.orca.kegel.R
 import com.orca.kegel.domain.CueId
+import com.orca.kegel.domain.DayUsage
 import com.orca.kegel.domain.PauseReason
 import com.orca.kegel.domain.Phase
 import com.orca.kegel.domain.SafetyReason
@@ -72,6 +73,14 @@ class TrainingService : MediaSessionService() {
     private var script: SessionScript? = null
     private var enduranceDone = 0
     private var fastDone = 0
+
+    /** 实际已开始（进入 HOLD / QUICK_TIGHTEN 即扣额，中止不返还） */
+    private var enduranceStarted = 0
+    private var fastStarted = 0
+    /** 按收缩开始时刻归属本地日的分桶（跨午夜正确扣额） */
+    private val enduranceStartedByDay = mutableMapOf<Long, Int>()
+    private val fastStartedByDay = mutableMapOf<Long, Int>()
+    private var countedUpTo = 0
 
     private val repo get() = KegelApplication.instance.repository
 
@@ -192,6 +201,11 @@ class TrainingService : MediaSessionService() {
                 TrainingState.silentMode.value = command.silent
                 if (command.silent) soundPool?.autoPause()
             }
+            is TrainingCommand.ExtendRest -> {
+                if (TrainingState.stage.value == TrainingStage.RUNNING) {
+                    if (script?.extendCurrent(command.extraMs) == true) pushStepState()
+                }
+            }
         }
     }
 
@@ -202,6 +216,11 @@ class TrainingService : MediaSessionService() {
         plan = newPlan
         enduranceDone = 0
         fastDone = 0
+        enduranceStarted = 0
+        fastStarted = 0
+        enduranceStartedByDay.clear()
+        fastStartedByDay.clear()
+        countedUpTo = 0
         TrainingState.silentMode.value = silent
         TrainingState.level.value = newPlan.level
         TrainingState.plan.value = newPlan
@@ -217,8 +236,32 @@ class TrainingService : MediaSessionService() {
         startCarrier()
         requestFocusIfNeeded()
         s.start()?.let { playCue(it) }
+        countEnteredSteps(s)
         pushStepState()
         startEngineLoop()
+    }
+
+    /** 进入某一步即视为该次收缩已开始（HOLD / QUICK_TIGHTEN），据此扣当日额度。 */
+    private fun countEnteredSteps(s: SessionScript) {
+        val steps = s.steps
+        if (steps.isEmpty()) return
+        val upto = minOf(s.index, steps.size - 1)
+        var i = countedUpTo
+        while (i <= upto) {
+            when (steps[i].phase) {
+                Phase.HOLD -> {
+                    enduranceStarted++
+                    enduranceStartedByDay.merge(LocalDate.now().toEpochDay(), 1, Int::plus)
+                }
+                Phase.QUICK_TIGHTEN -> {
+                    fastStarted++
+                    fastStartedByDay.merge(LocalDate.now().toEpochDay(), 1, Int::plus)
+                }
+                else -> Unit
+            }
+            i++
+        }
+        countedUpTo = upto + 1
     }
 
     private fun startEngineLoop() {
@@ -236,6 +279,7 @@ class TrainingService : MediaSessionService() {
                     if (step.phase == Phase.RELAX) enduranceDone++
                     if (step.phase == Phase.QUICK_RELAX) fastDone++
                 }
+                countEnteredSteps(s)
                 result.cues.forEach { playCue(it) }
                 pushStepState()
                 if (result.finished) {
@@ -258,6 +302,8 @@ class TrainingService : MediaSessionService() {
         TrainingState.section.value = step.section
         TrainingState.repIndex.value = step.repIndex
         TrainingState.repTotal.value = step.repTotal
+        TrainingState.groupIndex.value = step.groupIndex
+        TrainingState.groupTotal.value = step.groupTotal
         TrainingState.stepDurationMs.value = step.durationMs
         TrainingState.remainingMs.value = (step.durationMs - s.elapsedInStepMs).coerceAtLeast(0)
     }
@@ -312,8 +358,12 @@ class TrainingService : MediaSessionService() {
         script = null
 
         if (outcome != null) {
+            val today = LocalDate.now().toEpochDay()
+            val buckets = (enduranceStartedByDay.keys + fastStartedByDay.keys)
+                .map { d -> DayUsage(d, enduranceStartedByDay[d] ?: 0, fastStartedByDay[d] ?: 0) }
+                .sortedBy { it.epochDay }
             val record = SessionRecord(
-                epochDay = LocalDate.now().toEpochDay(),
+                epochDay = today,
                 timestampMs = System.currentTimeMillis(),
                 level = outcome.level,
                 enduranceReps = outcome.enduranceReps,
@@ -323,8 +373,18 @@ class TrainingService : MediaSessionService() {
                 completed = outcome.completed,
                 safetyReason = outcome.safetyReason,
                 halfDose = outcome.halfDose,
+                enduranceStarted = enduranceStarted,
+                fastStarted = fastStarted,
+                doseVersion = p?.doseVersion ?: SessionPlan.DOSE_VERSION,
+                startedByDay = buckets,
             )
             scope.launch { runCatching { repo.addSession(record) } }
+        }
+
+        // 疲劳停止 → 次日自动整日半量（仅次日生效，不影响当日已冻结额度）
+        if (safety == SafetyReason.FATIGUE) {
+            val nextDay = LocalDate.now().toEpochDay() + 1
+            scope.launch { runCatching { repo.scheduleHalfDose(nextDay) } }
         }
     }
 

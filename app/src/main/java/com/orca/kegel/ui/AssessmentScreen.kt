@@ -25,6 +25,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -66,6 +67,13 @@ fun AssessmentScreen(vm: AppViewModel, onClose: () -> Unit) {
     var fastReps by rememberSaveable { mutableIntStateOf(5) }
     var relax by rememberSaveable { mutableStateOf("") }
     var saved by remember { mutableStateOf<AssessmentResult?>(null) }
+    /** 实际已开始的收缩：保持测试（每次「开始计时」）＋逐轮耐力收紧（每轮进入收紧） */
+    var holdAttempts by rememberSaveable { mutableIntStateOf(0) }
+    var repStarts by rememberSaveable { mutableIntStateOf(0) }
+
+    val state by vm.state.collectAsState()
+    val today = LocalDate.now().toEpochDay()
+    val remainingE = state.remainingE(today)
 
     // 提前加载摸底提示音，保证第一次点击就有声音
     LaunchedEffect(Unit) { AssessmentAudio.warmUp() }
@@ -83,6 +91,8 @@ fun AssessmentScreen(vm: AppViewModel, onClose: () -> Unit) {
                 relaxQuality = runCatching { RelaxQuality.valueOf(relax) }.getOrDefault(RelaxQuality.UNCERTAIN),
             )
             vm.saveAssessment(result)
+            // 摸底实际已开始的收缩计入当日额度；快速滑块仅自报、不扣；动作教育不扣。
+            vm.addAssessmentUsage(result.epochDay, holdAttempts + repStarts)
             saved = result
             step = 5
         }
@@ -108,6 +118,15 @@ fun AssessmentScreen(vm: AppViewModel, onClose: () -> Unit) {
             Text(stringResource(R.string.assess_intro), style = MaterialTheme.typography.bodyMedium)
             HorizontalDivider()
 
+            // 余量不足时的可见说明：不硬塞，提示顺延至次日（本次实际开始的收缩仍计入当日已用）
+            if (step <= 2 && remainingE < 1) {
+                Text(
+                    stringResource(R.string.assess_quota_note),
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+            }
+
             when (step) {
                 0 -> {
                     Text(stringResource(R.string.assess_step_of, 1), style = MaterialTheme.typography.bodySmall)
@@ -122,13 +141,13 @@ fun AssessmentScreen(vm: AppViewModel, onClose: () -> Unit) {
                     Text(stringResource(R.string.assess_step_of, 2), style = MaterialTheme.typography.bodySmall)
                     Text(stringResource(R.string.assess_seconds_title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Text(stringResource(R.string.assess_seconds_body), style = MaterialTheme.typography.bodyMedium)
-                    HoldTimerStep(value = holdSec, onRecorded = { holdSec = it })
+                    HoldTimerStep(value = holdSec, onRecorded = { holdSec = it }, onStart = { holdAttempts++ })
                 }
                 2 -> {
                     Text(stringResource(R.string.assess_step_of, 3), style = MaterialTheme.typography.bodySmall)
                     Text(stringResource(R.string.assess_reps_title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Text(stringResource(R.string.assess_reps_body), style = MaterialTheme.typography.bodyMedium)
-                    RepsTimedStep(value = reps, holdSec = holdSec.coerceAtLeast(1), onCount = { reps = it })
+                    RepsTimedStep(value = reps, holdSec = holdSec.coerceAtLeast(1), onCount = { reps = it }, onStart = { repStarts++ })
                 }
                 3 -> {
                     Text(stringResource(R.string.assess_step_of, 4), style = MaterialTheme.typography.bodySmall)
@@ -225,7 +244,7 @@ fun AssessmentScreen(vm: AppViewModel, onClose: () -> Unit) {
  * 撑不住点「停」，播「放松」并记录实际秒数。全程有声音引导，不必盯屏。
  */
 @Composable
-private fun HoldTimerStep(value: Int, onRecorded: (Int) -> Unit) {
+private fun HoldTimerStep(value: Int, onRecorded: (Int) -> Unit, onStart: () -> Unit) {
     var running by rememberSaveable { mutableStateOf(false) }
     var elapsed by rememberSaveable { mutableIntStateOf(0) }
 
@@ -275,6 +294,7 @@ private fun HoldTimerStep(value: Int, onRecorded: (Int) -> Unit) {
         } else {
             Button(onClick = {
                 AssessmentAudio.play(R.raw.cue_tighten)
+                onStart()
                 elapsed = 0
                 running = true
             }) {
@@ -290,7 +310,7 @@ private fun HoldTimerStep(value: Int, onRecorded: (Int) -> Unit) {
  * 撑不住点「结束本项」。最多 10 次。全程有声音引导，不必盯屏。
  */
 @Composable
-private fun RepsTimedStep(value: Int, holdSec: Int, onCount: (Int) -> Unit) {
+private fun RepsTimedStep(value: Int, holdSec: Int, onCount: (Int) -> Unit, onStart: () -> Unit) {
     // phase: idle / hold / rest
     var phase by rememberSaveable { mutableStateOf("idle") }
     var remaining by rememberSaveable { mutableIntStateOf(0) }
@@ -302,6 +322,8 @@ private fun RepsTimedStep(value: Int, holdSec: Int, onCount: (Int) -> Unit) {
         when (phase) {
             "hold" -> {
                 remaining = holdSec
+                // 进入本轮收紧即视为已开始（按实际已开始扣当日额度）
+                onStart()
                 AssessmentAudio.play(R.raw.cue_tighten)
                 var e = 0
                 while (e < holdSec) {

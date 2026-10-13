@@ -19,16 +19,19 @@ data class CueAt(val cue: CueId, val atMs: Long)
 
 /**
  * 一个训练步骤。时长以毫秒计，lead 在步骤开始时播报，tails 在步骤内指定偏移播报。
+ * durationMs 可被「延长休息」在运行中增大（不可缩短）。
  */
 data class Step(
     val phase: Phase,
-    val durationMs: Long,
+    var durationMs: Long,
     val section: Section,
     val repIndex: Int? = null,
     val repTotal: Int? = null,
     val lead: CueId? = null,
     val tails: List<CueAt> = emptyList(),
     val countdown: Boolean = false,
+    val groupIndex: Int? = null,
+    val groupTotal: Int? = null,
 )
 
 /** 训练态：UI 与服务的统一状态 */
@@ -38,10 +41,13 @@ enum class TrainingStage { IDLE, RUNNING, PAUSED, FINISHED, SAFETY_STOPPED }
 enum class PauseReason { NONE, MANUAL, FOCUS_LOST, NOISY, SCREEN_OFF }
 
 /** 安全出口分类（落库分别记） */
-enum class SafetyReason { PAIN, URINARY, RELAX_FAIL }
+enum class SafetyReason { PAIN, URINARY, RELAX_FAIL, FATIGUE }
 
 /**
- * 一次会话的可执行计划（已按等级矩阵、频率降量、半量与当日剩余额度计算完毕）。
+ * 一次会话的可执行计划（已按等级矩阵、会话次数、半量与当日本类已用额度计算完毕）。
+ *  - enduranceReps/fastReps 为本次可执行次数
+ *  - sessionIndex 为本次是当日第几个时段（1..sessionCount）
+ *  - reducedByRemaining＝因当日余量不足被下调
  */
 data class SessionPlan(
     val level: Level,
@@ -52,56 +58,117 @@ data class SessionPlan(
     val fastRestSec: Int,
     val fastReps: Int,
     val halfDose: Boolean,
-    val frequencyReduced: Boolean,
-    val quotaCapped: Boolean,
+    val reducedByRemaining: Boolean,
+    val sessionIndex: Int,
+    val sessionCount: Int,
+    val doseVersion: Int = DOSE_VERSION,
 ) {
     val totalContractions: Int get() = enduranceReps + fastReps
+    val enduranceGroups: Int get() = LevelRules.groups(enduranceReps)
+    val fastGroups: Int get() = LevelRules.fastGroups(fastReps)
+    val totalGroups: Int get() = enduranceGroups + fastGroups
+    val estimatedSeconds: Int get() = LevelRules.sessionSeconds(enduranceReps, fastReps, LevelRules.spec(level))
+
+    companion object {
+        const val DOSE_VERSION = 2
+    }
 }
 
 sealed interface PlanResult {
     data class Ok(val plan: SessionPlan) : PlanResult
-    /** 当日剩余额度不足 2 次收缩，不启动组合训练 */
-    data class Blocked(val remaining: Int) : PlanResult
+
+    /** 当日额度或时段已用尽，不启动 */
+    data class Blocked(val remainingE: Int, val remainingF: Int) : PlanResult
+}
+
+/** 当日冻结额度（按类型拆分）。 */
+data class DailyAllocation(
+    val sessions: Int,
+    val eQuota: Int,
+    val fQuota: Int,
+) {
+    val total: Int get() = eQuota + fQuota
 }
 
 object Quota {
 
     /**
-     * 计算一次训练的量：
-     *  - 基准取等级矩阵
-     *  - 频率 3 → E=min(E,6)，F=min(F,13-E)
-     *  - 半量 → 各自 floor(n/2) 且 ≥1
-     *  - 与当日剩余额度取小（先减快速，再减耐力，各不低于 1）
-     *  - 当日剩余额度 < 2 → 不启动
+     * 当日额度（确定性换算，V2.2 FR-005）：
+     *  每次会话固定 e/q（spec.endurancePerSession / fastPerSession），日额 = 每次 × N。
+     *  会话数越少日总量按比例越少（每次会话量不变，保证每次一致，无余数分摊）。
+     *  半量：E_H=floor(E/2)、F_H=floor(F/2)（非零时至少 1 次）。
+     *  日总受 DAILY_LIMIT(240) 保护。
+     */
+    fun daily(level: Level, sessions: Int, halfDose: Boolean): DailyAllocation {
+        val spec = LevelRules.spec(level)
+        val n = sessions.coerceAtLeast(1)
+        var e = spec.endurancePerSession * n
+        var f = spec.fastPerSession * n
+        if (halfDose) {
+            e = halfFloor(e)
+            f = halfFloor(f)
+        }
+        // 日上限保护（当前最高 180，保留以防调参越界）
+        val cap = LevelRules.DAILY_LIMIT
+        if (e + f > cap && e + f > 0) {
+            val scaledE = cap * e / (e + f)
+            f = cap - scaledE
+            e = scaledE
+        }
+        return DailyAllocation(sessions = n, eQuota = e, fQuota = f)
+    }
+
+    /** 半量折半：向下取整为一半，非零时至少 1 次。 */
+    private fun halfFloor(v: Int): Int = if (v <= 0) 0 else maxOf(1, v / 2)
+
+    /**
+     * 第 index 个时段的原始分配（1-based）：
+     *  q_i = floor(Q/N) + (i ≤ Q mod N ? 1 : 0)
+     *  c_i = 前 i 个 q 之和；e_i = floor(c_i×E_Q/Q) − floor(c_{i−1}×E_Q/Q)；f_i = q_i − e_i
+     *  index 超出时段数或 Q=0 → 0/0。
+     */
+    fun forSession(alloc: DailyAllocation, index: Int): Pair<Int, Int> {
+        val q = alloc.total
+        if (q <= 0 || index < 1 || index > alloc.sessions) return 0 to 0
+        val n = alloc.sessions
+        fun slot(i: Int): Int = q / n + if (i <= q % n) 1 else 0
+
+        var c = 0
+        for (i in 1..index) c += slot(i)
+        val cPrev = c - slot(index)
+        val ei = c * alloc.eQuota / q - cPrev * alloc.eQuota / q
+        val fi = slot(index) - ei
+        return ei to fi
+    }
+
+    /**
+     * 计算本次训练量：
+     *  - 取当日冻结额度与该时段原始分配
+     *  - 读当日实际已开始 E/F，本次 e=min(e_i, rE)、f=min(f_i, rF)
+     *  - 两类各至少 1；不足则退化为余量专项；两类都 <1 则不启动
+     *  - 不先扣快速把额度转耐力（严格按类型余量取小）
      */
     fun build(
         level: Level,
-        dailyFrequency: Int,
+        sessions: Int,
         halfDose: Boolean,
-        remainingToday: Int,
+        sessionIndex: Int,
+        usedE: Int,
+        usedF: Int,
     ): PlanResult {
         val spec = LevelRules.spec(level)
-        var e = spec.enduranceReps
-        var f = spec.fastReps
-        var frequencyReduced = false
-        if (dailyFrequency >= 3) {
-            e = minOf(e, LevelRules.FREQ3_MAX_ENDURANCE)
-            f = minOf(f, LevelRules.FREQ3_MAX_TOTAL - e)
-            frequencyReduced = true
-        }
-        if (halfDose) {
-            e = maxOf(1, e / 2)
-            f = maxOf(1, f / 2)
-        }
-        if (remainingToday < 2) return PlanResult.Blocked(remainingToday)
+        val n = sessions.coerceAtLeast(1)
+        val alloc = daily(level, n, halfDose)
+        val rE = (alloc.eQuota - usedE).coerceAtLeast(0)
+        val rF = (alloc.fQuota - usedF).coerceAtLeast(0)
+        if (rE < 1 && rF < 1) return PlanResult.Blocked(rE, rF)
 
-        var total = e + f
-        var capped = false
-        while (total > remainingToday) {
-            if (f > 1) f-- else if (e > 1) e-- else break
-            total = e + f
-            capped = true
-        }
+        val (eI, fI) = forSession(alloc, sessionIndex)
+        val e = minOf(eI, rE)
+        val f = minOf(fI, rF)
+        if (e < 1 && f < 1) return PlanResult.Blocked(rE, rF)
+
+        val reduced = e < eI || f < fI
         return PlanResult.Ok(
             SessionPlan(
                 level = level,
@@ -112,8 +179,9 @@ object Quota {
                 fastRestSec = spec.fastRestSec,
                 fastReps = f,
                 halfDose = halfDose,
-                frequencyReduced = frequencyReduced,
-                quotaCapped = capped,
+                reducedByRemaining = reduced,
+                sessionIndex = sessionIndex,
+                sessionCount = n,
             )
         )
     }
@@ -121,66 +189,113 @@ object Quota {
 
 /**
  * 把计划展开成可执行的步骤脚本（纯函数，可单测）。
- * 语音尽量短促、不重叠；快速模式仅「紧 / 松」两字。
+ *  - 单次保持 H 含收紧起始（不再另加 2 秒）
+ *  - 耐力每组 ≤10 次、快速每回合 ≤20 次，组间与跨类之间 30 秒完全放松
+ *  - 语音尽量短促、不重叠；快速模式仅「紧 / 松」两字
  */
 object ScriptBuilder {
 
     fun build(plan: SessionPlan): List<Step> {
         val steps = mutableListOf<Step>()
 
-        // 准备（无「准备等待」阻塞：这是训练内第一步，一键开始即时进入）
-        steps += Step(Phase.READY, 3000, Section.ENDURANCE, lead = CueId.READY)
+        val eGroups = LevelRules.groups(plan.enduranceReps)
+        val fGroups = LevelRules.fastGroups(plan.fastReps)
+        val totalGroups = eGroups + fGroups
 
-        // 耐力组：收紧 → 保持（末 3 秒倒计时）→ 完全放松
-        for (i in 1..plan.enduranceReps) {
-            steps += Step(Phase.TIGHTEN, 2000, Section.ENDURANCE, i, plan.enduranceReps, lead = CueId.TIGHTEN)
+        // 准备：若本次只有快速（无耐力），在准备阶段顺带提示进入快速
+        val readyTails = if (plan.enduranceReps <= 0 && plan.fastReps > 0) {
+            listOf(CueAt(CueId.FAST_INTRO, 1500))
+        } else emptyList()
+        steps += Step(Phase.READY, LevelRules.READY_SEC * 1000L, Section.ENDURANCE, lead = CueId.READY, tails = readyTails)
 
-            val holdMs = plan.holdSec * 1000L
-            val holdTails = buildList {
-                add(CueAt(CueId.NUM3, holdMs - 3000))
-                add(CueAt(CueId.NUM2, holdMs - 2000))
-                add(CueAt(CueId.NUM1, holdMs - 1000))
-            }.filter { it.atMs >= 0 }.distinctBy { it.cue }
-            steps += Step(
-                Phase.HOLD, holdMs, Section.ENDURANCE, i, plan.enduranceReps,
-                lead = CueId.HOLD, tails = holdTails, countdown = true,
-            )
+        var groupSeq = 0
 
-            val relaxMs = plan.restSec * 1000L
-            val relaxTails = mutableListOf<CueAt>()
-            // 质量提示适度出现一次（FR-AUDIO-03）
-            if (i == 1) relaxTails += CueAt(CueId.QUALITY, 1200)
-            if (i < plan.enduranceReps) relaxTails += CueAt(CueId.NEXT, maxOf(0, relaxMs - 1500))
-            steps += Step(Phase.RELAX, relaxMs, Section.ENDURANCE, i, plan.enduranceReps, lead = CueId.RELAX, tails = relaxTails)
+        // 耐力：每小组 ≤10 次；HOLD 含收紧起始；组间 30 秒
+        for (g in 0 until eGroups) {
+            val from = g * LevelRules.GROUP_MAX
+            val to = minOf(plan.enduranceReps, from + LevelRules.GROUP_MAX)
+            for (i in from until to) {
+                val repNo = i + 1
+                val holdMs = plan.holdSec * 1000L
+                val holdTails = buildList {
+                    // H 含收紧起始：先「收紧」，稍后补一声「保持」；末 3 秒 3/2/1
+                    if (plan.holdSec >= 5) add(CueAt(CueId.HOLD, 1000L))
+                    add(CueAt(CueId.NUM3, holdMs - 3000))
+                    add(CueAt(CueId.NUM2, holdMs - 2000))
+                    add(CueAt(CueId.NUM1, holdMs - 1000))
+                }.filter { it.atMs >= 0 }.distinctBy { it.cue }.sortedBy { it.atMs }
+                steps += Step(
+                    Phase.HOLD, holdMs, Section.ENDURANCE, repNo, plan.enduranceReps,
+                    lead = CueId.TIGHTEN, tails = holdTails, countdown = true,
+                    groupIndex = g + 1, groupTotal = eGroups,
+                )
+
+                val relaxMs = plan.restSec * 1000L
+                val relaxTails = mutableListOf<CueAt>()
+                if (repNo == 1) relaxTails += CueAt(CueId.QUALITY, 1200)
+                // 组内还有下一次 → 放松末尾提示「下一次」；组末由组间休息的提示承接
+                if (repNo < to) relaxTails += CueAt(CueId.NEXT, maxOf(0, relaxMs - 1500))
+                steps += Step(
+                    Phase.RELAX, relaxMs, Section.ENDURANCE, repNo, plan.enduranceReps,
+                    lead = CueId.RELAX, tails = relaxTails,
+                    groupIndex = g + 1, groupTotal = eGroups,
+                )
+            }
+            groupSeq++
+            if (groupSeq < totalGroups) {
+                val sectionBoundary = g == eGroups - 1 && fGroups > 0
+                steps += restStep(
+                    index = groupSeq,
+                    total = totalGroups,
+                    lead = CueId.REST,
+                    tailCue = if (sectionBoundary) CueId.FAST_INTRO else CueId.NEXT,
+                )
+            }
         }
 
-        // 段落间：休息 → 提示进入快速训练
-        if (plan.fastReps > 0) {
-            val restMs = 5000L
-            val tails = if (plan.enduranceReps > 0) listOf(CueAt(CueId.FAST_INTRO, 1500)) else emptyList()
-            steps += Step(
-                Phase.REST, restMs, Section.REST,
-                lead = if (plan.enduranceReps > 0) CueId.REST else CueId.FAST_INTRO,
-                tails = tails,
-            )
+        // 快速：每回合 ≤20 次；组间 30 秒
+        for (g in 0 until fGroups) {
+            val from = g * LevelRules.FAST_GROUP_MAX
+            val to = minOf(plan.fastReps, from + LevelRules.FAST_GROUP_MAX)
+            for (j in from until to) {
+                val repNo = j + 1
+                steps += Step(
+                    Phase.QUICK_TIGHTEN, plan.fastSec * 1000L, Section.FAST, repNo, plan.fastReps,
+                    lead = CueId.FAST_TIGHTEN, groupIndex = g + 1, groupTotal = fGroups,
+                )
+                val tails = if (repNo < to) {
+                    listOf(CueAt(CueId.FAST_TIGHTEN, plan.fastRestSec * 1000L))
+                } else emptyList()
+                steps += Step(
+                    Phase.QUICK_RELAX, plan.fastRestSec * 1000L, Section.FAST, repNo, plan.fastReps,
+                    lead = CueId.FAST_RELAX, tails = tails,
+                    groupIndex = g + 1, groupTotal = fGroups,
+                )
+            }
+            groupSeq++
+            if (groupSeq < totalGroups) {
+                steps += restStep(
+                    index = groupSeq,
+                    total = totalGroups,
+                    lead = CueId.REST,
+                    tailCue = CueId.NEXT,
+                )
+            }
         }
 
-        // 快速组：紧 → 松（短促，不重叠）
-        for (j in 1..plan.fastReps) {
-            steps += Step(
-                Phase.QUICK_TIGHTEN, plan.fastSec * 1000L, Section.FAST, j, plan.fastReps,
-                lead = CueId.FAST_TIGHTEN,
-            )
-            val tails = if (j < plan.fastReps) listOf(CueAt(CueId.FAST_TIGHTEN, maxOf(0, plan.fastRestSec * 1000L)))
-            else emptyList()
-            steps += Step(
-                Phase.QUICK_RELAX, plan.fastRestSec * 1000L, Section.FAST, j, plan.fastReps,
-                lead = CueId.FAST_RELAX, tails = tails,
-            )
-        }
-
-        steps += Step(Phase.DONE, 3000, Section.FINISH, lead = CueId.DONE)
+        steps += Step(Phase.DONE, LevelRules.DONE_SEC * 1000L, Section.FINISH, lead = CueId.DONE)
         return steps
+    }
+
+    private fun restStep(index: Int, total: Int, lead: CueId, tailCue: CueId): Step {
+        val restMs = LevelRules.GROUP_REST_SEC * 1000L
+        return Step(
+            Phase.REST, restMs, Section.REST,
+            lead = lead,
+            tails = listOf(CueAt(tailCue, maxOf(0, restMs - 1500))),
+            groupIndex = index, groupTotal = total,
+            countdown = true,
+        )
     }
 }
 
@@ -194,6 +309,7 @@ data class TickResult(
 /**
  * 会话推进器：以 deltaMs 推进，返回本 tick 需要播报的 cue 与是否结束/换步。
  * 计时器是主时钟（语音只是提示，不让语音延迟拖节奏）。
+ * 组间休息可被「延长休息」在运行中加长（不可缩短）。
  */
 class SessionScript(val steps: List<Step>) {
 
@@ -204,7 +320,7 @@ class SessionScript(val steps: List<Step>) {
     private var firedTails: MutableSet<Int> = mutableSetOf()
     private var started = false
 
-    val totalMs: Long = steps.sumOf { it.durationMs }
+    val totalMs: Long get() = steps.sumOf { it.durationMs }
     val isFinished: Boolean get() = index >= steps.size
     fun current(): Step? = steps.getOrNull(index)
 
@@ -219,6 +335,18 @@ class SessionScript(val steps: List<Step>) {
         elapsedInStepMs = 0
         firedTails = mutableSetOf()
         return steps.firstOrNull()?.lead
+    }
+
+    /**
+     * 延长当前步骤（仅用于组间休息，可延长不可缩短）。
+     * 返回是否实际延长。
+     */
+    fun extendCurrent(extraMs: Long): Boolean {
+        if (extraMs <= 0) return false
+        val step = current() ?: return false
+        if (step.phase != Phase.REST) return false
+        step.durationMs += extraMs
+        return true
     }
 
     fun tick(deltaMs: Long): TickResult {

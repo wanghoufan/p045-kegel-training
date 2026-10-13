@@ -7,6 +7,7 @@
     <string name="nav_today">Today</string>
     <string name="nav_assess">Check-in</string>
     <string name="nav_ability">Progress</string>
+    <string name="nav_history">History</string>
     <string name="nav_settings">Settings</string>
     <string name="back">Back</string>
 
@@ -15,15 +16,16 @@
     <string name="home_last_assessment">Last check-in</string>
     <string name="home_current_level">Current level</string>
     <string name="home_level_unknown">Not assessed</string>
-    <string name="home_plan_endurance">Endurance: hold %1$d s × %2$d reps</string>
-    <string name="home_plan_fast">Quick: %1$d reps</string>
+    <string name="home_plan_exec">This session: endurance %1$d + quick %2$d (%3$d total)</string>
+    <string name="home_plan_groups">%1$d groups (endurance %2$d + quick %3$d), ≤10 per endurance group, ≤20 per quick round</string>
+    <string name="home_plan_duration">About %1$s this session (excluding rest extensions)</string>
+    <string name="home_plan_session">Session %1$d of %2$d today</string>
+    <string name="home_reduced_note">Today\'s remaining quota is low, so this session was scaled down by type (quick quota is never moved to endurance).</string>
     <string name="home_start">Start today\'s training</string>
-    <string name="home_today_done">Done today: %1$d / %2$d</string>
-    <string name="home_quota_left">Remaining today: %1$d contractions</string>
-    <string name="home_quota_blocked">You are near today\'s limit (fewer than 2 contractions left). Please train again tomorrow.</string>
-    <string name="home_rest_day_hint">You trained %1$d days in a row. Today, rest or use a half dose.</string>
+    <string name="home_quota_blocked">Today\'s quota is used up or all sessions are done. Please train again tomorrow.</string>
+    <string name="home_rest_day_hint">You have trained densely lately (%1$d days in a row). Today, rest or use a half dose.</string>
     <string name="home_half_dose">Half dose today</string>
-    <string name="home_half_dose_on">Half dose today: on</string>
+    <string name="home_half_dose_on">Half dose today: on (both daily quotas halved)</string>
     <string name="home_retest_hint">%1$d completed days since your last check-in. You can re-assess (optional).</string>
     <string name="home_retest_action">Re-assess now</string>
     <string name="home_standard">Level standards</string>
@@ -43,12 +45,13 @@
     <string name="training_tighten">Tighten</string>
     <string name="training_hold">Hold</string>
     <string name="training_relax">Relax</string>
-    <string name="training_rest">Rest</string>
+    <string name="training_rest">Group rest</string>
     <string name="training_next">Next</string>
     <string name="training_quick_tighten">Quick tighten</string>
     <string name="training_quick_relax">Quick relax</string>
     <string name="training_done">Complete</string>
     <string name="training_rep_progress">Rep %1$d / %2$d</string>
+    <string name="training_group_progress">Group %1$d / %2$d</string>
     <string name="training_pause">Pause</string>
     <string name="training_resume">Resume</string>
     <string name="training_stop">End early</string>
@@ -57,6 +60,7 @@
     <string name="training_silent_off">Voice mode</string>
     <string name="training_fast_intro">Next: quick squeezes</string>
     <string name="training_quality_hint">Breathe normally, don\'t hold your breath, don\'t clench your buttocks or thighs</string>
+    <string name="training_rest_extend">Rest 5 s more</string>
 
     <!-- Pause -->
     <string name="pause_title">Paused</string>
@@ -69,6 +73,7 @@
     <!-- Safety exit -->
     <string name="safety_title">Safety exit</string>
     <string name="safety_question">What are you feeling right now?</string>
+    <string name="safety_fatigue">Fatigue, dropping form or trouble breathing normally</string>
     <string name="safety_pain">Pain</string>
     <string name="safety_urinary">Difficulty urinating or passing stool</string>
     <string name="safety_relax_fail">Cannot relax</string>
@@ -84,7 +89,8 @@
     <string name="finish_endurance_hold">Effective hold: %1$d s</string>
     <string name="finish_fast_reps">Quick: %1$d reps</string>
     <string name="finish_duration">Duration %1$s</string>
-    <string name="finish_saved">Saved automatically</string>
+    <string name="finish_saved">Saved automatically. Contractions started in this session count toward today\'s quota; stopping early does not restore them.</string>
+    <string name="finish_fatigue_note">Stopped as \"fatigue\". For safety, tomorrow runs at half dose automatically (both daily quotas halved). If it persists, consult a professional.</string>
     <string name="finish_back_home">Back to home</string>
 
     <!-- Assessment -->
@@ -128,6 +134,7 @@
     <string name="assess_next">Next</string>
     <string name="assess_prev">Back</string>
     <string name="assess_skip">Skip check-in</string>
+    <string name="assess_quota_note">Today\'s training quota is nearly used up; please do the check-in the next day. Contractions you actually started still count toward today.</string>
     <string name="assess_result_title">Training level suggestion</string>
     <string name="assess_result_body">Based on this check-in, start training at %1$s. This is a training level, not a medical muscle-strength diagnosis.</string>
     <string name="assess_result_veto">Muscle control or relaxation quality did not pass, so no level is suggested this time. Please practise correct technique first and consult a professional if needed.</string>
@@ -148,11 +155,25 @@
     <string name="ability_days">Trained %1$d days</string>
     <string name="ability_level_history">Level history</string>
     <string name="ability_retest">Re-assess</string>
-    <string name="ability_recent">Recent sessions</string>
     <string name="history_empty">No sessions yet</string>
-    <string name="history_item">%1$s · %2$s · endurance %3$d / quick %4$d</string>
-    <string name="history_completed">completed</string>
-    <string name="history_aborted">ended early</string>
+
+    <!-- History & stats -->
+    <string name="history_summary_title">Summary</string>
+    <string name="history_total_sessions">Total sessions</string>
+    <string name="history_total_days">Days trained</string>
+    <string name="history_total_duration">Total time</string>
+    <string name="history_total_reps">Total reps</string>
+    <string name="history_total_endurance">Endurance reps</string>
+    <string name="history_total_fast">Quick reps</string>
+    <string name="history_total_hold">Total hold</string>
+    <string name="history_last_days">Last %1$d days</string>
+    <string name="history_chart_duration">Daily time</string>
+    <string name="history_chart_reps">Daily reps</string>
+    <string name="history_daily_title">Daily detail</string>
+    <string name="history_col_date">Date</string>
+    <string name="history_col_sessions">Sessions</string>
+    <string name="history_col_duration">Time</string>
+    <string name="history_col_reps">Reps</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
@@ -164,9 +185,13 @@
     <string name="settings_lang_system">Follow system</string>
     <string name="settings_lang_zh">简体中文</string>
     <string name="settings_lang_en">English</string>
-    <string name="settings_frequency">Daily reminders</string>
+    <string name="settings_sessions">Sessions per training day</string>
+    <string name="settings_sessions_times">%1$d time(s)</string>
+    <string name="settings_sessions_default">%1$s now uses %2$d session(s)</string>
+    <string name="settings_sessions_note">Fewer sessions means fewer reps that day (per-session reps stay the same); the daily cap is still 240.</string>
+    <string name="settings_reminder">Daily reminders</string>
     <string name="settings_frequency_times">%1$d time(s)</string>
-    <string name="settings_frequency_note">A product reminder, not a medical prescription. Choosing 3 times reduces the per-session dose automatically, and total daily contractions stay within 40.</string>
+    <string name="settings_reminder_note">A reminder only reminds; it never starts training. Default is 2, kept separate from session count.</string>
     <string name="settings_silent">Discreet mode</string>
     <string name="settings_silent_desc">When on: subtitles and countdown only, so nothing plays out loud in public.</string>
     <string name="settings_ehs">Optional EHS self-rating</string>
@@ -177,19 +202,27 @@
     <string name="settings_ehs_none">None</string>
     <string name="settings_about">About</string>
     <string name="settings_about_body">This app is a training aid and self-tracking tool. It does not diagnose, and it does not promise treatment results. Training levels are a product pace, not a medical muscle-strength grade.</string>
+    <string name="settings_compliance">Levels and counts are product settings, not a medical prescription or muscle-strength diagnosis. More repetitions are not necessarily better. Stop if you feel fatigue, pain, persistent tension or changes in urination, and consult a doctor or a pelvic floor physiotherapy professional. No treatment for incontinence, ED, PE or sexual-function benefit is guaranteed. 240 is a product counting cap, not a medical safety guarantee.</string>
     <string name="settings_offline">All data stays on this device. No network, no upload.</string>
 
     <!-- Level standards -->
     <string name="standards_title">Level standards</string>
-    <string name="standards_note">A training level is a product pace, not medical muscle strength. Values for each level are shown below.</string>
-    <string name="standards_level">Level</string>
-    <string name="standards_hold">Hold (s)</string>
-    <string name="standards_rest">Relax (s)</string>
-    <string name="standards_reps">Endurance reps</string>
-    <string name="standards_fast">Quick tighten (s)</string>
-    <string name="standards_fast_rest">Quick gap (s)</string>
-    <string name="standards_fast_reps">Quick reps</string>
-    <string name="standards_estimate">About %1$s per session</string>
+    <string name="standards_note">A training level is a product pace, not medical muscle strength. Full dose per level: endurance and quick each shown as sessions/day × reps per session = daily reps.</string>
+    <string name="std_endurance_title">Endurance</string>
+    <string name="std_fast_title">Quick</string>
+    <string name="std_total_title">Daily total</string>
+    <string name="std_col_level">Lv</string>
+    <string name="std_col_day_sessions">Sessions/day</string>
+    <string name="std_col_per_session">Reps/session</string>
+    <string name="std_col_day_rounds">Rounds/day</string>
+    <string name="std_col_per_round">Reps/round</string>
+    <string name="std_col_day_total">Daily reps</string>
+    <string name="std_col_e_total">Endur total</string>
+    <string name="std_col_f_total">Quick total</string>
+    <string name="std_col_day_sum">Daily sum</string>
+    <string name="std_level_summary">%1$s · hold %2$d s · %3$d+%4$d per session × %5$d</string>
+    <string name="standards_estimate">%1$s: about %2$s per session, about %3$s per full-dose day</string>
+    <string name="standards_footer">These are product settings, not a medical prescription. Each session = 1 endurance group + 1 quick round; rest 30 s fully between groups/types; rest can be extended, never shortened.</string>
 
     <!-- EHS -->
     <string name="ehs_title">Optional EHS self-rating</string>

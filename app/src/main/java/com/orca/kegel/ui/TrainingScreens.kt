@@ -95,6 +95,8 @@ fun TrainingScreen(vm: AppViewModel) {
     val section by TrainingState.section.collectAsState()
     val repIndex by TrainingState.repIndex.collectAsState()
     val repTotal by TrainingState.repTotal.collectAsState()
+    val groupIndex by TrainingState.groupIndex.collectAsState()
+    val groupTotal by TrainingState.groupTotal.collectAsState()
     val remainingMs by TrainingState.remainingMs.collectAsState()
     val pauseReason by TrainingState.pauseReason.collectAsState()
     val silent by TrainingState.silentMode.collectAsState()
@@ -148,12 +150,24 @@ fun TrainingScreen(vm: AppViewModel) {
                             style = MaterialTheme.typography.titleMedium,
                         )
                     }
+                    if (groupIndex != null && groupTotal != null && groupTotal!! > 1) {
+                        Text(
+                            stringResource(R.string.training_group_progress, groupIndex!!, groupTotal!!),
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    }
                     if (caption != null) {
                         Text(caption, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
 
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                    if (section == Section.REST && !paused) {
+                        OutlinedButton(
+                            onClick = { vm.extendRest(5) },
+                            modifier = Modifier.fillMaxWidth(),
+                        ) { Text(stringResource(R.string.training_rest_extend)) }
+                    }
                     Button(
                         onClick = { if (paused) vm.resume() else vm.pause() },
                         modifier = Modifier.fillMaxWidth(),
@@ -248,6 +262,7 @@ private fun SafetyExitDialog(onDismiss: () -> Unit, onConfirm: (SafetyReason) ->
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(stringResource(R.string.safety_question), fontWeight = FontWeight.SemiBold)
+                SafetyRow(stringResource(R.string.safety_fatigue), choice == SafetyReason.FATIGUE) { choice = SafetyReason.FATIGUE }
                 SafetyRow(stringResource(R.string.safety_pain), choice == SafetyReason.PAIN) { choice = SafetyReason.PAIN }
                 SafetyRow(stringResource(R.string.safety_urinary), choice == SafetyReason.URINARY) { choice = SafetyReason.URINARY }
                 SafetyRow(stringResource(R.string.safety_relax_fail), choice == SafetyReason.RELAX_FAIL) { choice = SafetyReason.RELAX_FAIL }
@@ -321,6 +336,16 @@ fun FinishScreen(vm: AppViewModel) {
                     stringResource(R.string.safety_stopped),
                     modifier = Modifier.padding(12.dp),
                     color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+        }
+
+        if (o?.safetyReason == SafetyReason.FATIGUE) {
+            Card {
+                Text(
+                    stringResource(R.string.finish_fatigue_note),
+                    modifier = Modifier.padding(12.dp),
                     style = MaterialTheme.typography.bodyMedium,
                 )
             }

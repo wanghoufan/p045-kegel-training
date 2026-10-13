@@ -43,9 +43,6 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     val state: StateFlow<AppState> = repo.state
         .stateIn(viewModelScope, SharingStarted.Eagerly, AppState())
 
-    /** 今日半量开关（UI 临时状态，不落库） */
-    val halfDose = MutableStateFlow(false)
-
     init {
         // 启动时恢复已存语言（AC-049），并在语言变化时即时切换（AC-047/048）。
         viewModelScope.launch {
@@ -55,8 +52,13 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     fun setTheme(mode: ThemeMode) = viewModelScope.launch { repo.setTheme(mode) }
     fun setLanguage(mode: LangMode) = viewModelScope.launch { repo.setLanguage(mode) }
-    fun setFrequency(times: Int) = viewModelScope.launch { repo.setFrequency(times) }
+    fun setReminderTimes(times: Int) = viewModelScope.launch { repo.setReminderTimes(times) }
+    fun setSessions(times: Int) = viewModelScope.launch { repo.setSessions(times) }
     fun setEhsEnabled(on: Boolean) = viewModelScope.launch { repo.setEhsEnabled(on) }
+
+    fun setHalfDose(on: Boolean) = viewModelScope.launch {
+        repo.setHalfDose(LocalDate.now().toEpochDay(), on)
+    }
 
     fun setSilent(on: Boolean) {
         viewModelScope.launch {
@@ -71,6 +73,11 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         repo.saveAssessment(result)
     }
 
+    /** 摸底实际已开始的收缩计入当日耐力额度（不计完成会话）。 */
+    fun addAssessmentUsage(epochDay: Long, enduranceStarted: Int) = viewModelScope.launch {
+        repo.addAssessmentUsage(epochDay, enduranceStarted)
+    }
+
     fun adoptAssessment(level: Level) = viewModelScope.launch {
         repo.setLevel(level, "assessment")
     }
@@ -83,22 +90,30 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     fun clearEhs() = viewModelScope.launch { repo.clearEhs() }
 
-    /** 今日计划（已含频率降量 / 半量 / 当日额度） */
-    fun todayPlan(state: AppState): PlanResult =
-        Quota.build(state.currentLevel, state.dailyFrequency, halfDose.value, state.remainingToday())
+    /**
+     * 今日计划（已含会话次数 / 半量 / 双维余量；等级与会话数按当日冻结值）。
+     * 首页始终可开始；安全只由真实症状出口（疲劳/疼痛/无法放松等）处理。
+     */
+    fun todayPlan(state: AppState, nowMs: Long = System.currentTimeMillis()): PlanResult {
+        val today = LocalDate.now().toEpochDay()
+        return Quota.build(
+            level = state.dayLevel(today),
+            sessions = state.daySessions(today),
+            halfDose = state.halfDoseOn(today),
+            sessionIndex = state.nextSessionIndex(today),
+            usedE = state.usedE(today),
+            usedF = state.usedF(today),
+        )
+    }
 
     fun startToday() {
         val s = state.value
         when (val result = todayPlan(s)) {
-            is PlanResult.Ok -> TrainingBus.send(TrainingCommand.Start(result.plan, s.silentMode))
-            is PlanResult.Blocked -> Unit
-        }
-    }
-
-    fun startLevelPreview(level: Level) {
-        val s = state.value
-        when (val result = Quota.build(level, s.dailyFrequency, halfDose.value, s.remainingToday())) {
-            is PlanResult.Ok -> TrainingBus.send(TrainingCommand.Start(result.plan, s.silentMode))
+            is PlanResult.Ok -> {
+                val today = LocalDate.now().toEpochDay()
+                viewModelScope.launch { repo.freezeDose(today, result.plan.level, result.plan.sessionCount) }
+                TrainingBus.send(TrainingCommand.Start(result.plan, s.silentMode))
+            }
             is PlanResult.Blocked -> Unit
         }
     }
@@ -107,6 +122,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     fun resume() = TrainingBus.send(TrainingCommand.Resume)
     fun stop() = TrainingBus.send(TrainingCommand.Stop)
     fun safetyExit(reason: SafetyReason) = TrainingBus.send(TrainingCommand.SafetyExit(reason))
+
+    /** 组间休息延长（可延长不可缩短） */
+    fun extendRest(seconds: Int) = TrainingBus.send(TrainingCommand.ExtendRest(seconds * 1000L))
 
     fun acknowledgeOutcome() = TrainingState.reset()
 

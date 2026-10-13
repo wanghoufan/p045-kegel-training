@@ -7,6 +7,7 @@
     <string name="nav_today">今日</string>
     <string name="nav_assess">摸底</string>
     <string name="nav_ability">能力</string>
+    <string name="nav_history">历史</string>
     <string name="nav_settings">设置</string>
     <string name="back">返回</string>
 
@@ -15,15 +16,16 @@
     <string name="home_last_assessment">上次摸底</string>
     <string name="home_current_level">当前选择</string>
     <string name="home_level_unknown">未摸底</string>
-    <string name="home_plan_endurance">耐力：收紧 %1$d 秒 × %2$d 次</string>
-    <string name="home_plan_fast">快速：%1$d 次</string>
+    <string name="home_plan_exec">本次可执行：耐力 %1$d 次 + 快速 %2$d 次（共 %3$d 次）</string>
+    <string name="home_plan_groups">本次组数 %1$d 组（耐力 %2$d + 快速 %3$d），耐力每组 ≤10、快速每回合 ≤20 次</string>
+    <string name="home_plan_duration">本次时长约 %1$s（不含组间休息延长）</string>
+    <string name="home_plan_session">今日第 %1$d / %2$d 个时段</string>
+    <string name="home_reduced_note">当日余量不足，本次已按双维余量下调（不把快速额转耐力）。</string>
     <string name="home_start">开始今日训练</string>
-    <string name="home_today_done">今日已完成 %1$d / %2$d 次</string>
-    <string name="home_quota_left">今日剩余额度：%1$d 次收缩</string>
-    <string name="home_quota_blocked">今日额度接近上限（剩余不足 2 次），请明天再练。</string>
-    <string name="home_rest_day_hint">已连续训练 %1$d 天，今天建议休息或半量。</string>
+    <string name="home_quota_blocked">今日额度已用尽或时段已排满，请明天再练。</string>
+    <string name="home_rest_day_hint">近期训练较密（连续 %1$d 天），今天建议休息或半量。</string>
     <string name="home_half_dose">今日半量</string>
-    <string name="home_half_dose_on">今日半量：已开启</string>
+    <string name="home_half_dose_on">今日半量：已开启（整日双维额度各减半）</string>
     <string name="home_retest_hint">距上次摸底已有 %1$d 个完成日，可重新摸底（可忽略）。</string>
     <string name="home_retest_action">现在重测</string>
     <string name="home_standard">各级标准</string>
@@ -43,12 +45,13 @@
     <string name="training_tighten">收紧</string>
     <string name="training_hold">保持</string>
     <string name="training_relax">放松</string>
-    <string name="training_rest">休息</string>
+    <string name="training_rest">组间休息</string>
     <string name="training_next">下一次</string>
     <string name="training_quick_tighten">快速收紧</string>
     <string name="training_quick_relax">快速放松</string>
     <string name="training_done">完成</string>
     <string name="training_rep_progress">第 %1$d / %2$d 次</string>
+    <string name="training_group_progress">第 %1$d / %2$d 组</string>
     <string name="training_pause">暂停</string>
     <string name="training_resume">继续</string>
     <string name="training_stop">提前结束</string>
@@ -57,6 +60,7 @@
     <string name="training_silent_off">语音模式</string>
     <string name="training_fast_intro">接下来：快速收缩</string>
     <string name="training_quality_hint">正常呼吸，不憋气，不夹臀、不夹腿</string>
+    <string name="training_rest_extend">再休息 5 秒</string>
 
     <!-- 暂停 -->
     <string name="pause_title">已暂停</string>
@@ -69,6 +73,7 @@
     <!-- 安全出口 -->
     <string name="safety_title">安全出口</string>
     <string name="safety_question">你现在的情况是？</string>
+    <string name="safety_fatigue">疲劳、动作质量下降或无法正常呼吸</string>
     <string name="safety_pain">疼痛</string>
     <string name="safety_urinary">排尿或排便困难</string>
     <string name="safety_relax_fail">无法放松</string>
@@ -84,7 +89,8 @@
     <string name="finish_endurance_hold">有效保持 %1$d 秒</string>
     <string name="finish_fast_reps">快速完成 %1$d 次</string>
     <string name="finish_duration">用时 %1$s</string>
-    <string name="finish_saved">已自动记录</string>
+    <string name="finish_saved">已自动记录；本次已开始的收缩计入当日额度，中止不返还。</string>
+    <string name="finish_fatigue_note">已按「疲劳」停止本次训练。为安全起见，次日将自动按半量（整日双维各减半）执行。持续不适请咨询专业人员。</string>
     <string name="finish_back_home">返回首页</string>
 
     <!-- 摸底 -->
@@ -128,6 +134,7 @@
     <string name="assess_next">下一步</string>
     <string name="assess_prev">上一步</string>
     <string name="assess_skip">跳过摸底</string>
+    <string name="assess_quota_note">今日训练额度已不足，建议将摸底顺延至次日；本次已实际开始的收缩仍会计入今日已用。</string>
     <string name="assess_result_title">训练等级建议</string>
     <string name="assess_result_body">根据本次自测，建议从 %1$s 训练开始。这是训练等级，不是医学肌力诊断。</string>
     <string name="assess_result_veto">动作控制或放松质量不合格，本次不做等级建议。建议先熟悉正确动作，必要时咨询专业人员。</string>
@@ -148,11 +155,25 @@
     <string name="ability_days">训练 %1$d 天</string>
     <string name="ability_level_history">等级变化</string>
     <string name="ability_retest">重新摸底</string>
-    <string name="ability_recent">最近训练</string>
     <string name="history_empty">还没有训练记录</string>
-    <string name="history_item">%1$s · %2$s · 耐力 %3$d 次 / 快速 %4$d 次</string>
-    <string name="history_completed">已完成</string>
-    <string name="history_aborted">提前结束</string>
+
+    <!-- 历史统计页 -->
+    <string name="history_summary_title">总计</string>
+    <string name="history_total_sessions">总训练次数</string>
+    <string name="history_total_days">训练天数</string>
+    <string name="history_total_duration">总时长</string>
+    <string name="history_total_reps">总次数</string>
+    <string name="history_total_endurance">耐力总次数</string>
+    <string name="history_total_fast">快速总次数</string>
+    <string name="history_total_hold">累计保持</string>
+    <string name="history_last_days">近 %1$d 天</string>
+    <string name="history_chart_duration">每日训练时长</string>
+    <string name="history_chart_reps">每日总次数</string>
+    <string name="history_daily_title">每日明细</string>
+    <string name="history_col_date">日期</string>
+    <string name="history_col_sessions">场次</string>
+    <string name="history_col_duration">时长</string>
+    <string name="history_col_reps">次数</string>
 
     <!-- 设置 -->
     <string name="settings_title">设置</string>
@@ -164,9 +185,13 @@
     <string name="settings_lang_system">跟随系统</string>
     <string name="settings_lang_zh">简体中文</string>
     <string name="settings_lang_en">English</string>
-    <string name="settings_frequency">每日提醒次数</string>
+    <string name="settings_sessions">每次训练的会话次数</string>
+    <string name="settings_sessions_times">%1$d 次</string>
+    <string name="settings_sessions_default">当前 %1$s，生效 %2$d 次会话</string>
+    <string name="settings_sessions_note">会话次数越少，当天完成的次数越少（每次会话的量不变）；日上限仍为 240 次。</string>
+    <string name="settings_reminder">每日提醒次数</string>
     <string name="settings_frequency_times">%1$d 次</string>
-    <string name="settings_frequency_note">产品提醒，非医学处方。选 3 次时会自动降量，每日总收缩不超过 40 次。</string>
+    <string name="settings_reminder_note">提醒只是提醒，不会自动开始训练；默认 2 次，与训练会话次数分开。</string>
     <string name="settings_silent">低调模式</string>
     <string name="settings_silent_desc">开启后无声：只显示字幕与倒计时，公共场合不外放。</string>
     <string name="settings_ehs">EHS 可选自评</string>
@@ -177,19 +202,27 @@
     <string name="settings_ehs_none">暂无</string>
     <string name="settings_about">关于</string>
     <string name="settings_about_body">本 App 是训练辅助与自我记录工具，不做医疗诊断，不承诺治疗效果。训练等级是产品训练节奏，不是医学肌力等级。</string>
+    <string name="settings_compliance">等级和次数是产品设定，不是医学处方或肌力诊断；更多次数不代表更好。出现疲劳、疼痛、持续紧张或排尿异常请停止，并咨询医生或盆底物理治疗专业人员。不能保证治疗尿失禁、ED、PE 或改善性功能。240 是产品计数上限，非医学安全保证。</string>
     <string name="settings_offline">所有数据仅保存在本机，不联网、不上传。</string>
 
     <!-- 各级标准 -->
     <string name="standards_title">各级标准</string>
-    <string name="standards_note">训练等级＝产品节奏，非医学肌力。以下为每级的单值参数。</string>
-    <string name="standards_level">等级</string>
-    <string name="standards_hold">收紧(秒)</string>
-    <string name="standards_rest">放松(秒)</string>
-    <string name="standards_reps">耐力次数</string>
-    <string name="standards_fast">快速收紧(秒)</string>
-    <string name="standards_fast_rest">快速间隔(秒)</string>
-    <string name="standards_fast_reps">快速次数</string>
-    <string name="standards_estimate">单次约 %1$s</string>
+    <string name="standards_note">训练等级＝产品节奏，非医学肌力。每级满量：耐力与快速各自「一天几场 × 每场几次 = 一天总次数」。</string>
+    <string name="std_endurance_title">耐力</string>
+    <string name="std_fast_title">快速</string>
+    <string name="std_total_title">每日总计</string>
+    <string name="std_col_level">等级</string>
+    <string name="std_col_day_sessions">一天几场</string>
+    <string name="std_col_per_session">每场几次</string>
+    <string name="std_col_day_rounds">一天几回合</string>
+    <string name="std_col_per_round">每回合几次</string>
+    <string name="std_col_day_total">一天总次数</string>
+    <string name="std_col_e_total">耐力总</string>
+    <string name="std_col_f_total">快速总</string>
+    <string name="std_col_day_sum">一天合计</string>
+    <string name="std_level_summary">%1$s · 保持 %2$d 秒 · 每次 %3$d+%4$d 次 × %5$d 场</string>
+    <string name="standards_estimate">%1$s：单次约 %2$s，满量每日约 %3$s</string>
+    <string name="standards_footer">以上为产品设定，非医学处方。每场＝1 个耐力组＋1 个快速回合；组间与跨类休息 30 秒完全放松，可延长不可缩短。</string>
 
     <!-- EHS -->
     <string name="ehs_title">EHS 可选自评</string>
