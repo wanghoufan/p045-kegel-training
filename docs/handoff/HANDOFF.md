@@ -107,3 +107,12 @@
   - 待办（治理）：同 TASK-022，正式 code-reviewer/qa 链未单独派（`executed_by=task-manager`，`chain_status=OPEN`）。
   - 2026-10-13 补（用户验收反馈）：①「每日明细」改为两段式行（左日期 ←→ 右「场/时长 m:ss/次数」），去等宽字体、时长改 `9:23` 紧凑格式，解决列挤在一起；②底部 4 个 tab 改用 Material 图标（今日=Home、能力=Star、历史=DateRange、设置=Settings，material-icons-core 随 material3 自带，无新依赖）。44 单测绿，真机 install -r Success 并核对（证据 `56/57-v2.2-*.png`）。
   - 2026-10-13 再补（用户验收反馈二轮）：①**首页移除「今日已用 / 今日剩余」两行**（用户令：练一遍即达标，不要额度显示）；②**能力页移除「最近训练」列表**（与历史页重复，保留等级变化）；③「每日明细」改为真正的**四列（日期｜场次｜时长｜次数）等宽居中**，列间清晰不再挤。44 单测绿，真机 install -r Success 并逐项核对（证据 `58-60-v2.2-*.png`）。
+
+- 2026-10-13｜【阶段收尾 TASK-024（用户令：jcp＋README skill＋homepage skill）】
+  - ①**jcp**：清空 `temp/` 会话残留、删除 6 条死字符串，回归构建绿（44 单测）。
+  - ②**README（github-readme-maintainer）**：双语重写（四个 tab 真机图、V2.2 六级标准、历史统计页、单测 44）；About 简介刷新为 67 字；`validate_readme.py --ui-product` = **DOCUMENTATION_READY**（0 警告）。
+  - ③**发布 v1.1**：`versionCode 2 / versionName 1.1`；**正式签名**（新 keystore `$HOME/android-toolchain/kegel-release.keystore`，alias `kegel`；口令在 `$HOME/android-toolchain/kegel-keystore.properties`，**均不入库**）；产物 `dist/pelvic-trainer-1.1.apk`（universal：arm64/armeabi-v7a/x86/x86_64；minSdk 31；SHA-256 `8648baeea2e4b074e62a37c1962bb4ec9036ff108d7c8628cf6afd937af65661`）；GitHub Release **v1.1**（非预发布）已挂该 APK，回读 sha256 一致。
+  - ④**发布到默认分支**（用户令 A1）：`main-3` → `main` 快进合并推送，`origin/main=4920b6b`（含 V2.2 代码、双语 README、修正后的四 tab 截图）。
+  - ⑤**个人主页**：kegel 行版本链接 → `releases/tag/v1.1` ＋统计描述（中英同改），`parity_check.py` = **PARITY-OK**（zh=32 / en=32）。
+  - ⑥**网站 `p003-houfan-xuezhang-site`**：条目更新到 v1.1、剂量与历史统计说明、重合成 16:9 封面（今日/能力/历史三机并排，底色对齐卡片容器）；站点测试 **14/14 绿**；push main（`1daa345`）；绕缓存复验：详情页 HTTP 200 含 v1.1、封面 HTTP 200 且 sha256 与本地一致（`75175b1f…`）。
+  - **未闭环（待用户定）**：**安装冒烟未做**——副机 `indq5xfi6hovay4d` 被 MIUI 拦 `INSTALL_FAILED_USER_RESTRICTED`；主真机 `IN9LZTAYV4UGU4JF` 现装的是 **debug 签名**旧版，release 签名不同，装 v1.1 须先卸载（会清掉本机测试数据），未擅自卸载。需用户：开 MIUI「USB 安装」后我在副机冒烟，或授权卸载主真机旧版做覆盖冒烟。
