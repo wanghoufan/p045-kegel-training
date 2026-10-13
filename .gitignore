@@ -61,3 +61,6 @@ local.properties
 
 # 项目机器身份（含本机路径，不入公开仓）
 .project.yaml
+
+# 本地发布的签名 APK 产物
+/dist/

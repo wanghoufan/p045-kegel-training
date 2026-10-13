@@ -64,4 +64,4 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 ## 当前版本
 
-`v1.0`（versionCode 1）· Android 12 及以上 · 简体中文 / English。
+`v1.1`（versionCode 2）· Android 12 及以上 · 简体中文 / English。

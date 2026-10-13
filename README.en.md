@@ -64,4 +64,4 @@ Audio cue assets can be regenerated offline on macOS: `bash tools/make_cues.sh`.
 
 ## Current version
 
-`v1.0` (versionCode 1) · Android 12+ · Simplified Chinese / English.
+`v1.1` (versionCode 2) · Android 12+ · Simplified Chinese / English.
