@@ -116,3 +116,4 @@
   - ⑤**个人主页**：kegel 行版本链接 → `releases/tag/v1.1` ＋统计描述（中英同改），`parity_check.py` = **PARITY-OK**（zh=32 / en=32）。
   - ⑥**网站 `p003-houfan-xuezhang-site`**：条目更新到 v1.1、剂量与历史统计说明、重合成 16:9 封面（今日/能力/历史三机并排，底色对齐卡片容器）；站点测试 **14/14 绿**；push main（`1daa345`）；绕缓存复验：详情页 HTTP 200 含 v1.1、封面 HTTP 200 且 sha256 与本地一致（`75175b1f…`）。
   - **未闭环（待用户定）**：**安装冒烟未做**——副机 `indq5xfi6hovay4d` 被 MIUI 拦 `INSTALL_FAILED_USER_RESTRICTED`；主真机 `IN9LZTAYV4UGU4JF` 现装的是 **debug 签名**旧版，release 签名不同，装 v1.1 须先卸载（会清掉本机测试数据），未擅自卸载。需用户：开 MIUI「USB 安装」后我在副机冒烟，或授权卸载主真机旧版做覆盖冒烟。
+  - **已闭环（用户选②，2026-10-13）**：主真机 `IN9LZTAYV4UGU4JF` 卸载旧版（测试数据按授权清除）→ 安装 `pelvic-trainer-1.1.apk` **Success** → 启动 `topResumedActivity=com.orca.kegel/.MainActivity`，首屏干净 L1 默认态（耐力 5 + 快速 5、2 组、约 1:46、第 1/3 时段），**V2.2 生效、真机安装冒烟 PASS**（证据 `61-v1.1-release-smoke.png`）。
